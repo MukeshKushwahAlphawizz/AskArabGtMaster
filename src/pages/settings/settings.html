@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{ 'Setting.Settings' | translate }}</ion-title>
+    <ion-buttons end>
+      <button padding ion-button icon-only (click)="openMyProfile(false)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content margin-top [ngClass]="laguage=='ar'?'item-right':''">
+  <div margin-top>
+    <div class="text-grey heading" style="margin-top: 0px" padding-left padding-right>{{ 'Setting.Main_Preferences' | translate }}</div>
+    <ion-item no-lines *ngIf="laguage=='ar'">
+      <div item-right class="small-subheading-size">{{ 'Setting.Language' | translate }}</div>
+      <ion-select text-left [(ngModel)]="laguage" (ionChange)="selectLanguage()" item-left class="small-subheading-size ar-right-align">
+        <ion-option value="en">{{ 'Default' | translate }}</ion-option>
+        <ion-option value="ar">{{ 'Arabic' | translate }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item no-lines *ngIf="laguage!=='ar'">
+      <div item-left class="small-subheading-size">{{ 'Setting.Language' | translate }}</div>
+      <ion-select [(ngModel)]="laguage" (ionChange)="selectLanguage()" item-right class="small-subheading-size right-align">
+        <ion-option value="en">{{ 'Default' | translate }}</ion-option>
+        <ion-option value="ar">{{ 'Arabic' | translate }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <div class="grey-saparator"></div>
+
+    <div class="text-grey heading" padding-left padding-right>{{ 'Setting.Appearance' | translate }}</div>
+    <ion-item text-right *ngIf="laguage=='ar'" no-lines>
+      <ion-label class="small-subheading-size">{{ 'Setting.Night_Mode' | translate }}</ion-label>
+      <ion-toggle item-left [(ngModel)]="isNightMode" (ionChange)="changeTheme($event)"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="laguage!=='ar'" no-lines>
+      <ion-label class="small-subheading-size">{{ 'Setting.Night_Mode' | translate }}</ion-label>
+      <ion-toggle [(ngModel)]="isNightMode" (ionChange)="changeTheme($event)"></ion-toggle>
+    </ion-item>
+    <div margin-top class="grey-saparator"></div>
+
+    <div class="text-grey heading" padding-left padding-right>{{ 'Setting.Sound' | translate }}</div>
+    <ion-item text-right *ngIf="laguage=='ar'" no-lines>
+      <ion-label class="small-subheading-size">{{ 'Setting.Notification_Sound' | translate }}</ion-label>
+      <ion-toggle item-left></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="laguage!=='ar'" no-lines>
+      <ion-label class="small-subheading-size">{{ 'Setting.Notification_Sound' | translate }}</ion-label>
+      <ion-toggle ></ion-toggle>
+    </ion-item>
+    <div margin-top class="grey-saparator"></div>
+    <button [ngClass]="laguage=='ar'?'item-right':''" margin-top (click)="gotoEditProfile()" class="text-grey" ion-item no-lines icon-end>{{ 'Setting.Edit_Profile' | translate }}</button>
+    <button [ngClass]="laguage=='ar'?'item-right':''" (click)="gotoChangePassword()" class="text-grey" ion-item no-lines icon-end>{{ 'Setting.Change_Password' | translate }}</button>
+    <button [ngClass]="laguage=='ar'?'item-right':''" (click)="deleteAccount()" class="text-grey" ion-item no-lines icon-end>{{ 'Setting.Delete_Account' | translate }}</button>
+  </div>
+
+</ion-content>

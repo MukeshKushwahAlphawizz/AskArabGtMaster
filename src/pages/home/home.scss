@@ -1,0 +1,287 @@
+page-home {
+  .text-input-md, .text-input-ios{
+    margin: 0;
+  }
+  .search-div{
+    padding: 5pt 10pt;
+  }
+  .comment-like-div{
+    margin-top: 10pt;
+    .label-md, .label-ios{
+      margin-right: 0px !important;
+    }
+    .all-questions-div{
+      position: absolute;
+      top: 13px;
+    }
+    .ar-all-questions-div{
+      position: absolute;
+      top: 13px;
+      right: 10pt;
+    }
+    .content-question{
+      margin-left: 57px;margin-bottom: 15pt
+    }
+    .ar-content-question{
+      text-align: right;
+      margin-right: 65px;
+      margin-bottom: 15pt
+    }
+    .question-author-name{
+      width: 55px;
+      margin-left: -2px;
+      white-space: pre-wrap;
+      font-size: 1rem;color: #CD1C2B;
+      text-align: center;
+    }
+
+    .user-main{
+      height: 50px;
+      width: 50px;
+      margin: 0px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid ;
+    }
+    .set-small-icon{
+      padding-right: 4pt;font-size: 0.8rem
+    }
+    .small-text{
+      font-size: 0.8rem
+    }
+    .right-button{
+      right: 5px;
+      position: absolute;
+      font-size: 1rem;
+    }
+    .ar-right-button{
+      left: 5pt;
+      position: absolute;
+      font-size: 1rem;
+      margin: 3px;
+    }
+
+    .commenter-div{
+      padding-left: 50pt;
+      .image-comment-div{
+        top: 10px;
+        position: absolute;
+      }
+      .ans-div{
+        margin-left: 57px;margin-bottom: 10pt
+      }
+      .name-div{
+        width: 55px;
+        white-space: pre-wrap;
+        font-size: 1rem;color: #CD1C2B;
+        color: #CD1C2B;
+        text-align: center;
+      }
+      .user-commenter{
+        height: 40px;
+        width: 40px;
+        margin-left: 8px;
+        border-radius: 50%;
+        border: 2px solid;
+        object-fit: cover;
+        margin-bottom: 0px !important;
+      }
+
+      .send-btn{
+        position: absolute;
+        right: 12pt;
+        top: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+
+    .ar-commenter-div{
+      padding-right: 90pt;
+      .ar-image-comment-div{
+        top: 10px;
+        right: 50pt;
+        position: absolute;
+      }
+      .ans-div{
+        margin-left: 57px;margin-bottom: 10pt
+      }
+      .name-div{
+        width: 55px;
+        white-space: pre-wrap;
+        font-size: 1rem;
+        color: #CD1C2B;
+        margin-right: -8px;
+        text-align: center;
+      }
+      .user-commenter{
+        height: 40px;
+        width: 40px;
+        margin-left: 8px;
+        border-radius: 50%;
+        border: 2px solid;
+        object-fit: cover;
+        margin-bottom: 0px !important;
+      }
+
+      .ar-send-btn{
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      .ar-right-button{
+        position: absolute;
+        left: 0;
+        font-size: 1rem;
+      }
+    }
+    .read-more{
+      font-size: 1.1rem;color: #CD1C2B;
+    }
+
+    .reply-div{
+      .image-reply-div{
+        top: 10px;
+        position: absolute;
+        .name-div{
+          width: 55px;
+          white-space: pre-wrap;
+          font-size: 1rem;color: #CD1C2B;
+        }
+      }
+      .user-replier{
+        height: 36px;
+        width: 36px;
+        margin-left: 8px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 0px !important;
+      }
+    }
+  }
+  .view-more{
+    font-size: 1rem;color: #CD1C2B;
+  }
+  .search{
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 5pt;
+    padding-left: 15pt;
+  }
+  .like-count{
+    font-size: 1rem;
+    margin: 6px;
+  }
+
+  .label{
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  /*dark theme*/
+  .dark .right-button{
+      color: #CD1C2B !important;
+  }
+  .dark .comment-like-div .set-small-icon{
+    background: black;
+  }
+  .dark .bar-buttons-md, .dark .bar-buttons-ios{
+    background: #191919;
+    margin: 0px;
+  }
+  .item-md [item-left], .item-md [item-right], .item-md [item-start], .item-md [item-end]{
+    margin: 0;
+  }
+
+  /*Arabic*/
+  .ar-comment-like-div{
+    margin-top: 10pt;
+    .label-md, .label-ios{
+      margin-right: 0px !important;
+    }
+    .ar-all-questions-div{
+      position: absolute;
+      top: 13px;
+    }
+    .ar-question-author-name{
+      width: 55px;
+      margin-left: -2px;
+      white-space: pre-wrap;
+      font-size: 1rem;color: #CD1C2B;
+      text-align: center;
+    }
+    .user-main{
+      height: 50px;
+      width: 50px;
+      margin: 0px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid ;
+    }
+    .set-small-icon{
+      padding-right: 4pt;font-size: 0.8rem
+    }
+    .small-text{
+      font-size: 0.8rem
+    }
+    .right-button{
+      right: 5px;
+      position: absolute;
+      font-size: 1rem;
+    }
+
+    .commenter-div{
+      padding-left: 50pt;
+      .image-comment-div{
+        top: 10px;
+        position: absolute;
+        .name-div{
+          width: 55px;
+          white-space: pre-wrap;
+          font-size: 1rem;color: #CD1C2B;
+          color: #CD1C2B;
+          text-align: center;
+        }
+      }
+      .user-commenter{
+        height: 40px;
+        width: 40px;
+        margin-left: 8px;
+        border-radius: 50%;
+        border: 2px solid;
+        object-fit: cover;
+        margin-bottom: 0px !important;
+      }
+
+      .send-btn{
+        position: absolute;
+        right: 12pt;
+        top: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    }
+    .read-more{
+      font-size: 1.1rem;color: #CD1C2B;
+    }
+  }
+  .ar-reply-div{
+    .ar-image-reply-div{
+      top: 10px;
+      right: 0;
+      position: absolute;
+      .ar-name-div{
+        width: 55px;
+        white-space: pre-wrap;
+        font-size: 1rem;color: #CD1C2B;
+      }
+    }
+    .ar-user-replier{
+      height: 36px;
+      width: 36px;
+      margin-left: 8px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0px !important;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{'Users.Members'|translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="isUsersAvailable && language=='ar'" dir="rtl">
+    <div *ngFor="let user of usersList">
+      <ion-item (click)="openMyProfile(user.ID)" no-margin no-lines>
+        <img [ngStyle]="{'border-color': util.getRank(user.user_rank)}"
+             item-start class="user" src="{{(user.user_profile && user.user_profile != '')?user.user_profile:'assets/img/profile-default.jpeg'}}">
+        <h2 text-wrap>{{user.first_name =='' && user.last_name == ''?user.user_login:user.first_name+' '+user.last_name}}</h2>
+      </ion-item>
+    </div>
+  </div>
+  <div *ngIf="isUsersAvailable && language!=='ar'">
+    <div *ngFor="let user of usersList">
+      <ion-item (click)="openMyProfile(user.ID)" no-margin no-lines>
+        <img [ngStyle]="{'border-color': util.getRank(user.user_rank)}"
+             item-start class="user" src="{{(user.user_profile && user.user_profile != '')?user.user_profile:'assets/img/profile-default.jpeg'}}">
+        <h2 text-wrap>{{user.first_name =='' && user.last_name == ''?user.user_login:user.first_name+' '+user.last_name}}</h2>
+      </ion-item>
+    </div>
+  </div>
+  <div *ngIf="!isUsersAvailable">No users are available.</div>
+</ion-content>

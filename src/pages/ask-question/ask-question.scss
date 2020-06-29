@@ -1,0 +1,105 @@
+page-ask-question {
+
+  .header-text{
+    font-size: 1.4rem;font-weight: bold;margin: 10pt 0pt;
+  }
+  .checkmark-icon{
+    color: #CD1C2B;
+    margin-right: 10pt;
+  }
+  .ar-checkmark-icon{
+    color: #CD1C2B;
+    margin-left: 10pt;
+  }
+  .write-question{
+    font-size: 1.4rem;
+    width: 100%;
+    border: none;
+    padding-right: 10px;
+  }
+
+  .rounded-red-input{
+    border-radius: 50px;
+    border: 1px solid #CD1C2B;
+  }
+  .points-text{
+    font-size: 1.1rem;
+  }
+  .text-input-md, .text-input-ios{
+   margin: 0;
+  }
+
+  .checkbox-ios .checkbox-checked, .checkbox-md .checkbox-checked {
+    border-color: #CD1C2B !important;
+    background-color: #CD1C2B !important;
+  }
+  .add-more{
+    position: absolute;
+    right: 5px;
+    top: 0;
+    font-size: 1rem;
+    padding: 12pt;
+  }
+  .ar-add-more{
+    position: absolute;
+    left: 5px;
+    top: 0;
+    font-size: 1rem;
+    padding: 12pt;
+  }
+  .select-main-div{
+    //margin: 15pt 35pt;
+  }
+  .select {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10pt;
+    width: 100%;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .select__arrow{
+    position :absolute;
+    right: 45pt;
+    margin-top: 5px;
+  }
+  select{
+    display: inline-block;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+  }
+
+  .bottom_textarea{
+    margin: 10pt 0pt;
+  }
+  .inner_textarea.input {
+    height: 170px;
+    border-radius: 20px;
+    padding: 15pt;
+    user-select: contain;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .upload{
+    padding: 10px;
+    //width: 150px;
+    .upload-text{
+      font-size: 1.2rem;
+      padding-right: 10px;
+    }
+  }
+  .hint-text{
+    margin-left: 5pt;
+    margin-top: 5pt;
+  }
+  .label-md{
+    margin: 0;
+  }
+
+  /*dark theme*/
+  .dark .rounded-grey-input, .dark .text-grey{
+    box-shadow: none;
+    color: white;
+  }
+}

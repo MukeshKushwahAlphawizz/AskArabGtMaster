@@ -1,0 +1,166 @@
+<ion-menu [ngClass]="dark" *ngIf="language=='ar'" [content]="content" type="overlay" side="right">
+  <ion-content text-right class="set-background">
+    <ion-item text-right padding class="set-background user-block" no-lines>
+      <ion-avatar (click)="openMyProfile(false)" item-right>
+        <img class="user-img" src="{{userImage}}">
+      </ion-avatar>
+      <h2 (click)="openMyProfile(false)" class="white" style="font-style: italic;">{{fullName}}</h2>
+      <div (click)="editProfile()" class="white" style="margin-top: 10px"><a style="padding-right: 10pt"><ion-icon class="white" name="md-create"></ion-icon></a><span class="edit-profile">{{'Menu.EditProfile'|translate}}</span></div>
+    </ion-item>
+    <div class="saparator"></div>
+    <ion-list text-right padding class="ar-options-list">
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,0)" margin-top class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="ios-home"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.Home'|translate}}</h2>
+      </ion-item>
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'QuestionAnswerPage'}, true,0)" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="md-chatboxes"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.YourQuestionAnswer'|translate}}</h2>
+      </ion-item>
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 2 },true,0)" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="md-document"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.Article'|translate}}</h2>
+      </ion-item>
+      <ion-item text-right (click)="isCategory === 1 ? isCategory = 0 : isCategory = 1" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" style="font-weight: bold;padding: 5px 12px;" item-right name="ios-list"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.Categories'|translate}}</h2>
+        <ion-icon class="ar-category-arrow" [name]="isCategory? 'ios-arrow-up' : 'ios-arrow-down'"></ion-icon>
+      </ion-item>
+
+      <ion-item-group text-right>
+        <div dir="rtl" *ngIf="isCategory" [@slideIn] class="sub-menu">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,9)" style="margin-right: 35pt;color: white">
+            <li>
+              <div class="white">{{'Menu.GeneralQuestions'|translate}}</div>
+            </li>
+          </ul>
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,12)" style="margin-right: 35pt;color: white">
+            <li>
+              <div class="white">{{'Menu.PartsAndMechanics'|translate}}</div>
+            </li>
+          </ul>
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,5)" style="margin-right: 35pt;color: white">
+            <li>
+              <div class="white">{{'Menu.CarProblems'|translate}}</div>
+            </li>
+          </ul>
+        </div>
+      </ion-item-group>
+
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 3 },true,0)" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="md-notifications"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.Notifications'|translate}}</h2>
+      </ion-item>
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'SettingsPage'},true,0)" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="md-settings"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.Settings'|translate}}</h2>
+      </ion-item>
+      <ion-item text-right (click)="openShareDialog()" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="md-share"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.ShareApp'|translate}}</h2>
+      </ion-item>
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'ContactUsPage'},true,0)" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="md-call"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.ContactUs'|translate}}</h2>
+      </ion-item>
+      <ion-item text-right margin-bottom (click)="logout()" class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" item-right name="ios-exit"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.Logout'|translate}}</h2>
+      </ion-item>
+      <div margin-top class="saparator"></div>
+      <ion-item text-right margin-top class="set-background" no-lines>
+        <h2 class="white">{{'Menu.FollowUs'|translate}}</h2>
+        <div>
+          <ion-icon class="white" (click)="openSocial('https://www.instagram.com/arabgt_/')" padding name="logo-instagram"></ion-icon>
+          <ion-icon class="white" (click)="openSocial('https://www.youtube.com/user/ArabMotorstv')" padding name="logo-youtube"></ion-icon>
+          <ion-icon class="white" (click)="openSocial('https://www.facebook.com/arabgtcom/')" padding name="logo-facebook"></ion-icon>
+          <ion-icon class="white" (click)="openSocial('https://twitter.com/arabgtcom?lang=en')" padding name="logo-twitter"></ion-icon>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-menu [ngClass]="dark" *ngIf="language!=='ar'" [content]="content" type="overlay">
+  <ion-content class="set-background">
+    <ion-item padding class="set-background user-block" no-lines>
+      <ion-avatar (click)="openMyProfile(false)" item-start>
+        <img class="user-img" src="{{userImage}}">
+      </ion-avatar>
+      <h2 (click)="openMyProfile(false)" class="white" style="font-style: italic;">{{fullName}}</h2>
+      <div (click)="editProfile()" class="white" style="margin-top: 10px"><a style="padding-right: 10pt"><ion-icon class="white" name="md-create"></ion-icon></a><span class="edit-profile">{{'Menu.EditProfile'|translate}}</span></div>
+    </ion-item>
+    <div class="saparator"></div>
+    <ion-list padding class="options-list">
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,0)" margin-top class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="ios-home"></ion-icon>
+        <h2 class="option-label">{{'Menu.Home'|translate}}</h2>
+      </ion-item>
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'QuestionAnswerPage'}, true,0)" class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="md-chatboxes"></ion-icon>
+        <h2 class="option-label">{{'Menu.YourQuestionAnswer'|translate}}</h2>
+      </ion-item>
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 2 },true,0)" class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="md-document"></ion-icon>
+        <h2 class="option-label">{{'Menu.Article'|translate}}</h2>
+      </ion-item>
+      <ion-item (click)="isCategory === 1 ? isCategory = 0 : isCategory = 1" class="set-background" no-lines>
+        <ion-icon style="font-weight: bold" class="left-option-icon" item-left name="ios-list"></ion-icon>
+        <h2 class="option-label">{{'Menu.Categories'|translate}}</h2>
+        <ion-icon class="category-arrow" slot="end" [name]="isCategory? 'ios-arrow-up' : 'ios-arrow-down'"></ion-icon>
+      </ion-item>
+
+      <ion-item-group>
+        <div *ngIf="isCategory" [@slideIn] class="sub-menu">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,9)" style="margin-left: 35pt;color: white">
+            <li>
+              <div class="white">{{'Menu.GeneralQuestions'|translate}}</div>
+            </li>
+          </ul>
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,12)" style="margin-left: 35pt;color: white">
+            <li>
+              <div class="white">{{'Menu.PartsAndMechanics'|translate}}</div>
+            </li>
+          </ul>
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,5)" style="margin-left: 35pt;color: white">
+            <li>
+              <div class="white">{{'Menu.CarProblems'|translate}}</div>
+            </li>
+          </ul>
+        </div>
+      </ion-item-group>
+
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 3 },true,0)" class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="md-notifications"></ion-icon>
+        <h2 class="option-label">{{'Menu.Notifications'|translate}}</h2>
+      </ion-item>
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'SettingsPage'},true,0)" class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="md-settings"></ion-icon>
+        <h2 class="option-label">{{'Menu.Settings'|translate}}</h2>
+      </ion-item>
+      <ion-item (click)="openShareDialog()" class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="md-share"></ion-icon>
+        <h2 class="option-label">{{'Menu.ShareApp'|translate}}</h2>
+      </ion-item>
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'ContactUsPage'},true,0)" class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="md-call"></ion-icon>
+        <h2 class="option-label">{{'Menu.ContactUs'|translate}}</h2>
+      </ion-item>
+      <ion-item margin-bottom (click)="logout()" class="set-background" no-lines>
+        <ion-icon class="left-option-icon" item-left name="ios-exit"></ion-icon>
+        <h2 class="option-label">{{'Menu.Logout'|translate}}</h2>
+      </ion-item>
+      <div margin-top class="saparator"></div>
+      <ion-item margin-top class="set-background" no-lines>
+        <h2 class="white">{{'Menu.FollowUs'|translate}}</h2>
+        <div>
+          <ion-icon class="white" (click)="openSocial('https://www.instagram.com/arabgt_/')" padding name="logo-instagram"></ion-icon>
+          <ion-icon class="white" (click)="openSocial('https://www.youtube.com/user/ArabMotorstv')" padding name="logo-youtube"></ion-icon>
+          <ion-icon class="white" (click)="openSocial('https://www.facebook.com/arabgtcom/')" padding name="logo-facebook"></ion-icon>
+          <ion-icon class="white" (click)="openSocial('https://twitter.com/arabgtcom?lang=en')" padding name="logo-twitter"></ion-icon>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"></ion-nav>

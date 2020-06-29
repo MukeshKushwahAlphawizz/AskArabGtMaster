@@ -1,0 +1,37 @@
+page-question-answer-detail {
+  .option-div{
+    margin: 5px 0px;
+  }
+  .small-text{
+    font-size: 1.3rem
+  }
+  .medium-text{
+   font-size: 1.5rem;
+  }
+  .done-btn{
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid !important;
+  }
+  .done-btn-green{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: green !important;
+    border: 1px solid green !important;
+  }
+  .set-margin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .dark .modal-wrapper, .dark .content-md{
+    color: white !important;
+    background: #191919 !important;
+  }
+  .content{
+    font-size: 1.1rem;
+    margin-top: 5pt;
+  }
+  .fixed-content{
+    margin-top: 47px !important;
+  }
+}

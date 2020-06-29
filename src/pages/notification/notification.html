@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{'Notifications.Notifications'|translate}}</ion-title>
+    <ion-buttons end>
+      <button padding ion-button icon-only (click)="openMyProfile(false)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding [ngClass]="language=='ar'?'right-align':''">
+  <div *ngIf="isNotification">
+    <ion-refresher class="pull-refresh" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  <div *ngFor="let item of notificationsList">
+    <!--Arabic-->
+    <ion-item *ngIf="language == 'ar'" (click)="gotoDetailPage(item)" margin-top no-lines no-padding>
+      <div style="position: absolute;top: 10pt;right: 5pt">
+      <ion-icon *ngIf="item.from_user_image === ''" class="user1" name="ios-notifications"></ion-icon>
+      <img *ngIf="item.from_user_image !== ''" class="user" src="{{item.from_user_image}}">
+      </div>
+      <div text-right style="margin-right: 70px;margin-bottom: 10pt">
+        <h3 style="margin-top: 3pt;" text-wrap padding-top>
+          {{item.notification}}<span *ngIf="item.type !== 'user profile'" style="font-weight: bold;margin-left: 10px">{{item.from_user_name}}</span>
+        </h3>
+        <div class="row">
+          <div class="ar-right-aligned" no-padding text-right>
+            <span class="text-grey small-text">{{util.timeSince(item.created)}}</span>
+            <a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>
+          </div>
+        </div>
+        <div *ngIf="item.answer !==''" text-wrap class="text-grey" style="font-size: 1.2rem">{{item.answer}}</div>
+      </div>
+    </ion-item>
+    <!--English-->
+    <ion-item *ngIf="language !== 'ar'" (click)="gotoDetailPage(item)" margin-top no-lines no-padding>
+      <div style="position: absolute;top: 10pt">
+      <ion-icon *ngIf="item.from_user_image === ''" item-start class="user1" name="ios-notifications"></ion-icon>
+      <img *ngIf="item.from_user_image !== ''" class="user" item-start src="{{item.from_user_image}}">
+      </div>
+      <div style="margin-left: 70px;margin-bottom: 10pt">
+        <h3 style="margin-top: 3pt;" text-wrap padding-top>
+          <span *ngIf="item.type !== 'user profile'" style="font-weight: bold;margin-right: 10px;margin-left: 5px">{{item.from_user_name}}</span>{{item.notification}}</h3>
+        <div class="row">
+          <div class="right-aligned" no-padding text-right><a class="set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>
+            <span class="text-grey small-text">{{util.timeSince(item.created)}}</span>
+          </div>
+        </div>
+        <div *ngIf="item.answer !==''" text-wrap class="text-grey" style="font-size: 1.2rem">{{item.answer}}</div>
+      </div>
+    </ion-item>
+  </div>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div text-center *ngIf="!isNotification" style="margin-top: 45pt;font-size: 2.0rem;font-weight: bold">{{'Notifications.No_Notifications_are_present'|translate}}</div>
+</ion-content>

@@ -1,0 +1,39 @@
+page-my-profile {
+  .user-profile{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid;
+  }
+  .set-left-margin{
+    margin-left: 5px;
+  }
+  .followers-following-div{
+    margin: 15pt 35pt 10pt 35pt;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .count{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #CD1C2B;
+  }
+  .border-rect{
+    border: 1px solid #e0e0e0 !important;
+    color: #CD1C2B;
+    font-weight: bold;
+  }
+
+  .follow-ask-question-div{
+    margin: 15pt 20pt 10pt 15pt;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .ask-question-btn{
+    border: 1px solid !important;
+    padding: 10px 16px !important;
+  }
+  .follow-btn{
+    padding: 10px 25pt !important;
+  }
+}

@@ -1,0 +1,138 @@
+page-edit-profile {
+  .container {
+    padding: 10px;
+  }
+  .user-img{
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .title_menu h1 {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    color: #DF0026;
+    margin: 0 auto;
+  }
+
+  .remember_password {
+    margin-left: 5px !important;
+  }
+
+  .save {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  .bottom_text {
+    margin-left: 93px;
+  }
+
+  form.ng-untouched.ng-pristine.ng-valid {
+    margin-top: 18px;
+  }
+
+  .item-input,
+  .item-select,
+  .item-datetime {
+    color: black;
+  }
+
+  .mailwidth {
+    background-image: image('../assets/icon/feather-lock.png');
+  }
+
+  .footer_image {
+    margin-top: 20px;
+  }
+
+  .emailicon {
+    width: 100%;
+    height: 38px;
+    border: none;
+    padding: 5px 15px 5px 5px;
+    font-size: 14px;
+    background-image: url(../assets/icon/feather-lock.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 98% 10px;
+  }
+
+  .passwordicon {
+    width: 100%;
+    height: 38px;
+    border: none;
+    padding: 5px 15px 5px 5px;
+    font-size: 14px;
+    background-image: url(../assets/icon/material-mail-outline1.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 98% 10px;
+  }
+
+  .row.remenber_box {
+    padding: 16px 0px 16px 16px !important;
+  }
+
+  .remember_password {
+    margin-left: 5px !important;
+    float: left;
+    width: 54%;
+  }
+
+  .forget_password {
+    float: right;
+    width: 39%;
+    text-align: right;
+  }
+
+  .item.item-block {
+    padding-right: 16px !important;
+  }
+
+  .ion-content {
+    position: sticky !important;
+  }
+
+  .title_menu {
+    padding-top: 5pt;
+    padding-left: 12pt;
+  }
+
+  .list-ios > .item-block:first-child{
+    border-top: none!important;
+  }
+  .male-radio{
+    font-size: 1.4rem;
+    margin-top: 20pt !important;
+    margin-right: 30pt !important;
+  }
+  .female-radio{
+    font-size: 1.4rem;
+    margin-top: 15pt !important;
+  }
+
+  .error-message {
+    color: red;
+    margin-left: 15px;
+    font-size: 10px;
+  }
+  button.fab {
+    width: 35px;
+    height: 35px;
+    margin-left: 20px;
+  }
+  ion-col.flexcontainer.col {
+    text-align: center;
+  }
+  select{
+    display: inline-block;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+  }
+}

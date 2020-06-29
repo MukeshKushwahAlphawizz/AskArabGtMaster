@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{'Articles.Articles'|translate}}</ion-title>
+    <ion-buttons end>
+      <button padding ion-button icon-only (click)="openMyProfile(false)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isArticleAvailable" [ngClass]="language=='ar'?'right-align':''">
+    <ion-refresher class="pull-refresh" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div *ngIf="language==='ar'">
+      <div *ngFor="let item of articleList">
+        <ion-item (click)="openReadArticle(item)" margin-top padding no-lines text-wrap>
+          <img margin-right item-right class="article-img" [src]="(item.featured_image && item.featured_image != '')?item.featured_image:'assets/img/article1.png'">
+          <h2 text-right>{{item.post_title}}</h2>
+          <div margin-top class="row">
+            <div text-wrap no-padding col-3 text-right><span class="text-grey small-text">{{item.category}}</span><a class="ar-set-small-icon"><ion-icon style="font-weight: bold" class="text-grey" name="ios-list"></ion-icon></a></div>
+            <div text-wrap no-padding col-4 text-center><span class="text-grey small-text">{{item.comment_count}} {{'Articles.Comments'|translate}}</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a></div>
+            <div text-wrap no-padding col-5 text-left><span class="text-grey small-text">{{item.user_login}}</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-person"></ion-icon></a></div>
+          </div>
+        </ion-item>
+        <div class="grey-saparator"></div>
+      </div>
+    </div>
+    <!--English Language-->
+    <div *ngIf="language!=='ar'">
+      <div *ngFor="let item of articleList">
+        <ion-item (click)="openReadArticle(item)" margin-top padding no-lines text-wrap>
+          <img margin-right item-start class="article-img" [src]="(item.featured_image && item.featured_image != '')?item.featured_image:'assets/img/article1.png'">
+          <h2>{{item.post_title}}</h2>
+          <div margin-top class="row">
+            <div text-wrap no-padding col-5 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="ios-person"></ion-icon></a><span class="text-grey small-text">{{item.user_login}}</span></div>
+            <div text-wrap no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{item.comment_count}} {{'Articles.Comments'|translate}}</span></div>
+            <div text-wrap no-padding col-3 text-right><a class="set-small-icon"><ion-icon style="font-weight: bold" class="text-grey" name="ios-list"></ion-icon></a><span class="text-grey small-text">{{item.category}}</span></div>
+          </div>
+        </ion-item>
+        <div class="grey-saparator"></div>
+      </div>
+    </div>
+    <ion-infinite-scroll *ngIf="articleList.length >= 10" (ionInfinite)="loadMoreArticles($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div text-center *ngIf="!isArticleAvailable" style="margin-top: 50pt">{{'Articles.No_Articles_are_Available'|translate}}</div>
+</ion-content>

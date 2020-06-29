@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{'Report.Report'|translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding [ngClass]="language=='ar'?'right-align':''">
+  <div margin-top>
+    <ion-item *ngIf="language=='ar'" no-margin no-lines text-right>
+      <img [ngStyle]="{'border-color': util.getRank(rank)}" item-right class="user-main" [src]="(profileImage && profileImage !=='')?profileImage:'assets/img/profile-default.jpeg'">
+      <h2 margin-right text-wrap [innerHTML]="content"></h2>
+    </ion-item>
+    <ion-item *ngIf="language!=='ar'" no-margin no-lines>
+      <img [ngStyle]="{'border-color': util.getRank(rank)}" item-start class="user-main" [src]="(profileImage && profileImage !=='')?profileImage:'assets/img/profile-default.jpeg'">
+      <h2 text-wrap [innerHTML]="content"></h2>
+    </ion-item>
+
+    <div style="margin: 10pt">
+      <div *ngIf="type === 'question'" class="text-grey small-font">{{'Report.PleaseBrieflyQuestion'|translate}}</div>
+      <div *ngIf="type !== 'question'" class="text-grey small-font">{{'Report.PleaseBrieflyAnswer'|translate}}</div>
+      <div class="bottom_textarea">
+        <ion-textarea *ngIf="language=='ar'" dir="rtl" [(ngModel)]="reportText" rows='9' placeholder="{{'Report.WriteHere'|translate}}" class="inner_textarea"></ion-textarea>
+        <ion-textarea *ngIf="language!=='ar'" [(ngModel)]="reportText" rows='9' placeholder="{{'Report.WriteHere'|translate}}" class="inner_textarea"></ion-textarea>
+      </div>
+    </div>
+
+    <div style="margin: 40pt" text-center>
+      <button (click)="report()" style="font-weight: bold" ion-button round>{{'Report.SendReport'|translate}}</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,235 @@
+<ion-header [ngClass]="dark">
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{'HOME.Home'|translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openMyProfile(false,userData.ID)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button padding ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon class="white header-icon" name="ios-funnel"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <div class="search-div">
+    <ion-item style="min-height: 1rem" class="rounded-red" no-lines>
+      <ion-input *ngIf="language === 'ar'" dir="rtl" (ionChange)="search($event)" placeholder="{{'HOME.Search'|translate}}" class="ar-search-icon text-grey" type="text">
+      </ion-input>
+      <ion-input *ngIf="language !== 'ar'" dir="ltr" (ionChange)="search($event)" placeholder="{{'HOME.Search'|translate}}" class="search-icon text-grey" type="text">
+      </ion-input>
+    </ion-item>
+  </div>
+</ion-header>
+
+<ion-content [ngClass]="dark">
+  <div *ngIf="isQuestionAvail">
+    <ion-refresher class="pull-refresh" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div [ngStyle]="{marginTop:margin}">
+      <div *ngFor="let question of questionsList">
+      <div class="comment-like-div">
+        <audio id="audio" src="assets/Bubbles.wav" autostart="false" ></audio>
+        <ion-item no-lines>
+          <div class="{{language =='ar'?'ar-all-questions-div':'all-questions-div'}}">
+            <img [ngStyle]="{'border-color': util.getRank(question.question_user_rank)}" (click)="openMyProfile(true,question.post_author)" item-start class="user-main" [src]="(question.post_user_profile && question.post_user_profile !='')?question.post_user_profile:'assets/img/profile-default.jpeg'">
+            <div text-center class="question-author-name">{{question.user_login}}</div>
+          </div>
+          <div class="{{language =='ar'?'ar-content-question':'content-question'}}">
+            <div *ngIf="language !=='ar'" class="row">
+              <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+              <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+              <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
+            </div>
+            <div *ngIf="language =='ar'" class="row">
+              <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
+              <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+              <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+            </div>
+            <h2 (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
+            <div *ngIf="language !=='ar'" class="row">
+              <button (click)="likeQuestion(question)" style="padding:5px" no-margin ion-button icon-start clear small>
+                <span class="text-grey like-count">({{(question.post_likes_count && question.post_likes_count != '' && question.post_likes_count >= 0)?question.post_likes_count:0}})</span>
+                <ion-icon [ngClass]="question.like?'':'text-grey'" name="thumbs-up"></ion-icon>
+              </button>
+              <div class="right-button">
+                <button (click)="report(question)" class="small-font" style="padding:5px" no-margin ion-button icon-start clear small>
+                  <ion-icon name="ios-flag"></ion-icon>
+                  <div>{{'HOME.Report'|translate}}</div>
+                </button>
+                <button class="small-font" (click)="gotoSubmitAnswer(question)" ion-button icon-start clear small>
+                  <ion-icon name="ios-undo"></ion-icon>
+                  <div>{{'HOME.Submit_Answer'|translate}}</div>
+                </button>
+              </div>
+            </div>
+            <ion-item *ngIf="language =='ar'" style="min-height: 2rem;" no-padding no-lines>
+              <button item-right (click)="likeQuestion(question)" style="padding:5px" no-margin ion-button icon-start clear small>
+                <span class="text-grey like-count">({{(question.post_likes_count && question.post_likes_count != '' && question.post_likes_count >= 0)?question.post_likes_count:0}})</span>
+                <ion-icon [ngClass]="question.like?'':'text-grey'" name="thumbs-up"></ion-icon>
+              </button>
+              <div item-left class="ar-right-button">
+                <button class="small-font" (click)="gotoSubmitAnswer(question)" ion-button icon-start clear small>
+                  <ion-icon name="ios-undo"></ion-icon>
+                  <div>{{'HOME.Submit_Answer'|translate}}</div>
+                </button>
+                <button (click)="report(question)" class="small-font" style="padding:5px" no-margin ion-button icon-start clear small>
+                  <ion-icon name="ios-flag"></ion-icon>
+                  <div>{{'HOME.Report'|translate}}</div>
+                </button>
+              </div>
+            </ion-item>
+          </div>
+
+      </ion-item>
+
+      <!--Comment div-->
+        <div *ngIf="question.answer_data[0] && language !=='ar'">
+            <ion-item no-lines class="commenter-div">
+              <div class="image-comment-div">
+                <img [ngStyle]="{'border-color': util.getRank(question.answer_data[0].answer_user_rank)}" (click)="openMyProfile(true,question.answer_data[0].comment_user_id)" item-start class="user-commenter" [src]="(question.answer_data[0].user_profile && question.answer_data[0].user_profile !='')?question.answer_data[0].user_profile:'assets/img/profile-default.jpeg'">
+                <div text-center class="name-div">{{question.answer_data[0].answer_author}}</div>
+              </div>
+
+              <div class="ans-div">
+                <div margin-top text-wrap no-padding text-left>
+                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="text-grey" style="font-size: 1rem"></span>
+                  <a (click)="gotoQuestionDetail(question)" class="read-more">{{(question.answer_data[0].answer_content.split(' ').length > 25)?Read_More:''}}</a></div>
+                    <div class="row">
+                      <button (click)="likeComment(question.answer_data[0])" style="padding:5px" no-margin ion-button icon-start clear small>
+                        <span class="text-grey like-count">({{(question.answer_data[0].likes_count && question.answer_data[0].likes_count != '' && question.answer_data[0].likes_count >= 0)?question.answer_data[0].likes_count:0}})</span>
+                        <ion-icon [ngClass]="question.answer_data[0].like?'':'text-grey'" name="thumbs-up"></ion-icon>
+                      </button>
+                      <!--<button style="padding:5px" no-margin ion-button icon-start clear small>
+                        <ion-icon class="text-grey" name="md-thumbs-down"></ion-icon>
+                      </button>-->
+                      <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a>
+                        <span class="text-grey small-text">{{question.answer_data[0].answer_date_gmt}}</span></div>
+                      <button (click)="reply(question)" class="right-button" ion-button icon-start clear small>
+                        <ion-icon name="ios-undo"></ion-icon>
+                        <div>{{'HOME.Reply'|translate}}</div>
+                      </button>
+                    </div>
+
+                <div margin-top (click)="gotoQuestionDetail(question)" *ngIf="question.isViewAll" [@fadeInOut]>
+                  <div class="row" text-center>
+                    <div col-5></div>
+                    <div col-2><div class="grey-saparator"></div></div>
+                    <div col-5></div>
+                  </div>
+                  <div text-center class="view-more">{{'HOME.View_All_Answer'|translate}}</div>
+                </div>
+
+                <!--Reply section-->
+                <div *ngIf="question.answer_data[0].isReplyView" [@slideIn]>
+                  <ion-item no-padding no-lines>
+                    <input [(ngModel)]="replyText" placeholder="{{'HOME.Reply'|translate}}" class="rounded-red text-grey search" type="text">
+                  </ion-item>
+                  <ion-item>
+                    <button (click)="sendReply(question)" class="send-btn" ion-button small round>{{'HOME.SEND'|translate}}</button>
+                  </ion-item>
+                </div>
+              </div>
+
+              <!--Reply comment div-->
+              <ion-item *ngIf="question.answer_data[0].isReplyDone && question.answer_data[0].reply[0]" no-lines class="reply-div">
+                <div class="image-reply-div">
+                  <img item-start class="user-replier" [src]="(question.answer_data[0].reply[0] && question.answer_data[0].reply[0].user_profile !== '')?question.answer_data[0].reply[0].user_profile:'assets/img/profile-default.jpeg'">
+                  <div text-center class="name-div">{{question.answer_data[0].reply[0].reply_author}}</div>
+                </div>
+
+                <div style="margin-left: 57px;margin-bottom: 15pt">
+                  <div text-wrap no-padding text-left>
+                    <span class="text-grey" style="font-size: 1rem">{{question.answer_data[0].reply[0].reply_content}}</span>
+                    <a class="read-more">{{(question.answer_data[0].reply[0].reply_content.split(' ').length > 25)?Read_More:''}}</a></div>
+                  <div class="row">
+                    <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.answer_data[0].reply[0].reply_date_gmt}}</span></div>
+                    <div (click)="editReply(question.answer_data[0].reply[0])" style="margin-left: 5pt;margin-right: 5pt" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'HOME.Edit'|translate}}</span></div>
+                    <div (click)="deleteReply(question.answer_data[0].reply[0].reply_post_ID,question)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'HOME.Delete'|translate}}</span></div>
+                  </div>
+                </div>
+              </ion-item>
+            </ion-item>
+        </div>
+        <div *ngIf="question.answer_data[0] && language ==='ar'" text-right>
+            <ion-item text-right no-lines class="ar-commenter-div">
+              <div class="ar-image-comment-div">
+                <img [ngStyle]="{'border-color': util.getRank(question.answer_data[0].answer_user_rank)}" (click)="openMyProfile(true,question.answer_data[0].comment_user_id)" item-start class="user-commenter" [src]="(question.answer_data[0].user_profile && question.answer_data[0].user_profile !='')?question.answer_data[0].user_profile:'assets/img/profile-default.jpeg'">
+                <div text-center class="name-div">{{question.answer_data[0].answer_author}}</div>
+              </div>
+
+              <div text-right class="ar-ans-div">
+                <div margin-top text-wrap no-padding>
+                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="text-grey" style="font-size: 1rem"></span>
+                  <a (click)="gotoQuestionDetail(question)" class="read-more">{{(question.answer_data[0].answer_content.split(' ').length > 25)?Read_More:''}}</a></div>
+                    <ion-item no-lines no-padding style="min-height: 2rem">
+                      <div item-right no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a>
+                        <span class="text-grey small-text">{{question.answer_data[0].answer_date_gmt}}</span></div>
+                      <button item-right (click)="likeComment(question.answer_data[0])" style="padding:5px" no-margin ion-button icon-end clear small>
+                        <ion-icon [ngClass]="question.answer_data[0].like?'':'text-grey'" name="thumbs-up"></ion-icon>
+                        <span class="text-grey like-count">({{(question.answer_data[0].likes_count && question.answer_data[0].likes_count != '' && question.answer_data[0].likes_count >= 0)?question.answer_data[0].likes_count:0}})</span>
+                      </button>
+                      <button item-left (click)="reply(question)" class="ar-right-button" ion-button icon-start clear small>
+                        <ion-icon name="ios-undo"></ion-icon>
+                        <div>{{'HOME.Reply'|translate}}</div>
+                      </button>
+                    </ion-item>
+
+                <div margin-top (click)="gotoQuestionDetail(question)" *ngIf="question.isViewAll" [@fadeInOut]>
+                  <div class="row" text-center>
+                    <div col-5></div>
+                    <div col-2><div class="grey-saparator"></div></div>
+                    <div col-5></div>
+                  </div>
+                  <div text-center class="view-more">{{'HOME.View_All_Answer'|translate}}</div>
+                </div>
+
+                <!--Reply section-->
+                <div *ngIf="question.answer_data[0].isReplyView" [@slideIn]>
+                  <ion-item no-padding no-lines>
+                    <input dir="rtl" [(ngModel)]="replyText" placeholder="{{'HOME.Reply'|translate}}" class="rounded-red text-grey search" style="padding-left: 5pt;padding-right: 15pt" type="text">
+                  </ion-item>
+                  <ion-item>
+                    <button (click)="sendReply(question)" class="ar-send-btn" ion-button small round>{{'HOME.SEND'|translate}}</button>
+                  </ion-item>
+                </div>
+              </div>
+
+              <!--Reply comment div-->
+              <ion-item *ngIf="question.answer_data[0].isReplyDone && question.answer_data[0].reply[0]" no-lines class="ar-reply-div">
+                <div class="ar-image-reply-div">
+                  <img item-start class="ar-user-replier" [src]="(question.answer_data[0].reply[0] && question.answer_data[0].reply[0].user_profile !== '')?question.answer_data[0].reply[0].user_profile:'assets/img/profile-default.jpeg'">
+                  <div text-center class="ar-name-div">{{question.answer_data[0].reply[0].reply_author}}</div>
+                </div>
+
+                <div style="margin-right: 57px;margin-bottom: 15pt" text-right>
+                  <div text-wrap no-padding>
+                    <span class="text-grey" style="font-size: 1rem">{{question.answer_data[0].reply[0].reply_content}}</span>
+                    <a class="read-more">{{(question.answer_data[0].reply[0].reply_content.split(' ').length > 25)?Read_More:''}}</a></div>
+                  <ion-item no-lines no-padding style="min-height: 2rem">
+                    <div item-left (click)="deleteReply(question.answer_data[0].reply[0].reply_post_ID,question)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'HOME.Delete'|translate}}</span></div>
+                    <div item-left (click)="editReply(question.answer_data[0].reply[0])" style="margin-left: 5pt;margin-right: 5pt" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'HOME.Edit'|translate}}</span></div>
+                    <div item-right no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.answer_data[0].reply[0].reply_date_gmt}}</span></div>
+                  </ion-item>
+                </div>
+              </ion-item>
+            </ion-item>
+        </div>
+        <div class="grey-saparator"></div>
+    </div>
+    </div>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div *ngIf="!isQuestionAvail" text-center>{{'HOME.NoQuestionsareAvailable'|translate}}</div>
+</ion-content>

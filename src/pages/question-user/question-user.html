@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{'QuesUser.AddQuestion'|translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="language=='ar'" dir="rtl" margin-top>
+    <ion-item no-margin no-lines>
+      <img item-start class="user-main" [src]="(profileImage && profileImage !=='')?profileImage:'assets/img/profile-default.jpeg'">
+      <h2 text-wrap>{{'QuesUser.AskingAQuestion'|translate}}{{userName}}{{'QuesUser.AQuestion'|translate}}</h2>
+    </ion-item>
+
+    <div style="margin: 10pt">
+      <div margin-left class="small-font text-grey">{{'QuesUser.PleaseChoose'|translate}}</div>
+      <input padding [(ngModel)]="questionText" placeholder="{{'QuesUser.Question'|translate}}" type="text" class="full-input rounded-grey-input">
+    </div>
+
+    <div style="margin: 10pt;padding-top: 10pt">
+      <div class="bottom_textarea">
+        <ion-textarea [(ngModel)]="questionDetailText" rows='7' placeholder="{{'QuesUser.TheDetail'|translate}}" class="inner_textarea"></ion-textarea>
+      </div>
+    </div>
+
+    <div style="margin: 40pt" text-center>
+      <button (click)="publishQuestion()" style="font-weight: bold" ion-button round>{{'QuesUser.PublishQuestion'|translate}}</button>
+    </div>
+  </div>
+  <div *ngIf="language!=='ar'" margin-top>
+    <ion-item no-margin no-lines>
+      <img item-start class="user-main" [src]="(profileImage && profileImage !=='')?profileImage:'assets/img/profile-default.jpeg'">
+      <h2 text-wrap>{{'QuesUser.AskingAQuestion'|translate}}{{userName}}{{'QuesUser.AQuestion'|translate}}</h2>
+    </ion-item>
+
+    <div style="margin: 10pt">
+      <div margin-left class="small-font text-grey">{{'QuesUser.PleaseChoose'|translate}}</div>
+      <input padding [(ngModel)]="questionText" placeholder="{{'QuesUser.Question'|translate}}" type="text" class="full-input rounded-grey-input">
+    </div>
+
+    <div style="margin: 10pt;padding-top: 10pt">
+      <div class="bottom_textarea">
+        <ion-textarea [(ngModel)]="questionDetailText" rows='7' placeholder="{{'QuesUser.TheDetail'|translate}}" class="inner_textarea"></ion-textarea>
+      </div>
+    </div>
+
+    <div style="margin: 40pt" text-center>
+      <button (click)="publishQuestion()" style="font-weight: bold" ion-button round>{{'QuesUser.PublishQuestion'|translate}}</button>
+    </div>
+  </div>
+</ion-content>

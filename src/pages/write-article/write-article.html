@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Write Article</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openMyProfile()">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div margin>
+
+    <ion-item class="article-heading" no-lines>
+      <ion-input placeholder="Article Heading" type="text"></ion-input>
+    </ion-item>
+
+
+    <div class="select-main-div">
+      <div class="select text-grey">
+        <select>
+          <option>Select Category</option>
+          <option>Category1</option>
+          <option>Category2</option>
+          <option>Category3</option>
+        </select>
+        <!--<ion-icon class="select__arrow" name="ios-arrow-down"></ion-icon>-->
+      </div>
+    </div>
+    <div class="bottom_textarea">
+      <ion-textarea rows='7' placeholder="Write Article" class="inner_textarea"></ion-textarea>
+    </div>
+
+    <div padding-top>
+      <span class="upload rounded-grey-input"><span class="upload-text">Upload File</span><a><ion-icon class="text-grey small-font" name="md-attach"></ion-icon></a></span>
+      <span style="font-size: 1rem;margin-left: 5px">Images Supported .png, .jpeg, .gif</span>
+    </div>
+
+    <div style="margin: 40pt" text-center>
+      <button (click)="postArticle()" style="font-weight: bold" ion-button round>POST ARTICLE</button>
+    </div>
+
+  </div>
+</ion-content>

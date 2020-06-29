@@ -1,0 +1,155 @@
+<ion-header [ngClass]="dark">
+  <ion-navbar>
+    <ion-buttons (click)="back()" left>
+      <button ion-button clear>
+        <ion-icon style="font-size: 2.5rem" class="white back-arrow" name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{'Ques&AnsDetail.Details'|translate}}</ion-title>
+
+    <!--<ion-buttons end>
+      <button ion-button icon-only (click)="openMyProfile(false)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding [ngClass]="dark">
+  <div *ngIf="language=='ar'" dir="rtl">
+    <div (click)="gotoDetailPage(questionData)" style="margin: 20pt 15pt">
+      <div class="medium-text">{{questionData.post_title}}</div>
+      <div class="content text-grey" [innerHTML]="questionData.post_content"></div>
+      <!--Poll-->
+      <div margin-top *ngIf="!isOtherUserProfile && questionData.poll && questionData.poll.length > 0">
+        <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>
+          <ion-item *ngFor="let item of questionData.poll;let i = index">
+            <ion-label>{{item}}</ion-label>
+            <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <!--Progress Poll-->
+        <div margin-top margin-bottom *ngIf="questionData.poll_vote_status=='true' && questionData.poll_progress">
+          <div *ngFor="let progress of questionData.poll_progress">
+            <ion-item no-lines style="min-height: 1rem">
+              <div class="small-font text-grey">{{progress.option}}</div>
+              <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
+            </ion-item>
+            <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+            </progress-bar>
+          </div>
+        </div>
+      </div>
+      <div margin-top margin-bottom *ngIf="isOtherUserProfile && questionData.poll_progress">
+        <div *ngFor="let progress of questionData.poll_progress">
+          <ion-item no-lines style="min-height: 1rem">
+            <div class="small-font text-grey">{{progress.option}}</div>
+            <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
+          </ion-item>
+          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+          </progress-bar>
+        </div>
+      </div>
+      <!--End Poll-->
+    </div>
+      <div class="row">
+        <div (click)="gotoDetailPage(questionData)" col-4 text-center no-padding><a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{'Ques&AnsDetail.Answer'|translate}} ({{questionData.answer_count}})</span></div>
+        <div *ngIf="!isOtherUserProfile" (click)="editQuestion()" col-4 text-center no-padding><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Ques&AnsDetail.Edit'|translate}}</span></div>
+        <div *ngIf="!isOtherUserProfile" (click)="deleteQuestion()" col-4 text-center no-padding><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Ques&AnsDetail.Delete'|translate}}</span></div>
+      </div>
+    <div style="margin-top: 20pt;margin-bottom: 10pt" class="grey-saparator"></div>
+    <div class="row" margin-left>
+      <div class="medium-text" col-4>
+        <div class="set-margin">{{'Ques&AnsDetail.TotalViews'|translate}}</div>
+        <div class="set-margin">{{'Ques&AnsDetail.Category'|translate}}</div>
+        <div class="set-margin">{{'Ques&AnsDetail.TotalLikes'|translate}}</div>
+        <div class="set-margin">{{'Ques&AnsDetail.TotalDisLikes'|translate}}</div>
+      </div>
+      <div class="medium-text" col-2>
+        <div class="set-margin">:</div>
+        <div class="set-margin">:</div>
+        <div class="set-margin">:</div>
+        <div class="set-margin">:</div>
+      </div>
+      <div class="medium-text" col-6>
+        <div class="set-margin"><span>{{questionData.total_views}}</span><a style="margin-right: 10px"><ion-icon name="ios-eye"></ion-icon></a></div>
+        <div class="set-margin"><span>{{questionData.category}}</span><a style="margin-right: 10px"><ion-icon name="md-help"></ion-icon></a></div>
+        <div class="set-margin"><span>{{questionData.post_likes_count !== '' && questionData.post_likes_count>=0?questionData.post_likes_count:0}}</span><a style="margin-right: 10px"><ion-icon name="md-thumbs-up"></ion-icon></a></div>
+        <div class="set-margin"><span>{{questionData.post_likes_count<0?questionData.post_likes_count*(-1):0}}</span><a style="margin-right: 10px"><ion-icon name="md-thumbs-down"></ion-icon></a></div>
+      </div>
+    </div>
+    <div style="margin-top: 20pt;margin-bottom: 20pt" class="grey-saparator"></div>
+    <div margin-top margin-bottom text-center>
+      <div *ngIf="questionData.question_status === 'Waiting for a solution'" text-center class="done-btn" ion-button clear round>{{questionData.question_status}}</div>
+      <div *ngIf="questionData.question_status !== 'Waiting for a solution'" text-center class="done-btn-green" ion-button clear round>{{questionData.question_status}}</div>
+    </div>
+  </div>
+  <div *ngIf="language!=='ar'">
+    <div (click)="gotoDetailPage(questionData)" style="margin: 20pt 15pt">
+      <div class="medium-text">{{questionData.post_title}}</div>
+      <div class="content text-grey" [innerHTML]="questionData.post_content"></div>
+      <!--Poll-->
+      <div margin-top *ngIf="!isOtherUserProfile && questionData.poll && questionData.poll.length > 0">
+        <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>
+          <ion-item *ngFor="let item of questionData.poll;let i = index">
+            <ion-label>{{item}}</ion-label>
+            <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <!--Progress Poll-->
+        <div margin-top margin-bottom *ngIf="questionData.poll_vote_status=='true' && questionData.poll_progress">
+          <div *ngFor="let progress of questionData.poll_progress">
+            <ion-item no-lines style="min-height: 1rem">
+              <div class="small-font text-grey">{{progress.option}}</div>
+              <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
+            </ion-item>
+            <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+            </progress-bar>
+          </div>
+        </div>
+      </div>
+      <div margin-top margin-bottom *ngIf="isOtherUserProfile && questionData.poll_progress">
+        <div *ngFor="let progress of questionData.poll_progress">
+          <ion-item no-lines style="min-height: 1rem">
+            <div class="small-font text-grey">{{progress.option}}</div>
+            <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
+          </ion-item>
+          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+          </progress-bar>
+        </div>
+      </div>
+      <!--End Poll-->
+    </div>
+    <div class="row">
+      <div (click)="gotoDetailPage(questionData)" col-4 text-center no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{'Ques&AnsDetail.Answer'|translate}} ({{questionData.answer_count}})</span></div>
+      <div *ngIf="!isOtherUserProfile" (click)="editQuestion()" col-4 text-center no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Ques&AnsDetail.Edit'|translate}}</span></div>
+      <div *ngIf="!isOtherUserProfile" (click)="deleteQuestion()" col-4 text-center no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Ques&AnsDetail.Delete'|translate}}</span></div>
+    </div>
+    <div style="margin-top: 20pt;margin-bottom: 10pt" class="grey-saparator"></div>
+    <div class="row" margin-left>
+      <div class="medium-text" col-4>
+        <div class="set-margin">{{'Ques&AnsDetail.TotalViews'|translate}}</div>
+        <div class="set-margin">{{'Ques&AnsDetail.Category'|translate}}</div>
+        <div class="set-margin">{{'Ques&AnsDetail.TotalLikes'|translate}}</div>
+        <div class="set-margin">{{'Ques&AnsDetail.TotalDisLikes'|translate}}</div>
+      </div>
+      <div class="medium-text" col-2>
+        <div class="set-margin">:</div>
+        <div class="set-margin">:</div>
+        <div class="set-margin">:</div>
+        <div class="set-margin">:</div>
+      </div>
+      <div class="medium-text" col-6>
+        <div class="set-margin"><span>{{questionData.total_views}}</span><a style="margin-left: 10px"><ion-icon name="ios-eye"></ion-icon></a></div>
+        <div class="set-margin"><span>{{questionData.category}}</span><a style="margin-left: 10px"><ion-icon name="md-help"></ion-icon></a></div>
+        <div class="set-margin"><span>{{questionData.post_likes_count !== '' && questionData.post_likes_count>=0?questionData.post_likes_count:0}}</span><a style="margin-left: 10px"><ion-icon name="md-thumbs-up"></ion-icon></a></div>
+        <div class="set-margin"><span>{{questionData.post_likes_count<0?questionData.post_likes_count*(-1):0}}</span><a style="margin-left: 10px"><ion-icon name="md-thumbs-down"></ion-icon></a></div>
+      </div>
+    </div>
+    <div style="margin-top: 20pt;margin-bottom: 20pt" class="grey-saparator"></div>
+    <div margin-top margin-bottom text-center>
+      <div *ngIf="questionData.question_status === 'Waiting for a solution'" text-center class="done-btn" ion-button clear round>{{questionData.question_status}}</div>
+      <div *ngIf="questionData.question_status !== 'Waiting for a solution'" text-center class="done-btn-green" ion-button clear round>{{questionData.question_status}}</div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,223 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{'EditProfile.Edit_Profile'|translate}}</ion-title>
+    <ion-buttons *ngIf="!fromSignUp" end>
+      <button ion-button icon-only (click)="openMyProfile(false)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="container" (click)="presentActionSheet()">
+    <p style="text-align: center;">
+      <img class="user-img" src="{{userImage}}">
+    </p>
+    <p class="text-grey" style="text-align: center;">{{'EditProfile.ChangeProfilePhoto'|translate}}</p>
+  </div>
+
+<!--Arabic-->
+  <form *ngIf="language=='ar'" [formGroup]="profileForm">
+    <ion-list dir="rtl">
+      <ion-item>
+        <!--<label class="text-grey" style="font-size: 1.2rem" floating>Name</label>-->
+        <input formControlName="name" placeholder="{{'EditProfile.Name'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.name">
+          <div class="error-message"
+               *ngIf="profileForm.get('name').hasError(error.type) && (profileForm.get('name').dirty || profileForm.get('name').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <!--<ion-label class="text-grey" style="font-size: 1.2rem" floating>Last Name</ion-label>-->
+        <input formControlName="lastname" placeholder="{{'EditProfile.LastName'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.lastname">
+          <div class="error-message"
+               *ngIf="profileForm.get('lastname').hasError(error.type) && (profileForm.get('lastname').dirty || profileForm.get('lastname').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <!--<ion-label class="text-grey small-font" floating>Address</ion-label>-->
+        <input formControlName="address" placeholder="{{'EditProfile.Address'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.address">
+          <div class="error-message"
+               *ngIf="profileForm.get('address').hasError(error.type) && (profileForm.get('address').dirty || profileForm.get('address').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item margin-top>
+        <select id="country" (change)="selectCountry()" formControlName="country" no-padding class="small-font text-grey">
+          <option value="default">{{'EditProfile.SelectCountry'|translate}}</option>
+          <option *ngFor="let country of countryList" value="{{country.name}}">{{country.name}}</option>
+        </select>
+      </ion-item>
+
+      <ion-item margin-top>
+        <select id="state" (change)="selectState()"  formControlName="state" no-padding class="small-font text-grey">
+          <option value="default">{{'EditProfile.SelectState'|translate}}</option>
+          <option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}</option>
+        </select>
+      </ion-item>
+
+
+      <ion-item>
+        <!--<ion-label class="text-grey" style="font-size: 1.2rem" floating>Mobile No.</ion-label>-->
+        <input formControlName="mobilenumber" placeholder="{{'EditProfile.MobileNo'|translate}}" class="text-grey full-input" type="number">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.mobilenumber">
+          <div class="error-message"
+               *ngIf="profileForm.get('mobilenumber').hasError(error.type) && (profileForm.get('mobilenumber').dirty || profileForm.get('mobilenumber').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item text-right>
+        <ion-label class="text-grey" style="font-size: 1.2rem" floating>{{'EditProfile.DOB'|translate}}</ion-label>
+        <ion-datetime formControlName="datebirth" class="text-grey" value="1990-02-19"></ion-datetime>
+      </ion-item>
+
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.datebirth">
+          <div class="error-message"
+               *ngIf="profileForm.get('datebirth').hasError(error.type) && (profileForm.get('datebirth').dirty || profileForm.get('datebirth').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item text-right>
+        <ion-label class="text-grey" style="font-size: 1.2rem" floating>{{'EditProfile.MyBio'|translate}}</ion-label>
+        <ion-textarea formControlName="myBio" class="text-grey" rows='3'></ion-textarea>
+      </ion-item>
+
+      <ion-item no-lines>
+        <div class="male-radio" item-left>
+          <input formControlName="gender" type="radio" id="male" name="gender" value="male">
+          <label for="male">{{'EditProfile.Male'|translate}}</label>
+        </div>
+        <div class="female-radio">
+          <input formControlName="gender" type="radio" id="female" name="gender" value="female">
+          <label for="female">{{'EditProfile.Female'|translate}}</label></div>
+      </ion-item>
+    </ion-list>
+  </form>
+  <!--English-->
+  <form *ngIf="language!=='ar'" [formGroup]="profileForm">
+    <ion-list>
+      <ion-item>
+        <!--<label class="text-grey" style="font-size: 1.2rem" floating>Name</label>-->
+        <input formControlName="name" placeholder="{{'EditProfile.Name'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.name">
+          <div class="error-message"
+               *ngIf="profileForm.get('name').hasError(error.type) && (profileForm.get('name').dirty || profileForm.get('name').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <!--<ion-label class="text-grey" style="font-size: 1.2rem" floating>Last Name</ion-label>-->
+        <input formControlName="lastname" placeholder="{{'EditProfile.LastName'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.lastname">
+          <div class="error-message"
+               *ngIf="profileForm.get('lastname').hasError(error.type) && (profileForm.get('lastname').dirty || profileForm.get('lastname').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <!--<ion-label class="text-grey small-font" floating>Address</ion-label>-->
+        <input formControlName="address" placeholder="{{'EditProfile.Address'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.address">
+          <div class="error-message"
+               *ngIf="profileForm.get('address').hasError(error.type) && (profileForm.get('address').dirty || profileForm.get('address').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item margin-top>
+        <select id="country" (change)="selectCountry()" formControlName="country" no-padding class="small-font text-grey">
+          <option value="default">{{'EditProfile.SelectCountry'|translate}}</option>
+          <option *ngFor="let country of countryList" value="{{country.name}}">{{country.name}}</option>
+        </select>
+      </ion-item>
+
+      <ion-item margin-top>
+        <select id="state" (change)="selectState()"  formControlName="state" no-padding class="small-font text-grey">
+          <option value="default">{{'EditProfile.SelectState'|translate}}</option>
+          <option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}</option>
+        </select>
+      </ion-item>
+
+
+      <ion-item>
+        <!--<ion-label class="text-grey" style="font-size: 1.2rem" floating>Mobile No.</ion-label>-->
+        <input formControlName="mobilenumber" placeholder="{{'EditProfile.MobileNo'|translate}}" class="text-grey full-input" type="number">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.mobilenumber">
+          <div class="error-message"
+               *ngIf="profileForm.get('mobilenumber').hasError(error.type) && (profileForm.get('mobilenumber').dirty || profileForm.get('mobilenumber').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label class="text-grey" style="font-size: 1.2rem" floating>{{'EditProfile.DOB'|translate}}</ion-label>
+        <ion-datetime formControlName="datebirth" class="text-grey" value="1990-02-19"></ion-datetime>
+      </ion-item>
+
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.datebirth">
+          <div class="error-message"
+               *ngIf="profileForm.get('datebirth').hasError(error.type) && (profileForm.get('datebirth').dirty || profileForm.get('datebirth').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label class="text-grey" style="font-size: 1.2rem" floating>{{'EditProfile.MyBio'|translate}}</ion-label>
+        <ion-textarea formControlName="myBio" class="text-grey" rows='3'></ion-textarea>
+      </ion-item>
+
+      <ion-item no-lines>
+        <div class="male-radio" item-left>
+          <input formControlName="gender" type="radio" id="male" name="gender" value="male">
+          <label for="male">{{'EditProfile.Male'|translate}}</label>
+        </div>
+        <div class="female-radio">
+          <input formControlName="gender" type="radio" id="female" name="gender" value="female">
+          <label for="female">{{'EditProfile.Female'|translate}}</label></div>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <div padding text-center>
+    <button class="save" ion-button round (click)="save()">{{'EditProfile.SAVEANDEXIT'|translate}}</button>
+    <button *ngIf="fromSignUp" margin-left class="save" ion-button round (click)="skip()">SKIP</button>
+<!--    <button class="save" ion-button [disabled]="profileForm.invalid" (click)="exit()">Save & Exit</button>-->
+  </div>
+</ion-content>
+

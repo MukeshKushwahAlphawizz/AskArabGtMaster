@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>{{'Contact.ContactUs'|translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon class="white header-icon"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="contactUsForm" [ngClass]="language=='ar'?'right-align':''">
+    <div text-wrap class="text-grey details">{{'Contact.DetailText'|translate}}</div>
+    <div margin-top text-wrap class="text-grey details">{{'Contact.DetailText1'|translate}}</div>
+    <div margin-top text-wrap class="text-grey details">{{'Contact.DetailText2'|translate}}</div>
+    <div margin-top margin-bottom>
+      <h2>{{'Menu.FollowUs'|translate}}</h2>
+      <div>
+        <ion-icon class="text-red" (click)="openSocial('https://www.instagram.com/arabgt_/')" padding name="logo-instagram"></ion-icon>
+        <ion-icon class="text-red" (click)="openSocial('https://www.youtube.com/user/ArabMotorstv')" padding name="logo-youtube"></ion-icon>
+        <ion-icon class="text-red" (click)="openSocial('https://www.facebook.com/arabgtcom/')" padding name="logo-facebook"></ion-icon>
+        <ion-icon class="text-red" (click)="openSocial('https://twitter.com/arabgtcom?lang=en')" padding name="logo-twitter"></ion-icon>
+      </div>
+    </div>
+    <h2>{{'Contact.ConnectWithUs'|translate}}</h2>
+    <ion-item margin-top class="rounded-grey-input" no-lines>
+      <input padding-right *ngIf="language=='ar'" dir="rtl" formControlName="name" placeholder="{{'Contact.Name'|translate}}" class="text-grey full-input" type="text">
+      <input *ngIf="language!=='ar'" formControlName="name" placeholder="{{'Contact.Name'|translate}}" class="text-grey full-input" type="text">
+    </ion-item>
+    <div class="error-messages">
+      <ng-container *ngFor="let error of error_messages.name">
+        <div [ngClass]="language=='ar'?'right-align':''" class="error-message" *ngIf="contactUsForm.get('name').hasError(error.type) &&
+           (contactUsForm.get('name').dirty || contactUsForm.get('name').touched)">
+          {{ error.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item margin-top class="rounded-grey-input" no-lines>
+      <input padding-right *ngIf="language=='ar'" dir="rtl" formControlName="email" placeholder="{{'Contact.Email'|translate}}" class="text-grey full-input" type="email">
+      <input *ngIf="language!=='ar'" formControlName="email" placeholder="{{'Contact.Email'|translate}}" class="text-grey full-input" type="email">
+    </ion-item>
+    <div class="error-messages">
+      <ng-container *ngFor="let error of error_messages.email">
+        <div [ngClass]="language=='ar'?'right-align':''" class="error-message" *ngIf="contactUsForm.get('email').hasError(error.type) &&
+           (contactUsForm.get('email').dirty || contactUsForm.get('email').touched)">
+          {{ error.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <div margin-top class="bottom_textarea">
+      <ion-textarea *ngIf="language=='ar'" dir="rtl" formControlName="message" rows='7' placeholder="{{'Contact.Message'|translate}}" class="inner_textarea"></ion-textarea>
+      <ion-textarea *ngIf="language!=='ar'" formControlName="message" rows='7' placeholder="{{'Contact.Message'|translate}}" class="inner_textarea"></ion-textarea>
+    </div>
+    <div class="error-messages">
+      <ng-container *ngFor="let error of error_messages.message">
+        <div [ngClass]="language=='ar'?'right-align':''" class="error-message" *ngIf="contactUsForm.get('message').hasError(error.type) &&
+           (contactUsForm.get('message').dirty || contactUsForm.get('message').touched)">
+          {{ error.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <div style="margin: 20pt" text-center>
+      <button [disabled]="contactUsForm.invalid" (click)="send()" style="font-weight: bold" ion-button full round>{{'Contact.Send'|translate}}</button>
+    </div>
+  </form>
+</ion-content>

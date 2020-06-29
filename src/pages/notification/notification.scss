@@ -1,0 +1,40 @@
+page-notification {
+  .user{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .user1{
+    font-size: 5rem;
+    background: #CD1C2B;
+    color: white;
+    padding: 5px 9pt;
+    margin: 0 !important;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+  .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input{
+    margin-left: 0px;
+  }
+  .right-aligned{
+    position: absolute;
+    top: 10px;
+    right: 15pt;
+  }
+  .ar-right-aligned{
+    position: absolute;
+    top: 10px;
+    left: 15pt;
+  }
+  .set-small-icon{
+    padding-right: 4pt;font-size: 1rem;
+  }
+  .ar-set-small-icon{
+    padding-left: 4pt;font-size: 1rem;
+  }
+  .small-text{
+    font-size: 0.8rem
+  }
+}

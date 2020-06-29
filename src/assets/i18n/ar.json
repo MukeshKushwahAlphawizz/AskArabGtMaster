@@ -1,0 +1,317 @@
+{
+  "BACK_BUTTON_TEXT": "رجوع",
+
+  "CommonErrMsg": {
+    "Name_required": "*مطلوب اسم.",
+    "Lastname_required": "*إسم العائلة مطلوب.",
+    "Address_required": "*العنوان مطلوب.",
+    "MobileNumber_required": "* رقم الجوال مطلوب.",
+    "Minimumlength10.": "* يجب أن يكون الحد الأدنى للطول 10.",
+    "Maximumlength12": "* الحد الأقصى للطول هو 12.",
+    "DOBrequired": "*تاريخ الميلاد مطلوب.",
+    "EmailRequired": "*البريد الالكتروني مطلوب.",
+    "EnterValidEmail": "*لو سمحت أدخل بريد إليكتروني صالح.",
+    "PasswordRequired": "*كلمة المرور مطلوبة.",
+    "MinPasswordLength8": "* يجب أن يكون الحد الأدنى لطول كلمة المرور 8.",
+    "EnterMessage": "*أدرج رسالتك من فضلك."
+  },
+
+  "Filter": {
+    "ChooseFilterOption": "اختر خيار التصفية",
+    "TheLastQuestion": "السؤال الأخير",
+    "MostAnswered": "أجاب معظم",
+    "LatestAnswers": "أحدث الأجوبة",
+    "ThereAreNoAnswers": "لا توجد إجابات"
+  },
+
+  "Common": {
+    "Delete_Reply": "حذف الرد",
+    "Are_you_sure_delete": "هل تريد بالتأكيد الحذف؟",
+    "Choose_take_picture": "اختر أو التقط صورة",
+    "Take_picture": "التقط صوره",
+    "Choose_picture": "اختر صورة",
+    "Answer_Added_Successfully": "تمت إضافة الإجابة بنجاح",
+    "Select_Video_Type": "حدد نوع الفيديو",
+    "Select_Category": "اختر الفئة",
+    "General_Questions": "اسئلة عامة",
+    "Parts_and_Mechanics": "قطع غيار وميكانيكا",
+    "Car_Problems": "مشاكل السيارة",
+    "ConfirmDelete": "تأكيد الحذف",
+    "AreyousureDeleteAccount": "هل انت متأكد انك تريد حذف حسابك؟",
+    "QuestionDeletedSuccessfully": "تم حذف السؤال بنجاح"
+  },
+
+  "StateDetail": {
+    "Comments": "تعليقات",
+    "QuestionAsked": "سئل السؤال",
+    "BestAnswers": "أفضل الإجابات",
+    "FavoriteQuestion": "السؤال المفضل",
+    "FollowingQuestion": "السؤال التالي"
+  },
+
+  "Users": {
+    "Members": "أفراد"
+  },
+
+  "Contact": {
+    "ContactUs": "اتصل بنا",
+    "DetailText": "في هذا التطبيق ، يمكنك طرح أسئلتك حول كل ما يتعلق بالسيارات ، والميكانيكا ، والقيادة ، وما إلى ذلك ، حيث يشارك الأفراد المسجلون على الموقع في الإجابة على أسئلتك من خلال تجاربهم ومعرفتهم الشخصية ، يمكنك أيضًا الانضمام إلى العائلة ومشاركتها تجاربنا والإجابة على الأسئلة المطروحة واختيار أفضل الإجابات.",
+    "DetailText1": "بهذه الطريقة ، ومن خلال هذه العملية التفاعلية ، يمكننا تبادل الخبرات والمعرفة بهدف تعزيز ثقافة السيارات ورفع مستوى الوعي حول هذا الموضوع بين جمهورنا العربي الأعزاء ، والذي يمتد من المحيط إلى الخليج الفارسي.",
+    "DetailText2": "أهلا وسهلا بك إلى عائلة عرب جي تي",
+    "ConnectWithUs": "اتصل بنا",
+    "Name": "اسم",
+    "Email": "البريد الإلكتروني",
+    "Message": "رسالة",
+    "Send": "إرسال",
+    "MessageSend": "تم إرسال رسالتك"
+  },
+
+  "QuesUser": {
+    "AddQuestion": "اسأل سؤالك",
+    "AskingAQuestion": " أنا أسأل الآن ",
+    "AQuestion": " سؤال ",
+    "Question": "سؤال",
+    "TheDetail": "التفاصيل",
+    "PublishQuestion": "انشر سؤالك",
+    "PleaseChoose": "يرجى اختيار عنوان مناسب للسؤال بحيث يمكن الإجابة عليه بسهولة"
+  },
+
+  "Report": {
+    "Report": "نقل",
+    "PleaseBrieflyQuestion": "يرجى توضيح بإيجاز لماذا تشعر أنه يجب الإبلاغ عن هذا السؤال.",
+    "PleaseBrieflyAnswer": "يرجى توضيح بإيجاز لماذا تشعر أنه يجب الإبلاغ عن هذه الإجابة.",
+    "WriteHere": "اكتب هنا",
+    "SendReport": "إرسال",
+    "EnterReportContent": "الرجاء إدخال محتوى التقرير الخاص بك",
+    "SuccessMsg": "إرسال تقرير"
+  },
+
+  "SubmitAns": {
+    "Submit_Answer": "سلم الاجابة",
+    "Answer": "إجابة",
+    "WriteYourAnswer": "اكتب اجابتك",
+    "UploadFile": "رفع ملف",
+    "POSTANSWER": "الرد على الأسئلة",
+    "SupportImages": "الصور المدعومة .png و. jpeg و. gif"
+  },
+
+  "SignUp": {
+    "GetStarted": "هيا بنا نبدأ!",
+    "Username": "اسم المستخدم",
+    "EmailAddress": "عنوان بريد الكتروني",
+    "Password": "كلمه السر",
+    "Create": "خلق",
+    "OrConnectUsing": "أو الاتصال باستخدام",
+    "Alreadyhaveanaccount": "هل لديك حساب؟",
+    "LogIn": "تسجيل الدخول",
+    "Created_Successfully": "تم إنشاء حسابك بنجاح."
+  },
+
+  "Ques&AnsDetail": {
+    "YourQuestion&Answer": "سؤالك وإجابتك",
+    "Details": "تفاصيل",
+    "Answer": "إجابة",
+    "Edit": "تعديل",
+    "Delete": "حذف",
+    "TotalViews": "عدد المشاهدات",
+    "Category": "الفئة",
+    "TotalLikes": "إجمالي الإعجابات",
+    "TotalDisLikes": "إجمالي إبداءات عدم الإعجاب",
+    "THESOLUTIONWASDONE": "تم الحل"
+  },
+
+  "Ques&Ans": {
+    "YourQuestion&Answer": "سؤالك وإجابتك",
+    "Question&Answer": "أسئلة و أجوبة",
+    "Questions": "الأسئلة",
+    "Answers": "الإجابات",
+    "Comments": "تعليقات",
+    "ReadMore": "اقرأ أكثر",
+    "Edit": "تعديل",
+    "Delete": "حذف"
+  },
+
+  "MyProfile": {
+    "MyProfile": "ملفي",
+    "Profile": "الملف الشخصي",
+    "Years": "سنوات",
+    "Followers": "متابعون",
+    "Following": "التالية",
+    "ASKQUESTION": "اسأل سؤالا",
+    "MyStats": "إحصائياتي",
+    "UserStats": "إحصائيات المستخدم",
+    "ANSWERS": "الإجابات",
+    "QUESTIONS": "أسئلة",
+    "COMMENTS": "تعليقات",
+    "QUESTIONSASK": "طرح الأسئلة",
+    "BESTANSWERS": "أفضل الإجابات",
+    "FOLLOW": "إتبع",
+    "FOLLOWED": "يتبع",
+    "FAVORITEQUESTIONS": "أسئلة مفضلة",
+    "MEMBERSQUESTIONS": "أسئلة الأعضاء التي أتبعها"
+  },
+
+  "Menu": {
+    "Home": "الصفحة الرئيسية",
+    "ContactUs": "اتصل بنا",
+    "EditProfile": "تعديل الملف الشخصي",
+    "YourQuestionAnswer": "سؤالك / إجابتك",
+    "Article": "مقالة - سلعة",
+    "Categories": "التصنيفات",
+    "GeneralQuestions": "اسئلة عامة",
+    "PartsAndMechanics": "قطع غيار وميكانيكا",
+    "CarProblems": "مشاكل السيارة",
+    "Notifications": "إشعارات",
+    "Settings": "الإعدادات",
+    "ShareApp": "شارك التطبيق",
+    "Logout": "تسجيل خروج",
+    "FollowUs": "تابعنا"
+  },
+
+  "Login": {
+    "WelcomeBack": "مرحبا بعودتك!",
+    "EmailAddress": "عنوان بريد الكتروني",
+    "Password": "كلمه السر",
+    "ForgotPassword": "هل نسيت كلمة المرور؟",
+    "OrConnectUsing": "أو الاتصال باستخدام",
+    "DontAccount": "لا تملك حساب؟",
+    "SignUp": "سجل"
+  },
+
+  "ForgotPassword": {
+    "Forgot_Password": "هل نسيت كلمة المرور",
+    "Send": "إرسال",
+    "EmailAddress": "عنوان بريد الكتروني",
+    "NewPasswordWill": "سترسل لك كلمة المرور الجديدة على عنوان بريدك الإلكتروني.",
+    "PleaseEnterEmail": "يرجى إدخال البريد الإلكتروني",
+    "Pleaseentervalidmailid": "يرجى إدخال معرف بريد صالح"
+  },
+
+  "EditProfile": {
+    "Edit_Profile": "تعديل الملف الشخصي",
+    "ChangeProfilePhoto": "تغيير صورة الملف الشخصي",
+    "Name": "اسم",
+    "LastName": "الكنية",
+    "Address": "عنوان",
+    "SelectCountry": "حدد الدولة",
+    "SelectState": "اختر ولايه",
+    "MobileNo": "رقم الموبايل.",
+    "DOB": "دوب",
+    "MyBio": "بلدي الحيوي",
+    "Male": "الذكر",
+    "Female": "أنثى",
+    "SAVEANDEXIT": "حفظ وخروج",
+    "ProfileEditedSuccessfully": "تم تعديل الملف الشخصي بنجاح"
+  },
+
+  "ChangePassword": {
+    "Change_Password": "تغيير كلمة المرور",
+    "Change": "يتغيرون",
+    "Confirm_Password": "تأكيد كلمة المرور",
+    "New_Password": "كلمة السر الجديدة",
+    "Old_Password": "كلمة سر قديمة"
+  },
+
+  "Notifications": {
+    "Notifications": "إشعارات",
+    "No_Notifications_are_present": "لا توجد إخطارات موجودة.",
+    "QuestionNotExist": "قد يتم حذف السؤال أو عدم وجوده."
+  },
+
+  "Articles": {
+    "Articles": "مقالات",
+    "Comments": "تعليقات",
+    "No_Articles_are_Available": "لا توجد مقالات متاحة"
+  },
+
+  "ReadArticle": {
+    "Read_Article": "اقرأ المقال",
+    "Comments": "تعليقات",
+    "Reply": "الرد",
+    "SEND": "إرسال",
+    "Add_Comments": "أضف تعليقات",
+    "Write_Comment": "اكتب تعليق",
+    "Allow_to_reply": "السماح للرد",
+    "ASK_QUESTION": "اسأل سؤالا"
+  },
+
+  "AskQuestion": {
+    "Ask_Question": "اسأل سؤالا",
+    "Tips_title": "نصائح للحصول على إجابات جيدة بسرعة",
+    "Make_sure": "تأكد من أن سؤالك قد تم طرحه بالفعل",
+    "Keep_your": "اجعل سؤالك قصيرًا ومباشرًا",
+    "Double_check": "تحقق مرة أخرى من القواعد والتهجئة",
+    "Write_your_question": "اكتب سؤالك",
+    "Is_this_question": "هل هذا السؤال استطلاع؟",
+    "WritePollItem": "اكتب عنصر الاستطلاع",
+    "ADDMORE": "أضف المزيد",
+    "DescribeYourQuestion": "صف سؤالك",
+    "Do_you_need": "هل تحتاج إلى فيديو لشرح أفضل",
+    "ED_Video": "فيديو ED",
+    "Put_videoID": "ضع هنا معرف الفيديو",
+    "ASK_QUESTION": "اسأل سؤالا",
+    "Upload_Image": "تحميل الصور",
+    "Please_write_your_question": "يرجى كتابة سؤالك",
+    "Question_Posted_Successfully": "تم نشر السؤال بنجاح"
+  },
+
+  "Question": {
+    "Question_Details": "تفاصيل السؤال",
+    "Share": "شارك",
+    "Answers": "الإجابات",
+    "Reply": "الرد",
+    "SEND": "إرسال",
+    "Edit": "تعديل",
+    "Delete": "حذف",
+    "Add_An_Answer": "أضف إجابة",
+    "video_better_explain": "هل تحتاج إلى فيديو لشرح أفضل",
+    "ED_Video": "فيديو ED",
+    "Put_here": "ضع هنا معرف الفيديو",
+    "Answer": "إجابة",
+    "Add_Attachment": "إضافة مرفق",
+    "Add_To_Favorite": "أضف إلى المفضلة",
+    "Follow": "إتبع",
+    "Added_As_Favorite": "تمت إضافته كمفضل",
+    "Followed": "يتبع",
+    "Add_Your_Answer": "أضف إجابتك"
+  },
+
+  "HOME": {
+    "Home": "الصفحة الرئيسية",
+    "Report": "نقل",
+    "Search": "بحث",
+    "Answer": "إجابة",
+    "Submit_Answer": "سلم الاجابة",
+    "Reply": "الرد",
+    "View_All_Answer": "عرض جميع الإجابات",
+    "SEND": "إرسال",
+    "Edit": "تعديل",
+    "Delete": "حذف",
+    "Read_More": "اقرأ أكثر",
+    "NoQuestionsareAvailable": "لا توجد أسئلة متاحة"
+  },
+
+  "Setting": {
+    "Settings": "الإعدادات",
+    "Main_Preferences": "التفضيلات الرئيسية",
+    "Language": "لغة",
+    "Appearance": "مظهر خارجي",
+    "Night_Mode": "وضع الليل",
+    "Sound": "صوت",
+    "Notification_Sound": "صوت الإشعار",
+    "Edit_Profile": "تعديل الملف الشخصي",
+    "Change_Password": "تغيير كلمة المرور",
+    "Delete_Account": "حذف الحساب"
+  },
+
+  "TAB": {
+    "TAB1_TITLE": "الصفحة الرئيسية",
+    "TAB2_TITLE": "اسأل سؤالا",
+    "TAB3_TITLE": "مقالات",
+    "TAB4_TITLE": "إشعارات"
+  },
+
+  "Default": "Default",
+  "Arabic": "عربى",
+  "PleaseWait": "ارجوك انتظر..."
+}

@@ -1,0 +1,46 @@
+page-submit-answer {
+  .user-main{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid;
+  }
+  .set-small-icon{
+    padding-right: 4pt;font-size: 0.8rem
+  }
+  .ar-set-small-icon{
+    padding-left: 4pt;font-size: 0.8rem
+  }
+  .label-md, .label-ios{
+    margin-right: 0px !important;
+  }
+  .set-small-icon{
+    padding-right: 4pt;font-size: 0.8rem
+  }
+  .small-text{
+    font-size: 0.8rem
+  }
+  .upload{
+    padding: 10px;
+    //width: 150px;
+    .upload-text{
+      font-size: 1.2rem;
+      padding-right: 10px;
+    }
+  }
+  .bottom_textarea{
+    margin: 10pt 0pt;
+  }
+  .inner_textarea.input {
+    height: 170px;
+    border-radius: 20px;
+    padding: 10pt;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .rounded-grey-input{
+    box-shadow: 1px 3px 4px #c8c7cc;
+    border-radius: 50px;
+    border: 1px solid #dedede !important;
+  }
+}

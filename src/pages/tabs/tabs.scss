@@ -1,0 +1,28 @@
+page-tabs {
+  .tabs-ios .tab-button{
+    padding: 7px;
+  }
+  .tabs .tab-button-icon{
+    font-size: 2rem !important;
+  }
+  .tab-button-text{
+    font-size: 1rem !important;
+    margin-top: 2px !important;
+  }
+  .dot{
+    height: 6px;
+    width: 6px;
+    background: #CD1C2B;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 25pt;
+    right: 25pt;
+  }
+
+  .tabs .tab-button {
+    min-height: 4.8rem;
+  }
+  .tabs-ios .tab-button-icon{
+    height: auto;
+  }
+}

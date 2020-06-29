@@ -1,0 +1,83 @@
+page-menu {
+  .user-block{
+    margin-top: 45px;
+    .edit-profile{
+      font-size: 1.3rem;
+    }
+    .user-img{
+      width: 60px !important;
+      height: 60px !important;
+      object-fit: cover;
+    }
+  }
+  .saparator{
+    height: 2px;
+    background: white;
+  }
+
+  .options-list{
+    .left-option-icon{
+      color: white;
+      border: 1px solid white;
+      padding: 4px;
+      border-radius: 5px;
+      width: 40px;
+      height: 40px;
+      margin: 10pt 0px;
+    }
+    .option-label{
+      margin-left: 10pt;
+      color: white;
+      font-size: 1.4rem;
+    }
+    .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input{
+      margin-left: 0px !important;
+    }
+  }
+  .ar-options-list{
+    .ar-left-option-icon{
+      color: white;
+      border: 1px solid white;
+      padding: 5px 9px;
+      border-radius: 5px;
+      width: 40px;
+      height: 40px;
+      margin: 10pt 0px;
+    }
+    .ar-option-label{
+      margin-right: 10pt;
+      color: white;
+      font-size: 1.4rem;
+    }
+    .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input{
+      margin-left: 0px !important;
+    }
+  }
+  .category-arrow{
+    position: absolute;
+    right: 15pt;
+    top: 17pt;
+    color: white;
+  }
+  .ar-category-arrow{
+    position: absolute;
+    left: 15pt;
+    top: 17pt;
+    color: white;
+  }
+  .set-background{
+    background: #CD1C2B;
+  }
+  .dark .set-background{
+    background: #191919 !important;
+    //.dark h1, .dark h2, .dark div, .dark .item, .dark .ion-app, .dark .content
+    h2,div, ion-list{
+      background: #191919;
+    }
+    .saparator{
+      height: 2px;
+      background: white !important;
+    }
+  }
+
+}

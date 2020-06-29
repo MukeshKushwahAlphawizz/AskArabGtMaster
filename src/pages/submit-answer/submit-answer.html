@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{'SubmitAns.Submit_Answer'|translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openMyProfile(false,myID)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding [ngClass]="language=='ar'?'right-align':''">
+  <div margin-top>
+    <ion-item *ngIf="language=='ar'" no-margin no-lines>
+      <img [ngStyle]="{'border-color': util.getRank(questionData.question_user_rank)}" (click)="openMyProfile(true,questionData.post_author)" item-right class="user-main" [src]="(questionData.post_user_profile && questionData.post_user_profile !='')?questionData.post_user_profile:'assets/img/profile-default.jpeg'">
+      <div margin-right class="row">
+        <div no-padding col-4 text-left><span class="text-grey small-text">{{questionData.category}}</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a></div>
+        <div no-padding col-4 text-center><span class="text-grey small-text">{{'SubmitAns.Answer'|translate}} ({{questionData.answer_count}})</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a></div>
+        <div no-padding col-4 text-right><span class="text-grey small-text">{{questionData.post_modified_gmt}}</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a></div>
+      </div>
+      <h2 text-right margin-right text-wrap>{{questionData.post_title}}</h2>
+    </ion-item>
+    <ion-item *ngIf="language!=='ar'" no-margin no-lines>
+      <img [ngStyle]="{'border-color': util.getRank(questionData.question_user_rank)}" (click)="openMyProfile(true,questionData.post_author)" item-start class="user-main" [src]="(questionData.post_user_profile && questionData.post_user_profile !='')?questionData.post_user_profile:'assets/img/profile-default.jpeg'">
+      <div class="row">
+        <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{questionData.post_modified_gmt}}</span></div>
+        <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'SubmitAns.Answer'|translate}} ({{questionData.answer_count}})</span></div>
+        <div no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{questionData.category}}</span></div>
+      </div>
+      <h2 text-wrap>{{questionData.post_title}}</h2>
+    </ion-item>
+
+   <div style="margin: 20pt">
+     <div class="bottom_textarea">
+       <ion-textarea *ngIf="language == 'ar'" dir="rtl" [(ngModel)]="answer" rows='7' placeholder="{{'SubmitAns.WriteYourAnswer'|translate}}" class="inner_textarea"></ion-textarea>
+       <ion-textarea *ngIf="language !== 'ar'" [(ngModel)]="answer" rows='7' placeholder="{{'SubmitAns.WriteYourAnswer'|translate}}" class="inner_textarea"></ion-textarea>
+     </div>
+
+     <div *ngIf="language=='ar'" padding-top style="margin-top: 25pt">
+       <span *ngIf="imageName == ''" style="font-size: 1rem;margin-left: 5px">{{'SubmitAns.SupportImages'|translate}}</span>
+       <span *ngIf="imageName !== ''" style="font-size: 1rem;margin-left: 5px">{{imageName}}</span>
+       <button (click)="openUpload()" ion-button clear class="upload rounded-grey-input" style="margin-top: 0">
+         <span class="upload-text">{{'SubmitAns.UploadFile'|translate}}</span>
+         <a><ion-icon class="text-grey small-font" name="md-attach"></ion-icon></a>
+       </button>
+     </div>
+     <div *ngIf="language!=='ar'" padding-top style="margin-top: 25pt">
+       <button (click)="openUpload()" ion-button clear class="upload rounded-grey-input" style="margin-top: 0"><span class="upload-text">{{'SubmitAns.UploadFile'|translate}}</span><a><ion-icon class="text-grey small-font" name="md-attach"></ion-icon></a></button>
+       <span *ngIf="imageName == ''" style="font-size: 1rem;margin-left: 5px">{{'SubmitAns.SupportImages'|translate}}</span>
+       <span *ngIf="imageName !== ''" style="font-size: 1rem;margin-left: 5px">{{imageName}}</span>
+     </div>
+   </div>
+
+    <div style="margin: 50pt" text-center>
+      <button (click)="postAnswer()" style="font-weight: bold" ion-button round>{{'SubmitAns.POSTANSWER'|translate}}</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+page-settings {
+  .small-subheading-size{
+    font-size: 1.4rem;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    background: transparent !important;
+  }
+  .heading{
+    font-size: 1.6rem;
+    margin-top: 15pt;
+  }
+  .right-align{
+    position: absolute;
+    text-align: right;
+    right: 10px;
+    top: -12px;
+    width: 100%;
+  }
+  .ar-right-align{
+    position: absolute;
+    text-align: right;
+    left: 10px;
+    top: -12px;
+    width: 100%;
+  }
+  .item-right{
+    text-align: right;
+  }
+}
+

@@ -1,0 +1,112 @@
+page-states-detail {
+  .profile-user{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .question-text{
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .option-div{
+    margin: 5px 0px;
+  }
+  .set-small-icon{
+    padding-right: 4pt;font-size: 1rem;
+  }
+  .ar-set-small-icon{
+    padding-left: 4pt;font-size: 1rem;
+  }
+  .small-text{
+    font-size: 1rem
+  }
+
+  .comment-like-div{
+    margin-top: 20pt;
+    .label-md, .label-ios{
+      margin-right: 0px !important;
+    }
+    .user-main{
+      height: 55px;
+      width: 55px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0;
+    }
+    .set-small-icon{
+      padding-right: 4pt;font-size: 0.8rem
+    }
+    .small-text{
+      font-size: 0.8rem
+    }
+
+    .commenter-div {
+      padding-left: 50pt;
+    }
+    .ar-commenter-div {
+      padding-right: 50pt;
+    }
+      .image-comment-div{
+        top: 10px;
+        position: absolute;
+        .name-div{
+          width: 55px;
+          white-space: pre-wrap;
+          font-size: 1rem;color: #CD1C2B;
+        }
+      }
+      .user-commenter{
+        height: 45px;
+        width: 45px;
+        object-fit: cover;
+        margin-left: 8px;
+        border-radius: 50%;
+        border: 1px solid;
+        margin-bottom: 0px !important;
+      }
+
+      .send-btn{
+        position: absolute;
+        right: 12pt;
+        top: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+    .read-more{
+      font-size: 1.1rem;color: #CD1C2B;
+    }
+  }
+  .name{
+    color: #CD1C2B;
+    font-size: 1rem;
+    width: 60px;
+    text-align: center;
+    margin-left: -5px;
+    white-space: normal;
+  }
+  .question-user{
+    margin-left: 60px;
+    margin-bottom: 30pt;
+    margin-top: -10px;
+  }
+  .ar-question-user{
+    margin-right: 60px;
+    margin-bottom: 30pt;
+    margin-top: -10px;
+  }
+  .answer-user{
+    margin-left: 65px;
+    margin-bottom: 15pt;
+    margin-top: 5pt;
+  }
+  .ar-answer-user{
+    margin-right: 65px;
+    margin-bottom: 15pt;
+    margin-top: 5pt;
+  }
+  .user-comment-div{
+    position: absolute;top: 0pt;
+  }
+}

@@ -1,0 +1,56 @@
+page-login {
+  .logo-img{
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 55pt;
+  }
+
+  .error-message {
+    color: red;
+    text-align: left;
+    margin-left: 20pt;
+    margin-top: 5pt;
+    font-size: 12px;
+  }
+  .ar-error-message {
+    color: red;
+    text-align: right;
+    margin-right: 20pt;
+    margin-top: 5pt;
+    font-size: 12px;
+  }
+  .text-input-md, .text-input-ios{
+    margin: 0;
+  }
+  .forget_password {
+    float: right;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    text-align: right;
+  }
+  .login-btn {
+    padding: 18pt 40pt;
+    font-weight: bold;
+    border-radius: 50px;
+    text-transform: uppercase !important;
+  }
+  .connect-using{
+    font-size: 1.2rem;
+    margin: 10pt;
+  }
+  .fb-social{
+    width: 120px;
+  }
+  .google-social{
+    width: 120px;
+  }
+  .bottom-div{
+    font-size: 1.2rem;
+    margin: 10pt;
+    text-align: center;
+  }
+  .label{
+    margin: 0;
+  }
+}

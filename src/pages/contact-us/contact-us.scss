@@ -1,0 +1,23 @@
+page-contact-us {
+  .details{
+   font-size: 1rem;
+  }
+  .label, .text-input{
+    margin: 0;
+  }
+  .inner_textarea.input {
+    height: 170px;
+    border-radius: 20px;
+    padding: 15pt;
+    user-select: contain;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .error-message {
+    color: red;
+    text-align: left;
+    margin-left: 10pt;
+    margin-right: 10pt;
+    margin-top: 5pt;
+    font-size: 12px;
+  }
+}

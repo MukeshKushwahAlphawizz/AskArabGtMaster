@@ -1,0 +1,141 @@
+<ion-header [ngClass]="dark">
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center="">{{'AskQuestion.Ask_Question'|translate}}</ion-title>
+    <ion-buttons end>
+      <button padding ion-button icon-only (click)="openMyProfile(false)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding [ngClass]="dark">
+  <div [ngClass]="language=='ar'?'right-align':''" margin>
+    <div *ngIf="language=='ar'">
+      <div class="header-text">{{'AskQuestion.Tips_title'|translate}}</div>
+      <div margin-top><span class="text-grey points-text">{{'AskQuestion.Make_sure'|translate}}</span><a><ion-icon class="ar-checkmark-icon" name="ios-checkmark-circle"></ion-icon></a></div>
+      <div style="margin-top: 7px"><span class="text-grey points-text">{{'AskQuestion.Keep_your'|translate}}</span><a><ion-icon class="ar-checkmark-icon" name="ios-checkmark-circle"></ion-icon></a></div>
+      <div style="margin-top: 7px"><span class="text-grey points-text">{{'AskQuestion.Double_check'|translate}}</span><a><ion-icon class="ar-checkmark-icon" name="ios-checkmark-circle"></ion-icon></a></div>
+
+      <ion-item no-lines class="rounded-grey-input">
+        <input dir="rtl" [(ngModel)]="questionInfo.post_title" placeholder="{{'AskQuestion.Write_your_question'|translate}}" class="text-grey write-question" type="text">
+      </ion-item>
+      <ion-item text-right no-lines margin-top>
+        <ion-label class="text-grey small-font">{{'AskQuestion.Is_this_question'|translate}}</ion-label>
+        <ion-checkbox item-right [checked]="questionInfo.is_this_question_a_poll" (ionChange)="openPollBox()" style="margin-left: 5pt"></ion-checkbox>
+      </ion-item>
+
+      <div *ngIf="questionInfo.is_this_question_a_poll" [@slideIn] margin-bottom>
+        <ion-item margin-top *ngFor="let poll of pollArray; let i=index" class="rounded-red" no-lines>
+          <input dir="rtl" [(ngModel)]="poll.item" placeholder="{{'AskQuestion.WritePollItem'|translate}}" class="text-grey write-question" type="text">
+          <button (click)="clearPoll(i)" item-right ion-button clear><ion-icon style="font-size: 2.2rem" class="text-red" name="md-backspace"></ion-icon></button>
+        </ion-item>
+        <ion-item no-lines margin-right padding><button (click)="addMorePoll()" margin ion-button small clear class="rounded-red ar-add-more">{{'AskQuestion.ADDMORE'|translate}}</button></ion-item>
+      </div>
+
+      <div margin-top class="select-main-div">
+        <div class="select text-grey">
+          <select id="category" (change)="selectCategory()">
+            <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="bottom_textarea">
+        <ion-textarea dir="rtl" [(ngModel)]="questionInfo.post_content" rows='7' placeholder="{{'AskQuestion.DescribeYourQuestion'|translate}}" class="inner_textarea"></ion-textarea>
+      </div>
+
+      <ion-item no-lines margin-bottom text-right>
+        <ion-label class="text-grey small-font">{{'AskQuestion.Do_you_need'|translate}}</ion-label>
+        <ion-checkbox item-right [checked]="isVideoNeeded" (ionChange)="openVideoBox()" style="margin-left: 5pt"></ion-checkbox>
+      </ion-item>
+
+      <div *ngIf="isVideoNeeded" [@slideIn]>
+        <div class="select-main-div">
+          <div class="select text-grey">
+            <select id="video" (change)="selectVideoType()">
+              <option *ngFor="let type of videoTypeList" value="{{type.name}}">{{type.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="select-main-div">
+          <ion-item class="rounded-grey-input" no-lines>
+            <input dir="rtl" [(ngModel)]="questionInfo.Link" placeholder="{{'AskQuestion.ED_Video'|translate}}" style="background-image: none !important;" class="search-icon text-grey" type="text">
+          </ion-item>
+          <div class="hint-text small-font text-grey">{{'AskQuestion.Put_videoID'|translate}}: https://www.youtube.com/watch?v=sdUUx5FdySs EX: 'sdUUx5FdySs'.</div>
+        </div>
+      </div>
+    </div>
+    <!--English-->
+    <div *ngIf="language!=='ar'">
+      <div class="header-text">{{'AskQuestion.Tips_title'|translate}}</div>
+      <div margin-top><a><ion-icon class="checkmark-icon" name="ios-checkmark-circle"></ion-icon></a><span class="text-grey points-text">{{'AskQuestion.Make_sure'|translate}}</span></div>
+      <div style="margin-top: 7px"><a><ion-icon class="checkmark-icon" name="ios-checkmark-circle"></ion-icon></a><span class="text-grey points-text">{{'AskQuestion.Keep_your'|translate}}</span></div>
+      <div style="margin-top: 7px"><a><ion-icon class="checkmark-icon" name="ios-checkmark-circle"></ion-icon></a><span class="text-grey points-text">{{'AskQuestion.Double_check'|translate}}</span></div>
+
+      <ion-item no-lines class="rounded-grey-input">
+        <input [(ngModel)]="questionInfo.post_title" placeholder="{{'AskQuestion.Write_your_question'|translate}}" class="text-grey write-question" type="text">
+      </ion-item>
+      <ion-item no-lines margin-top>
+        <ion-label class="text-grey small-font">{{'AskQuestion.Is_this_question'|translate}}</ion-label>
+        <ion-checkbox [checked]="questionInfo.is_this_question_a_poll" (ionChange)="openPollBox()" style="margin-right: 5pt"></ion-checkbox>
+      </ion-item>
+
+      <div *ngIf="questionInfo.is_this_question_a_poll" [@slideIn] margin-bottom>
+        <ion-item margin-top *ngFor="let poll of pollArray; let i=index" class="rounded-red" no-lines>
+          <input [(ngModel)]="poll.item" placeholder="{{'AskQuestion.WritePollItem'|translate}}" class="text-grey write-question" type="text">
+          <button (click)="clearPoll(i)" item-right ion-button clear><ion-icon style="font-size: 2.2rem" class="text-red" name="md-backspace"></ion-icon></button>
+        </ion-item>
+        <ion-item no-lines margin-left padding><button (click)="addMorePoll()" margin ion-button small clear class="rounded-red add-more">{{'AskQuestion.ADDMORE'|translate}}</button></ion-item>
+      </div>
+
+      <div margin-top class="select-main-div">
+        <div class="select text-grey">
+          <select id="category" (change)="selectCategory()">
+            <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="bottom_textarea">
+        <ion-textarea [(ngModel)]="questionInfo.post_content" rows='7' placeholder="{{'AskQuestion.DescribeYourQuestion'|translate}}" class="inner_textarea"></ion-textarea>
+      </div>
+
+      <ion-item no-lines margin-bottom>
+        <ion-label class="text-grey small-font">{{'AskQuestion.Do_you_need'|translate}}</ion-label>
+        <ion-checkbox [checked]="isVideoNeeded" (ionChange)="openVideoBox()" style="margin-right: 5pt"></ion-checkbox>
+      </ion-item>
+
+      <div *ngIf="isVideoNeeded" [@slideIn]>
+        <div class="select-main-div">
+          <div class="select text-grey">
+            <select id="video" (change)="selectVideoType()">
+              <option *ngFor="let type of videoTypeList" value="{{type.name}}">{{type.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="select-main-div">
+          <ion-item class="rounded-grey-input" no-lines>
+            <input [(ngModel)]="questionInfo.Link" placeholder="{{'AskQuestion.ED_Video'|translate}}" style="background-image: none !important;" class="search-icon text-grey" type="text">
+          </ion-item>
+          <div class="hint-text small-font text-grey">{{'AskQuestion.Put_videoID'|translate}}: https://www.youtube.com/watch?v=sdUUx5FdySs EX: 'sdUUx5FdySs'.</div>
+        </div>
+      </div>
+    </div>
+
+    <button (click)="openUploadOptions()" class="rounded-grey-input" ion-button clear>
+      <span class="upload"><span class="upload-text">{{imageName}}</span><a><ion-icon name="md-attach"></ion-icon></a></span>
+    </button>
+
+    <div style="margin: 30pt" text-center>
+      <button (click)="askQuestion()" style="font-size: 1.2rem;font-weight: bold" ion-button round>{{'AskQuestion.ASK_QUESTION'|translate}}</button>
+    </div>
+
+  </div>
+</ion-content>
+

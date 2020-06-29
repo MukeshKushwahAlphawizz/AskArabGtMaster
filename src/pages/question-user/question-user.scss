@@ -1,0 +1,27 @@
+page-question-user {
+  .user-main{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid yellow;
+  }
+
+  .label-md, .label-ios{
+    margin-right: 0px !important;
+  }
+
+  .small-text{
+    font-size: 0.8rem
+  }
+
+  .bottom_textarea{
+    margin: 10pt 0pt;
+  }
+  .inner_textarea.input {
+    height: 170px;
+    border-radius: 20px;
+    padding: 10pt;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}

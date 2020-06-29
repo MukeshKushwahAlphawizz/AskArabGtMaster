@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{'ReadArticle.Read_Article'|translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openMyProfile()">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding [ngClass]="language=='ar'?'right-align':''">
+  <img *ngIf="articleDetail.featured_image && articleDetail.featured_image != ''" [src]="articleDetail.featured_image">
+  <!--Arabic-->
+  <div *ngIf="language=='ar'" class="row option-div">
+    <div no-padding col-4 text-right><span class="text-grey small-text">{{articleDetail.comment_count}} {{'ReadArticle.Comments'|translate}}</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a></div>
+    <div no-padding col-4 text-center><span class="text-grey small-text">{{articleDetail.user_login}}</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-person"></ion-icon></a></div>
+    <div no-padding col-4 text-left><span class="text-grey small-text">{{articleDetail.post_modified_gmt}}</span><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a></div>
+  </div>
+  <!--English-->
+  <div *ngIf="language!=='ar'" class="row option-div">
+    <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{articleDetail.post_modified_gmt}}</span></div>
+    <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="ios-person"></ion-icon></a><span class="text-grey small-text">{{articleDetail.user_login}}</span></div>
+    <div no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{articleDetail.comment_count}} {{'ReadArticle.Comments'|translate}}</span></div>
+  </div>
+  <h2>{{articleDetail.post_title}}</h2>
+  <div class="text-grey" [innerHtml]="articleDetail.post_content"></div>
+
+
+  <div style="margin-top: 15px" class="grey-saparator"></div>
+  <div class="header-txt">{{'ReadArticle.Comments'|translate}} {{articleDetail.comment_count}}</div>
+
+  <div *ngFor="let comment of articleDetail.comment_data">
+    <ion-item no-margin no-lines>
+      <div [ngClass]="language=='ar'?'ar-comment-user-div':'comment-user-div'">
+        <img [ngStyle]="{'border-color': util.getRank(comment.rank)}" class="user-main" src="{{(comment.user_profile && comment.user_profile != '')?comment.user_profile:'assets/img/profile-default.jpeg'}}">
+        <div class="name">{{comment.comment_author}}</div>
+      </div>
+
+      <!--Arabic-->
+      <div *ngIf="language=='ar'" class="ar-left-div-user" text-right>
+        <div>
+          <div class="ar-right-aligned" no-padding>
+            <span class="text-grey small-text">{{util.timeSince(comment.comment_date_gmt)}}</span>
+            <a class="set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>
+          </div>
+        </div>
+        <p class="comments-div" text-wrap>{{comment.comment_content}}</p>
+        <div *ngIf="comment.allow_to_reply !== '0'" text-left>
+          <button (click)="reply(comment)" ion-button icon-start clear small>
+            <ion-icon name="ios-undo"></ion-icon>
+            <div class="small-text">{{'ReadArticle.Reply'|translate}}</div>
+          </button>
+        </div>
+
+        <div *ngIf="comment.isReplyView" [@slideIn]>
+          <ion-item no-padding no-lines text-right>
+            <input dir="rtl" [(ngModel)]="replyText" placeholder="{{'ReadArticle.Reply'|translate}}" class="rounded-red text-grey ar-search" type="text">
+          </ion-item>
+          <ion-item>
+            <button (click)="sendReply(comment)" class="ar-send-btn" ion-button small round>{{'ReadArticle.SEND'|translate}}</button>
+          </ion-item>
+        </div>
+
+        <div margin-top *ngIf="comment.reply_data && comment.reply_data.length">
+          <ion-item no-lines class="ar-reply-div" *ngFor="let rep of comment.reply_data; let i = index">
+            <div>
+              <div class="ar-right-aligned" no-padding text-right>
+                <span class="text-grey small-text">{{util.timeSince(rep.reply_date_gmt)}}</span>
+                <a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>
+              </div>
+            </div>
+            <div class="ar-image-reply-div">
+              <img [ngStyle]="{'border-color': util.getRank(comment.rank_reply)}" item-start class="ar-user-replier" [src]="(rep.user_profile !== '')?rep.user_profile:'assets/img/profile-default.jpeg'">
+              <div text-center class="ar-name-div">{{rep.reply_author}}</div>
+            </div>
+
+            <div text-right class="ar-reply-content">
+              <div style="margin-top: 7pt" text-wrap no-padding>
+                <span class="text-grey" style="font-size: 1rem">{{rep.reply_content}}</span>
+              </div>
+            </div>
+          </ion-item>
+        </div>
+
+      </div>
+      <!--English-->
+      <div *ngIf="language!=='ar'" class="left-div-user">
+        <div>
+          <div class="right-aligned" no-padding text-right><a class="set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>
+            <span class="text-grey small-text">{{util.timeSince(comment.comment_date_gmt)}}</span>
+          </div>
+        </div>
+        <p class="comments-div" text-wrap>{{comment.comment_content}}</p>
+        <div *ngIf="comment.allow_to_reply !== '0'" text-right>
+          <button (click)="reply(comment)" ion-button icon-start clear small>
+            <ion-icon name="ios-undo"></ion-icon>
+            <div class="small-text">{{'ReadArticle.Reply'|translate}}</div>
+          </button>
+        </div>
+
+        <div *ngIf="comment.isReplyView" [@slideIn]>
+          <ion-item no-padding no-lines>
+            <input [(ngModel)]="replyText" placeholder="{{'ReadArticle.Reply'|translate}}" class="rounded-red text-grey search" type="text">
+          </ion-item>
+          <ion-item>
+            <button (click)="sendReply(comment)" class="send-btn" ion-button small round>{{'ReadArticle.SEND'|translate}}</button>
+          </ion-item>
+        </div>
+
+        <div margin-top *ngIf="comment.reply_data && comment.reply_data.length">
+          <ion-item no-lines class="reply-div" *ngFor="let rep of comment.reply_data; let i = index">
+            <div>
+              <div class="right-aligned" no-padding text-right><a class="set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>
+                <span class="text-grey small-text">{{util.timeSince(rep.reply_date_gmt)}}</span>
+              </div>
+            </div>
+            <div class="image-reply-div">
+              <img [ngStyle]="{'border-color': util.getRank(comment.rank_reply)}" item-start class="user-replier" [src]="(rep.user_profile !== '')?rep.user_profile:'assets/img/profile-default.jpeg'">
+              <div text-center class="name-div">{{rep.reply_author}}</div>
+            </div>
+
+            <div class="reply-content">
+              <div style="margin-top: 7pt" text-wrap no-padding text-left>
+                <span class="text-grey" style="font-size: 1rem">{{rep.reply_content}}</span>
+              </div>
+            </div>
+          </ion-item>
+        </div>
+
+      </div>
+    </ion-item>
+  </div>
+
+  <div style="margin-top: 5px" class="grey-saparator"></div>
+  <div class="header-txt">{{'ReadArticle.Add_Comments'|translate}}</div>
+  <div *ngIf="language=='ar'" class="bottom_textarea">
+    <ion-textarea dir="rtl" [(ngModel)]="comment" rows='7' placeholder="{{'ReadArticle.Write_Comment'|translate}}" class="inner_textarea"></ion-textarea>
+  </div>
+  <div *ngIf="language!=='ar'" class="bottom_textarea">
+    <ion-textarea [(ngModel)]="comment" rows='7' placeholder="{{'ReadArticle.Write_Comment'|translate}}" class="inner_textarea"></ion-textarea>
+  </div>
+  <ion-item *ngIf="language=='ar'" no-lines margin-top margin-bottom text-right>
+    <ion-label class="text-grey small-font">{{'ReadArticle.Allow_to_reply'|translate}}</ion-label>
+    <ion-checkbox item-right (ionChange)="allowToReply()" [checked]="isAllowToReply" style="margin-left: 5pt"></ion-checkbox>
+  </ion-item>
+  <ion-item *ngIf="language!=='ar'" no-lines margin-top margin-bottom>
+    <ion-label class="text-grey small-font">{{'ReadArticle.Allow_to_reply'|translate}}</ion-label>
+    <ion-checkbox (ionChange)="allowToReply()" [checked]="isAllowToReply" style="margin-right: 5pt"></ion-checkbox>
+  </ion-item>
+
+  <div style="margin: 30pt" text-center>
+    <button (click)="addComment()" style="font-size: 1.2rem;font-weight: bold" ion-button round>{{'ReadArticle.ASK_QUESTION'|translate}}</button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1096210779940",
+    "firebase_url": "https://arabgt-login.firebaseio.com",
+    "project_id": "arabgt-login",
+    "storage_bucket": "arabgt-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096210779940:android:190753c2311c839b506db1",
+        "android_client_info": {
+          "package_name": "com.alpha.askarabgt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096210779940-60bgkr3298nvcvb5mdnn8jnfq33p0p7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSjNDhbQGy5gCnpqkcU-b-kSYhQPGXiaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096210779940-60bgkr3298nvcvb5mdnn8jnfq33p0p7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

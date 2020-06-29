@@ -1,0 +1,106 @@
+<ion-content>
+<div text-center>
+  <img class="logo-img" src="assets/img/logo.png">
+  <h1>{{'Login.WelcomeBack'|translate}}</h1>
+  <!--<div class="text-grey">Lorem ipsum is simply dummy text of the printing</div>-->
+  <form (submit)="doLogin()" [formGroup]="loginForm">
+    <ion-list dir="rtl" *ngIf="language == 'ar'">
+      <div style="margin: 50pt 20pt 10pt 20pt;">
+        <ion-item class="rounded-red" no-lines>
+          <input placeholder="{{'Login.EmailAddress'|translate}}" formControlName="email" class="ar-email-icon full-input text-grey" type="email">
+        </ion-item>
+        <div>
+          <ng-container *ngFor="let error of error_messages.email">
+            <div class="ar-error-message" *ngIf="loginForm.get('email').hasError(error.type) &&
+           (loginForm.get('email').dirty || loginForm.get('email').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div style="margin: 15pt 20pt 10pt 20pt;">
+        <ion-item class="rounded-grey-input">
+          <input placeholder="{{'Login.Password'|translate}}" formControlName="password" class="text-grey full-input ar-password-icon" type="password" name="password">
+        </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of error_messages.password">
+            <div class="ar-error-message"
+                 *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <!--<ion-item col-7 no-lines>
+        <ion-label class="text-grey small-font">Remember Me</ion-label>
+        <ion-checkbox (click)="rememberMe($event)" [checked]="isChecked" style="margin-right: 5pt"></ion-checkbox>
+      </ion-item>-->
+      <div class="row" padding>
+        <ion-item style="min-height: 2rem" col-7 no-lines>
+          <ion-label class="text-grey small-font">Remember Me</ion-label>
+          <ion-checkbox (click)="rememberMe()" [checked]="isChecked" style="margin-right: 5pt"></ion-checkbox>
+        </ion-item>
+        <div text-right col-5 (click)="openForgotPassord()" no-lines class="forget_password">{{'Login.ForgotPassword'|translate}}</div>
+      </div>
+
+      <div text-center><button class="login-btn" [disabled]="loginForm.invalid" ion-button>Log in</button></div>
+      <div class="text-grey connect-using">{{'Login.OrConnectUsing'|translate}}</div>
+      <ion-item style="padding: 0pt 33pt;" no-margin no-lines>
+        <img (click)="fbLogin()" class="fb-social" no-margin item-left src="assets/img/facebook.png">
+        <img (click)="googleLogin()" no-margin class="google-social" item-right src="assets/img/google.png">
+      </ion-item>
+      <div class="bottom-div">{{'Login.DontAccount'|translate}} <span (click)="openSignUpPage()" style="font-weight: bold">{{'Login.SignUp'|translate}}</span></div>
+    </ion-list>
+    <!--English-->
+    <ion-list *ngIf="language !== 'ar'">
+      <div style="margin: 50pt 20pt 10pt 20pt;">
+        <ion-item class="rounded-red" no-lines>
+          <input placeholder="{{'Login.EmailAddress'|translate}}" formControlName="email" class="email-icon full-input text-grey" type="email">
+        </ion-item>
+        <div>
+          <ng-container *ngFor="let error of error_messages.email">
+            <div class="error-message" *ngIf="loginForm.get('email').hasError(error.type) &&
+           (loginForm.get('email').dirty || loginForm.get('email').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div style="margin: 15pt 20pt 10pt 20pt;">
+        <ion-item class="rounded-grey-input">
+          <input placeholder="{{'Login.Password'|translate}}" formControlName="password" class="text-grey full-input password-icon" type="password" name="password">
+        </ion-item>
+        <div class="error-messages">
+          <ng-container *ngFor="let error of error_messages.password">
+            <div class="error-message"
+                 *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+              {{ error.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <!--<ion-item col-7 no-lines>
+        <ion-label class="text-grey small-font">Remember Me</ion-label>
+        <ion-checkbox (click)="rememberMe($event)" [checked]="isChecked" style="margin-right: 5pt"></ion-checkbox>
+      </ion-item>-->
+      <div class="row" padding>
+        <ion-item style="min-height: 2rem" col-7 no-lines>
+          <ion-label class="text-grey small-font">Remember Me</ion-label>
+          <ion-checkbox (click)="rememberMe()" [checked]="isChecked" style="margin-right: 5pt"></ion-checkbox>
+        </ion-item>
+        <div text-right col-5 (click)="openForgotPassord()" no-lines class="forget_password">{{'Login.ForgotPassword'|translate}}</div>
+      </div>
+
+      <div text-center><button class="login-btn" [disabled]="loginForm.invalid" ion-button>Log in</button></div>
+      <div class="text-grey connect-using">{{'Login.OrConnectUsing'|translate}}</div>
+      <ion-item style="padding: 0pt 40pt;" no-lines>
+        <img (click)="fbLogin()" class="fb-social" item-left src="assets/img/facebook.png">
+        <img (click)="googleLogin()" class="google-social" item-right src="assets/img/google.png">
+      </ion-item>
+      <div class="bottom-div">{{'Login.DontAccount'|translate}} <span (click)="openSignUpPage()" style="font-weight: bold">{{'Login.SignUp'|translate}}</span></div>
+    </ion-list>
+  </form>
+</div>
+</ion-content>

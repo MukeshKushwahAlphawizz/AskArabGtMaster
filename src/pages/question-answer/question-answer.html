@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title *ngIf="!isOtherUserProfile" text-center>{{'Ques&Ans.YourQuestion&Answer'|translate}}</ion-title>
+    <ion-title *ngIf="isOtherUserProfile" text-center>{{'Ques&Ans.Question&Answer'|translate}}</ion-title>
+    <!--<ion-buttons end>
+      <button ion-button icon-only (click)="openMyProfile(false)">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+    <ion-segment-button value="question">
+      {{'Ques&Ans.Questions'|translate}} ({{questionsList.length}})
+    </ion-segment-button>
+    <ion-segment-button value="answer">
+      {{'Ques&Ans.Answers'|translate}} ({{answersList.length}})
+    </ion-segment-button>
+  </ion-segment>
+  <!--question list block-->
+  <div *ngIf="language=='ar'" dir="rtl" style="margin-top: 20pt" [hidden]="shownSessions > 0">
+    <div *ngFor="let question of questionsList">
+      <ion-item (click)="gotoQuestionDetail(question)" no-lines>
+        <img [ngStyle]="{'border-color': util.getRank(question.question_user_rank)}" item-left class="profile-user" src="{{(question.post_user_profile != '')?question.post_user_profile:'assets/img/profile-default.jpeg'}}">
+        <div text-wrap class="question-text">
+          <div text-wrap>{{question.post_title}}</div>
+          <div text-wrap [innerHTML]="question.post_content"></div>
+          <div class="row option-div">
+            <div no-padding col-4 text-left><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+            <div no-padding col-4 text-center><a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-person"></ion-icon></a><span class="text-grey small-text">{{question.user_login}}</span></div>
+            <div no-padding col-4 text-right><a class="ar-set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{question.answer_count}} {{'Ques&Ans.Comments'|translate}}</span></div>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+  </div>
+  <div *ngIf="language!=='ar'" style="margin-top: 20pt" [hidden]="shownSessions > 0">
+    <div *ngFor="let question of questionsList">
+      <ion-item (click)="gotoQuestionDetail(question)" no-lines>
+        <img [ngStyle]="{'border-color': util.getRank(question.question_user_rank)}" item-left class="profile-user" src="{{(question.post_user_profile != '')?question.post_user_profile:'assets/img/profile-default.jpeg'}}">
+        <div text-wrap class="question-text">
+          <div text-wrap>{{question.post_title}}</div>
+          <div text-wrap [innerHTML]="question.post_content"></div>
+          <div class="row option-div">
+            <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+            <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="ios-person"></ion-icon></a><span class="text-grey small-text">{{question.user_login}}</span></div>
+            <div no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{question.answer_count}} {{'Ques&Ans.Comments'|translate}}</span></div>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+  </div>
+  <!--question answers block-->
+  <div dir="rtl" *ngIf="language=='ar'" [hidden]="shownSessions === 0">
+    <div *ngFor="let item of answersList; let i=index">
+      <div class="comment-like-div">
+        <ion-item>
+          <div style="position: absolute;top: 0pt" item-start>
+            <img no-margin (click)="openMyProfile(true,item.post_author)" item-start class="user-main" [src]="(item.question_user_profile && item.question_user_profile != '')?item.question_user_profile:'assets/img/profile-default.jpeg'">
+            <div class="name">{{item.question_user_name}}</div>
+          </div>
+          <div (click)="gotoDetailPage(item)" class="ar-question-user">
+            <div>
+              <div no-padding text-left><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{item.post_date}}</span></div>
+            </div>
+            <h2 text-wrap style="margin-top: 5px">{{item.post_title}}</h2>
+          </div>
+        </ion-item>
+
+        <!--Comment div-->
+        <ion-item no-lines class="ar-commenter-div">
+          <div class="image-comment-div">
+            <img [ngStyle]="{'border-color': util.getRank(item.answer_user_rank)}" item-start class="user-commenter" [src]="(item.answer_user_profile && item.answer_user_profile != '')?item.answer_user_profile:'assets/img/profile-default.jpeg'">
+            <div text-center class="name-div">{{item.answer_user_name}}</div>
+          </div>
+
+          <div class="ar-answer-user" text-right>
+            <div (click)="gotoDetailPage(item)" text-wrap no-padding>
+              <span class="text-grey" style="font-size: 1rem">{{item.comment_content}}</span>
+              <a class="read-more">{{'Ques&Ans.ReadMore'|translate}}</a></div>
+            <div class="row">
+              <div  text-left no-padding><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{item.comment_date}}</span></div>
+              <div *ngIf="!isOtherUserProfile" style="margin-left: 10px;margin-right: 10px" (click)="editAnswer(item)" text-center no-padding><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Ques&Ans.Edit'|translate}}</span></div>
+              <div *ngIf="!isOtherUserProfile" (click)="deleteAnswer(item,i)" text-left no-padding><a class="ar-set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Ques&Ans.Delete'|translate}}</span></div>
+            </div>
+          </div>
+
+        </ion-item>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="language!=='ar'" [hidden]="shownSessions === 0">
+    <div *ngFor="let item of answersList; let i=index">
+      <div class="comment-like-div">
+        <ion-item>
+          <div style="position: absolute;top: 0pt" item-start>
+            <img no-margin (click)="openMyProfile(true,item.post_author)" item-start class="user-main" [src]="(item.question_user_profile && item.question_user_profile != '')?item.question_user_profile:'assets/img/profile-default.jpeg'">
+            <div class="name">{{item.question_user_name}}</div>
+          </div>
+          <div (click)="gotoDetailPage(item)" class="question-user">
+            <div text-right>
+              <div no-padding text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{item.post_date}}</span></div>
+            </div>
+            <h2 text-wrap style="margin-top: 5px">{{item.post_title}}</h2>
+          </div>
+        </ion-item>
+
+        <!--Comment div-->
+        <ion-item no-lines class="commenter-div">
+          <div class="image-comment-div">
+            <img [ngStyle]="{'border-color': util.getRank(item.answer_user_rank)}" item-start class="user-commenter" [src]="(item.answer_user_profile && item.answer_user_profile != '')?item.answer_user_profile:'assets/img/profile-default.jpeg'">
+            <div text-center class="name-div">{{item.answer_user_name}}</div>
+          </div>
+
+          <div class="answer-user">
+            <div (click)="gotoDetailPage(item)" text-wrap no-padding text-left>
+              <span class="text-grey" style="font-size: 1rem">{{item.comment_content}}</span>
+              <a class="read-more">{{'Ques&Ans.ReadMore'|translate}}</a></div>
+            <div class="row">
+              <div  text-left no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{item.comment_date}}</span></div>
+              <div *ngIf="!isOtherUserProfile" margin-left margin-right (click)="editAnswer(item)" text-center no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Ques&Ans.Edit'|translate}}</span></div>
+              <div *ngIf="!isOtherUserProfile" (click)="deleteAnswer(item,i)" text-left no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Ques&Ans.Delete'|translate}}</span></div>
+            </div>
+          </div>
+
+        </ion-item>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

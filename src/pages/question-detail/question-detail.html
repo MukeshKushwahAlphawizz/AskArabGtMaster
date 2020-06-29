@@ -1,0 +1,248 @@
+<ion-header [ngClass]="dark" class="toolbar-style">
+  <ion-navbar>
+    <ion-title text-center>{{'Question.Question_Details'|translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openMyProfile(false,'')">
+        <ion-icon class="white header-icon" name="md-person"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content [ngClass]="dark" padding>
+  <audio id="audio" src="assets/Bubbles.wav" autostart="false" ></audio>
+
+  <div [ngClass]="language == 'ar'?'right-align':''">
+    <h2>{{questionData.post_title}}</h2>
+    <div class="text-grey" [innerHtml]="questionData.post_content"></div>
+
+    <!--Poll-->
+    <div *ngIf="questionData.poll && questionData.poll.length > 0">
+      <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>
+        <ion-item *ngFor="let item of questionData.poll;let i = index">
+          <ion-label>{{item}}</ion-label>
+          <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <!--Progress Poll-->
+      <div margin-top margin-bottom *ngIf="questionData.poll_vote_status=='true' && questionData.poll_progress">
+        <div *ngFor="let progress of questionData.poll_progress">
+          <ion-item no-lines style="min-height: 1rem">
+            <div class="small-font text-grey">{{progress.option}}</div>
+            <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
+          </ion-item>
+          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+          </progress-bar>
+        </div>
+      </div>
+    </div>
+    <!--End Poll-->
+
+    <img class="post-img" *ngIf="questionData.image_link && questionData.image_link !== ''" [src]="questionData.image_link">
+    <iframe *ngIf="questionData.video_link !==''" margin-top margin-bottom width="100%" height="250" [src]="questionData.video_link | safe" frameborder="0"  allowfullscreen></iframe>
+    <!--<div *ngIf="language==='ar'" class="row option-div">
+      <div no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{questionData.category}}</span></div>
+      <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{'Question.Answers'|translate}} ({{questionData.answer_count}})</span></div>
+      <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{questionData.post_modified_gmt}}</span></div>
+    </div>
+    <div *ngIf="language !=='ar'" class="row option-div">
+      <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{questionData.post_modified_gmt}}</span></div>
+      <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="ios-chatbubbles"></ion-icon></a><span class="text-grey small-text">{{'Question.Answers'|translate}} ({{questionData.answer_count}})</span></div>
+      <div no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{questionData.category}}</span></div>
+    </div>-->
+  </div>
+  <ion-item *ngIf="language=='ar'" no-margin no-padding no-lines>
+    <button class="small-font" (click)="shareQuestion()"  no-margin ion-button icon-start clear small>
+      <ion-icon name="ios-redo"></ion-icon>
+      <div>{{'Question.Share'|translate}}</div>
+    </button>
+    <button class="small-font" (click)="report(questionData,'question')" style="padding:5px" no-margin ion-button icon-start clear small>
+      <ion-icon name="ios-flag"></ion-icon>
+      <div>{{'HOME.Report'|translate}}</div>
+    </button>
+  </ion-item>
+  <ion-item *ngIf="language!=='ar'" no-margin no-padding no-lines>
+      <button item-right class="small-font" (click)="report(questionData,'question')" style="padding:5px" no-margin ion-button icon-start clear small>
+        <ion-icon name="ios-flag"></ion-icon>
+        <div>{{'HOME.Report'|translate}}</div>
+      </button>
+      <button item-right class="small-font" (click)="shareQuestion()"  no-margin ion-button icon-start clear small>
+        <ion-icon name="ios-redo"></ion-icon>
+        <div>{{'Question.Share'|translate}}</div>
+      </button>
+    </ion-item>
+
+  <div text-center class="row follow-ask-question-div">
+    <div col-6>
+      <button (click)="addToFavorite()" class="small-font favorite-btn" ion-button round>{{addToFavText}}</button>
+    </div>
+    <div col-6>
+      <button (click)="follow()" class="follow-btn small-font" ion-button round clear>{{followText}}</button>
+    </div>
+  </div>
+
+  <div class="header-txt">{{'Question.Answers'|translate}} {{questionData.answer_data.length}}</div>
+
+  <div *ngIf="questionData.answer_data.length">
+    <div *ngFor="let answer of questionData.answer_data">
+      <ion-item no-margin no-lines>
+        <div class="{{language=='ar'?'ar-user-main-div':'user-main-div'}}" margin-top item-start>
+          <img [ngStyle]="{'border-color': util.getRank(answer.answer_user_rank)}" (click)="openMyProfile(true,answer.comment_user_id)" class="user-main" [src]="(answer.user_profile && answer.user_profile != '')?answer.user_profile:'assets/img/profile-default.jpeg'">
+          <div class="name">{{answer.answer_author}}</div>
+        </div>
+        <div class="{{language=='ar'?'ar-user-answer-div':'user-answer-div'}}">
+        <div class="row">
+          <div [ngClass]="language=='ar'?'ar-right-aligned':'right-aligned'" no-padding>
+            <button class="small-font" (click)="report(answer,'answer')" style="margin-top:-8px" no-margin ion-button icon-start clear small>
+              <ion-icon name="ios-flag"></ion-icon>
+              <div>{{'HOME.Report'|translate}}</div>
+            </button>
+            <a class="set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>
+            <span class="text-grey small-text">{{util.timeSince(answer.answer_date_gmt)}}</span>
+          </div>
+        </div>
+
+          <p class="answer-content" text-wrap>{{answer.answer_content}}</p>
+          <div>
+            <img margin-top padding-top margin-bottom *ngIf="answer.answer_image_link && answer.answer_image_link != ''" [src]="answer.answer_image_link">
+          </div>
+          <div>
+            <iframe *ngIf="answer.getvideo_answer_id !==''" margin-top margin-bottom width="100%" height="250" [src]="answer.getvideo_answer_id | safe" frameborder="0"  allowfullscreen></iframe>
+          </div>
+            <ion-item style="min-height: 2rem" *ngIf="language=='ar'">
+            <button item-right (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
+              <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count < 0)?(answer.likes_count * (-1)):0}})</span>
+              <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="md-thumbs-down"></ion-icon>
+            </button>
+            <button item-right (click)="like(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
+              <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count >=0)?answer.likes_count:0}})</span>
+              <ion-icon [ngClass]="answer.like?'':'text-grey'" name="thumbs-up"></ion-icon>
+            </button>
+            <button item-left (click)="reply(answer)" class="ar-right-button" ion-button icon-start clear small>
+              <ion-icon name="ios-undo"></ion-icon>
+              <div>{{'Question.Reply'|translate}}</div>
+            </button>
+          </ion-item>
+          <div *ngIf="language!=='ar'" class="row">
+            <button (click)="like(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
+              <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count >=0)?answer.likes_count:0}})</span>
+              <ion-icon [ngClass]="answer.like?'':'text-grey'" name="thumbs-up"></ion-icon>
+            </button>
+            <button (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
+              <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count < 0)?(answer.likes_count * (-1)):0}})</span>
+              <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="md-thumbs-down"></ion-icon>
+            </button>
+            <button (click)="reply(answer)" class="right-button" ion-button icon-start clear small>
+              <ion-icon name="ios-undo"></ion-icon>
+              <div>{{'Question.Reply'|translate}}</div>
+            </button>
+          </div>
+          <div *ngIf="answer.isReplyView && language =='ar'" [@slideIn]>
+            <ion-item no-padding no-lines>
+              <input dir="rtl" [(ngModel)]="replyText" placeholder="{{'Question.Reply'|translate}}" class="rounded-red text-grey ar-search" type="text">
+            </ion-item>
+            <ion-item>
+              <button (click)="sendReply(answer)" class="ar-send-btn" ion-button small round>{{'Question.SEND'|translate}}</button>
+            </ion-item>
+          </div>
+          <div *ngIf="answer.isReplyView && language !=='ar'" [@slideIn]>
+            <ion-item no-padding no-lines>
+              <input [(ngModel)]="replyText" placeholder="{{'Question.Reply'|translate}}" class="rounded-red text-grey search" type="text">
+            </ion-item>
+            <ion-item>
+              <button (click)="sendReply(answer)" class="send-btn" ion-button small round>{{'Question.SEND'|translate}}</button>
+            </ion-item>
+          </div>
+
+          <!--Reply answers section-->
+          <div *ngIf="answer.reply && answer.reply.length && language=='ar'">
+            <ion-item no-lines class="ar-reply-div" *ngFor="let rep of answer.reply; let i = index">
+              <div class="ar-image-reply-div">
+                <img [ngStyle]="{'border-color': util.getRank(rep.reply_user_rank)}" item-start class="ar-user-replier" [src]="(rep.user_profile !== '')?rep.user_profile:'assets/img/profile-default.jpeg'">
+                <div text-center class="ar-name-div">{{rep.reply_author}}</div>
+              </div>
+
+              <div class="ar-reply-div">
+                <div text-wrap no-padding text-right>
+                  <span class="text-grey" style="font-size: 1rem">{{rep.reply_content}}</span>
+                  <div class="row">
+                    <div *ngIf="userData.user_login == rep.reply_author" (click)="deleteReply(rep.reply_post_ID,answer.reply,i)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Question.Delete'|translate}}</span></div>
+                    <div *ngIf="userData.user_login == rep.reply_author" (click)="editReply(rep)" style="margin-left: 5pt;margin-right: 5pt" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Question.Edit'|translate}}</span></div>
+                    <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{rep.reply_date_gmt}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </ion-item>
+          </div>
+          <div *ngIf="answer.reply && answer.reply.length && language!=='ar'">
+            <ion-item no-lines class="reply-div" *ngFor="let rep of answer.reply; let i = index">
+              <div class="image-reply-div">
+                <img [ngStyle]="{'border-color': util.getRank(rep.reply_user_rank)}" item-start class="user-replier" [src]="(rep.user_profile !== '')?rep.user_profile:'assets/img/profile-default.jpeg'">
+                <div text-center class="name-div">{{rep.reply_author}}</div>
+              </div>
+
+              <div style="margin-left: 57px;margin-bottom: 15pt">
+                <div text-wrap no-padding text-left>
+                  <span class="text-grey" style="font-size: 1rem">{{rep.reply_content}}</span>
+                  <div class="row">
+                    <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{rep.reply_date_gmt}}</span></div>
+                    <div *ngIf="userData.user_login == rep.reply_author" (click)="editReply(rep)" style="margin-left: 5pt;margin-right: 5pt" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Question.Edit'|translate}}</span></div>
+                    <div *ngIf="userData.user_login == rep.reply_author" (click)="deleteReply(rep.reply_post_ID,answer.reply,i)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Question.Delete'|translate}}</span></div>
+                  </div>
+                </div>
+              </div>
+            </ion-item>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+  </div>
+
+  <div style="margin-top: 5px" class="grey-saparator"></div>
+  <div text-center margin-top class="header-txt">{{'Question.Add_An_Answer'|translate}}</div>
+
+  <div class="attach-div">
+    <button (click)="addAttachment()" class="rounded-red" ion-button clear full>
+      <span class="{{language=='ar'?'ar-attach-text':'attach-text'}}">{{imageName}}</span><a class="{{language=='ar'?'ar-attach-icn':'attach-icn'}}"><ion-icon name="md-attach"></ion-icon></a>
+    </button>
+  </div>
+  <ion-item *ngIf="language=='ar'" no-lines margin-bottom text-right>
+    <ion-label class="text-grey small-font">{{'Question.video_better_explain'|translate}}</ion-label>
+    <ion-checkbox item-right [checked]="isVideoNeeded" (ionChange)="openVideoBox()" style="padding-right: 5pt;padding-left: 5pt"></ion-checkbox>
+  </ion-item>
+  <ion-item *ngIf="language!=='ar'" no-lines margin-bottom>
+    <ion-label class="text-grey small-font">{{'Question.video_better_explain'|translate}}</ion-label>
+    <ion-checkbox [checked]="isVideoNeeded" (ionChange)="openVideoBox()" style="margin-right: 5pt"></ion-checkbox>
+  </ion-item>
+
+  <div *ngIf="isVideoNeeded" [@slideIn]>
+    <div class="select-main-div">
+      <div class="select text-grey">
+        <select id="video" (change)="selectVideoType()">
+          <option *ngFor="let type of videoTypeList" value="{{type.name}}">{{type.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="select-main-div">
+      <ion-item *ngIf="language=='ar'" class="rounded-grey-input" no-lines>
+        <input dir="rtl" [(ngModel)]="videoLink" placeholder="{{'Question.ED_Video'|translate}}" style="background-image: none !important;" class="search-icon text-grey" type="text">
+      </ion-item>
+      <ion-item *ngIf="language!=='ar'" class="rounded-grey-input" no-lines>
+        <input [(ngModel)]="videoLink" placeholder="{{'Question.ED_Video'|translate}}" style="background-image: none !important;" class="search-icon text-grey" type="text">
+      </ion-item>
+      <div class="hint-text small-font text-grey">{{'Question.Put_here'|translate}}: https://www.youtube.com/watch?v=sdUUx5FdySs EX: 'sdUUx5FdySs'.</div>
+    </div>
+  </div>
+
+  <div *ngIf="language=='ar'" class="bottom_textarea">
+    <ion-textarea dir="rtl" [(ngModel)]="answer" rows='7' placeholder="{{'Question.Answer'|translate}}" class="inner_textarea"></ion-textarea>
+  </div>
+  <div *ngIf="language!=='ar'" class="bottom_textarea">
+    <ion-textarea [(ngModel)]="answer" rows='7' placeholder="{{'Question.Answer'|translate}}" class="inner_textarea"></ion-textarea>
+  </div>
+
+  <div style="margin: 30pt" text-center>
+    <button (click)="addAnswer()" style="font-size: 1.2rem;font-weight: bold" ion-button round>{{'Question.Add_Your_Answer'|translate}}</button>
+  </div>
+
+</ion-content>

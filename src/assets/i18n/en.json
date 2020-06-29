@@ -1,0 +1,316 @@
+{
+  "BACK_BUTTON_TEXT": "Back",
+
+  "CommonErrMsg": {
+    "Name_required": "*Name is required.",
+    "Lastname_required": "*Lastname is required.",
+    "Address_required": "*Address is required.",
+    "MobileNumber_required": "*Mobile number is required.",
+    "Minimumlength10.": "*Minimum length should be 10.",
+    "Maximumlength12": "*Maximum length should be 12.",
+    "DOBrequired": "*Date of birth is required.",
+    "EmailRequired": "*Email is required.",
+    "EnterValidEmail": "*Please enter a valid email address.",
+    "PasswordRequired": "*Password is required.",
+    "MinPasswordLength8": "*Minimum password length should be 8.",
+    "EnterMessage": "*Please enter your message."
+  },
+
+  "Filter": {
+    "ChooseFilterOption": "Choose Filter Option",
+    "TheLastQuestion": "The Last Question",
+    "MostAnswered": "Most Answered",
+    "LatestAnswers": "Latest Answers",
+    "ThereAreNoAnswers": "There Are No Answers"
+  },
+
+  "Common": {
+    "Delete_Reply": "Delete Reply",
+    "Are_you_sure_delete": "Are you sure want to delete?",
+    "Choose_take_picture": "Choose or take a picture",
+    "Take_picture": "Take a picture",
+    "Choose_picture": "Choose picture",
+    "Answer_Added_Successfully": "Answer Added Successfully",
+    "Select_Video_Type": "Select Video Type",
+    "Select_Category": "Select Category",
+    "General_Questions": "General Questions",
+    "Parts_and_Mechanics": "Parts and Mechanics",
+    "Car_Problems": "Car Problems",
+    "ConfirmDelete": "Confirm Delete",
+    "AreyousureDeleteAccount": "Are you sure you want to Delete your Account?",
+    "QuestionDeletedSuccessfully": "Question is deleted Successfully"
+  },
+
+  "StateDetail": {
+    "Comments": "Comments",
+    "QuestionAsked": "Question Asked",
+    "BestAnswers": "Best Answers",
+    "FavoriteQuestion": "Favorite Question",
+    "FollowingQuestion": "Following Question"
+  },
+
+  "Users": {
+    "Members": "Members"
+  },
+
+  "Contact": {
+    "ContactUs": "Contact Us",
+    "DetailText": "In this app, you can ask your questions about everything related to cars, mechanics, driving, etc., where the individuals registered on the site will participate in answering your questions through their experiences and personal knowledge, you can also join the family and share our experiences and answer the questions posed and choose the best answers.",
+    "DetailText1": "In this way, and through this interactive process, we can exchange experiences and knowledge with the aim of promoting the culture of cars and raising awareness on this topic among our dear Arab audience, which stretches from the ocean to the Persian Gulf.",
+    "DetailText2": "Welcome to the Arab GT family",
+    "ConnectWithUs": "Connect With Us",
+    "Name": "Name",
+    "Email": "Email",
+    "Message": "Message",
+    "Send": "Send",
+    "MessageSend": "Your Message is Sent"
+  },
+
+  "QuesUser": {
+    "AddQuestion": "Ask Your Question",
+    "AskingAQuestion": "I am now asking ",
+    "AQuestion": " a question",
+    "Question": "Question",
+    "TheDetail": "The Details",
+    "PublishQuestion": "Publish Your Question",
+    "PleaseChoose": "Please choose an appropriate title for the question so that it can be easily answered"
+  },
+
+  "Report": {
+    "Report": "Report",
+    "PleaseBrieflyQuestion": "Please briefly explain why you feel this question should be reported.",
+    "PleaseBrieflyAnswer": "Please briefly explain why you feel this answer should be reported.",
+    "WriteHere": "Write Here",
+    "SendReport": "Send",
+    "EnterReportContent": "Please Enter Your Report Content",
+    "SuccessMsg": "Report Send"
+  },
+
+  "SubmitAns": {
+    "Submit_Answer": "Submit Answer",
+    "Answer": "Answer",
+    "WriteYourAnswer": "Write Your Answer",
+    "UploadFile": "Upload File",
+    "POSTANSWER": "POST ANSWER",
+    "SupportImages": "Images Supported .png, .jpeg, .gif"
+  },
+
+  "SignUp": {
+    "GetStarted": "Let's Get Started!",
+    "Username": "Username",
+    "EmailAddress": "Email Address",
+    "Password": "Password",
+    "Create": "Create",
+    "OrConnectUsing": "Or Connect Using",
+    "Alreadyhaveanaccount": "Already have an account?",
+    "LogIn": "Log In",
+    "Created_Successfully": "Your Account Has Created Successfully"
+  },
+
+  "Ques&AnsDetail": {
+    "YourQuestion&Answer": "Your Question & Answer",
+    "Details": "Details",
+    "Answer": "Answer",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "TotalViews": "Total Views",
+    "Category": "Category",
+    "TotalLikes": "Total Likes",
+    "TotalDisLikes": "Total DisLikes",
+    "THESOLUTIONWASDONE": "THE SOLUTION WAS DONE"
+  },
+
+  "Ques&Ans": {
+    "YourQuestion&Answer": "Your Question & Answer",
+    "Question&Answer": "Questions & Answers",
+    "Questions": "Questions",
+    "Answers": "Answers",
+    "Comments": "Comments",
+    "ReadMore": "Read More",
+    "Edit": "Edit",
+    "Delete": "Delete"
+  },
+
+  "MyProfile": {
+    "MyProfile": "My Profile",
+    "Profile": "Profile",
+    "Years": "Years",
+    "Followers": "Followers",
+    "Following": "Following",
+    "ASKQUESTION": "ASK QUESTION",
+    "MyStats": "My Stats",
+    "UserStats": "User Stats",
+    "ANSWERS": "ANSWERS",
+    "QUESTIONS": "QUESTIONS",
+    "COMMENTS": "COMMENTS",
+    "QUESTIONSASK": "QUESTIONS ASK",
+    "BESTANSWERS": "BEST ANSWERS",
+    "FOLLOW": "FOLLOW",
+    "FOLLOWED": "FOLLOWED",
+    "FAVORITEQUESTIONS": "FAVORITE QUESTIONS",
+    "MEMBERSQUESTIONS": "MEMBERS QUESTIONS I FOLLOW"
+  },
+
+  "Menu": {
+    "Home": "Home",
+    "ContactUs": "Contact Us",
+    "EditProfile": "Edit Profile",
+    "YourQuestionAnswer": "Your Question/Answer",
+    "Article": "Article",
+    "Categories": "Categories",
+    "GeneralQuestions": "General Questions",
+    "PartsAndMechanics": "Parts and Mechanics",
+    "CarProblems": "Car Problems",
+    "Notifications": "Notifications",
+    "Settings": "Settings",
+    "ShareApp": "Share App",
+    "Logout": "Logout",
+    "FollowUs": "Follow Us"
+  },
+
+  "Login": {
+    "WelcomeBack": "Welcome Back!",
+    "EmailAddress": "Email Address",
+    "Password": "Password",
+    "ForgotPassword": "Forgot Password?",
+    "OrConnectUsing": "Or Connect Using",
+    "DontAccount": "Don't have an account?",
+    "SignUp": "Sign Up"
+  },
+
+  "ForgotPassword": {
+    "Forgot_Password": "Forgot Password",
+    "Send": "Send",
+    "EmailAddress": "Email Address",
+    "NewPasswordWill": "New Password will send you on your email address.",
+    "PleaseEnterEmail": "Please Enter Email",
+    "Pleaseentervalidmailid": "Please enter valid mail id"
+  },
+
+  "EditProfile": {
+    "Edit_Profile": "Edit Profile",
+    "ChangeProfilePhoto": "Change Profile Photo",
+    "Name": "Name",
+    "LastName": "Last Name",
+    "Address": "Address",
+    "SelectCountry": "Select Country",
+    "SelectState": "Select State",
+    "MobileNo": "Mobile No.",
+    "DOB": "DOB",
+    "MyBio": "My Bio",
+    "Male": "Male",
+    "Female": "Female",
+    "SAVEANDEXIT": "SAVE AND EXIT",
+    "ProfileEditedSuccessfully": "Profile Edited Successfully"
+  },
+
+  "ChangePassword": {
+    "Change_Password": "Change Password",
+    "Change": "Change",
+    "Confirm_Password": "Confirm Password",
+    "New_Password": "New Password",
+    "Old_Password": "Old Password"
+  },
+
+  "Notifications": {
+    "Notifications": "Notifications",
+    "No_Notifications_are_present": "No Notifications are present.",
+    "QuestionNotExist": "Question may be deleted or not exist."
+  },
+
+  "Articles": {
+    "Articles": "Articles",
+    "Comments": "Comments",
+    "No_Articles_are_Available": "No Articles are Available"
+  },
+
+  "ReadArticle": {
+    "Read_Article": "Read Article",
+    "Comments": "Comments",
+    "Reply": "Reply",
+    "SEND": "SEND",
+    "Add_Comments": "Add Comments",
+    "Write_Comment": "Write Comment",
+    "Allow_to_reply": "Allow to reply",
+    "ASK_QUESTION": "ASK QUESTION"
+  },
+
+  "AskQuestion": {
+    "Ask_Question": "Ask Question",
+    "Tips_title": "Tips on getting good answers quickly",
+    "Make_sure": "Make sure your question has been asked already",
+    "Keep_your": "Keep your question short and to the point",
+    "Double_check": "Double-check grammar and spelling",
+    "Write_your_question": "Write your question",
+    "Is_this_question": "Is this question a poll?",
+    "WritePollItem": "Write Poll Item",
+    "ADDMORE": "ADD MORE",
+    "DescribeYourQuestion": "Describe Your Question",
+    "Do_you_need": "Do you need a video to better explain",
+    "ED_Video": "ED Video",
+    "Put_videoID": "Put here the video ID",
+    "ASK_QUESTION": "ASK QUESTION",
+    "Upload_Image": "Upload Image",
+    "Please_write_your_question": "Please write your question",
+    "Question_Posted_Successfully": "Question Posted Successfully"
+  },
+
+  "Question": {
+    "Question_Details": "Question Details",
+    "Share": "Share",
+    "Answers": "Answers",
+    "Reply": "Reply",
+    "SEND": "SEND",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Add_An_Answer": "Add An Answer",
+    "video_better_explain": "Do you need a video to better explain",
+    "ED_Video": "ED Video",
+    "Put_here": "Put here the video ID",
+    "Answer": "Answer",
+    "Add_Attachment": "Add Attachment",
+    "Add_To_Favorite": "Add To Favorite",
+    "Follow": "Follow",
+    "Added_As_Favorite": "Added As Favorite",
+    "Followed": "Followed",
+    "Add_Your_Answer": "Add Your Answer"
+  },
+
+  "HOME": {
+    "Home": "Home",
+    "Report": "Report",
+    "Search": "Search",
+    "Answer": "Answer",
+    "Submit_Answer": "Submit Answer",
+    "Reply": "Reply",
+    "View_All_Answer": "View All Answer",
+    "SEND": "SEND",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Read_More": "Read More",
+    "NoQuestionsareAvailable": "No Questions are Available"
+  },
+
+  "Setting": {
+    "Settings": "Settings",
+    "Main_Preferences": "Main Preferences",
+    "Language": "Language",
+    "Appearance": "Appearance",
+    "Night_Mode": "Night Mode",
+    "Sound": "Sound",
+    "Notification_Sound": "Notification Sound",
+    "Edit_Profile": "Edit Profile",
+    "Change_Password": "Change Password",
+    "Delete_Account": "Delete Account"
+  },
+  "TAB": {
+    "TAB1_TITLE": "Home",
+    "TAB2_TITLE": "Ask Question",
+    "TAB3_TITLE": "Articles",
+    "TAB4_TITLE": "Notifications"
+  },
+
+  "Default": "Default",
+  "Arabic": "عربى",
+  "PleaseWait": "please wait..."
+}
