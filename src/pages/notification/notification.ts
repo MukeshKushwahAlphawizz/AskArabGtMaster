@@ -21,7 +21,7 @@ export class NotificationPage {
   private pageSize: number = 10;
   private showLoadMore: boolean = true;
   public QuestionNotExist : string = '';
-  language: string = 'en';
+  language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public util: UtilProvider,
@@ -45,10 +45,21 @@ export class NotificationPage {
   ionViewDidEnter() {
     this.scrollToTop();
     this.events.publish('notificationRead', true);
+    let allNotification = this.user.getAllNotifications();
+    if(allNotification){
+      this.notificationsList = JSON.parse(this.user.getAllNotifications());
+      this.getDataOfNotification(false);
+    }else {
+      this.getDataOfNotification(true);
+    }
+
+  }
+
+  getDataOfNotification(showLoader){
     this.storage.get('userId').then(data=>{
       this.userId = data;
       this.pageNumber = 0;
-      this.getAllNotifications(true).then(data =>{
+      this.getAllNotifications(showLoader).then(data =>{
         let list : any = data;
         this.notificationsList = list;
         (this.notificationsList.length>0)?this.isNotification=true:this.isNotification=false;

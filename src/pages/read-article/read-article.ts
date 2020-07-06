@@ -32,7 +32,7 @@ export class ReadArticlePage {
   comment: string = '';
   userId:any = '';
   isAllowToReply: number = 1;
-  private language: string = 'en';
+  private language: string = 'ar';
   constructor(public navCtrl: NavController,
               public util: UtilProvider,
               public storage : Storage,

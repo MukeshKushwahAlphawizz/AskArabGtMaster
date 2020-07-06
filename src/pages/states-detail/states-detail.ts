@@ -24,7 +24,7 @@ export class StatesDetailPage {
   isComment: boolean = false;
   commentList: any = [];
   StateDetail:any={};
-  language: string = '';
+  language: string = 'ar';
   constructor(public navCtrl: NavController,
               public util : UtilProvider,
               public modalCtrl:ModalController,

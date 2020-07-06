@@ -50,7 +50,7 @@ page-question-detail {
     height: 170px;
     border-radius: 20px;
     padding: 12pt;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
   .right-aligned{
@@ -238,6 +238,6 @@ page-question-detail {
     margin-left: 60px;margin-bottom: 15pt
   }
   .ar-user-answer-div{
-    margin-right: 70px;margin-bottom: 15pt;text-align: right;
+    margin-right: 60pt;margin-bottom: 15pt;text-align: right;
   }
 }

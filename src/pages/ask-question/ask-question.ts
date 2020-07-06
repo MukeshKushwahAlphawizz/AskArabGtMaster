@@ -64,7 +64,7 @@ export class AskQuestionPage {
   pollArray : any = [{item:''}];
   dark: any = '';
   myId: string = '';
-  language: string = '';
+  language: string = 'ar';
   isVideoNeeded: boolean = false;
   private commonTexts: any = {};
   private Please_write_your_question: string = '';

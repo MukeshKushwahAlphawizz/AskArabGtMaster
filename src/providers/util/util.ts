@@ -35,12 +35,12 @@ export class UtilProvider {
   }
   initTranslate() {
     this.storage.get('appLanguage').then(data=>{
-      if(data && data == 'ar'){
-        this.translateService.setDefaultLang('ar');
-        this.translateService.use('ar');
-      }else {
+      if(data && data == 'en'){
         this.translateService.setDefaultLang('en');
         this.translateService.use('en');
+      }else {
+        this.translateService.setDefaultLang('ar');
+        this.translateService.use('ar');
       }
       this.translateService.get("PleaseWait").subscribe(values => {
         this.pleaseWait = values;

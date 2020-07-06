@@ -6,6 +6,7 @@ import {Storage} from "@ionic/storage";
 import {TranslateService} from "@ngx-translate/core";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import { AdMobPro } from '@ionic-native/admob-pro';
+import {FullScreenContentSettings} from "../../components/full-screen-content/models/full-screen-content-settings";
 
 @IonicPage()
 @Component({
@@ -38,21 +39,26 @@ import { AdMobPro } from '@ionic-native/admob-pro';
 export class HomePage {
   @ViewChild(Content) content: Content;
 
+  public customSettings: FullScreenContentSettings = {
+    tolerance: 10,
+    offset: 250
+  };
+
   questionsListForSearch: any = [];
   questionsList: any = [];
   pageNumber : number = 0;
-  pageSize : number = 10;
+  pageSize : number = 8;
   cat_id : number = CATEGORY_ID.value;
   filter_id : number = 1;
   isQuestionAvail: boolean = true;
-  margin: any = '0pt';
   userData :any = '';
   replyText: string = '';
   dark: any = '';
   Read_More: any = 'Read More';
   filterOptions: any = {};
   commonTexts : any = {};
-  language : string = 'en';
+  language : string = 'ar';
+  isLoading: boolean = false;
 
   constructor(public navCtrl: NavController,
               public util:UtilProvider,
@@ -64,26 +70,14 @@ export class HomePage {
               public events : Events,
               public actionSheetCtrl:ActionSheetController,
               public navParams: NavParams) {
-    this.dark = user.getTheme();
-    this.storage.get('appLanguage').then(data=>{
-      this.language = data;
-    })
-    translateService.get("HOME.Read_More").subscribe(values => {
-      this.Read_More=values;
+    this.storage.get('userData').then(data => {
+      this.userData = JSON.parse(data);
+      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
     });
-    translateService.get("Filter").subscribe(values => {
-      this.filterOptions = values;
-    });
-    translateService.get("Common").subscribe(values => {
-      this.commonTexts = values;
-    });
-    events.subscribe('refreshFeed', (value) => {
-      // this.scrollToTop();
+    this.events.subscribe('refreshFeed', (value) => {
       this.pageNumber = 0;
-      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id);
+      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true);
     });
-    if (platform.is('cordova'))
-    this.showAds();
   }
 
   ionViewDidLoad() {
@@ -92,17 +86,20 @@ export class HomePage {
   }
 
   showAds() {
-    let adId;
-    if(this.platform.is('android')) {
-      adId = 'ca-app-pub-2579181101911625/3617761015';
-    } else if (this.platform.is('ios')) {
-      adId = 'YOUR_ADID_IOS';
-    }
     var admobid :any = {};
-    admobid = {
-      banner: 'ca-app-pub-2579181101911625/6569844529',
-      interstitial: 'ca-app-pub-2579181101911625/3617761015'
-    };
+
+    if(this.platform.is('android')) {
+      admobid = {
+        banner: 'ca-app-pub-2579181101911625/6569844529',
+        interstitial: 'ca-app-pub-2579181101911625/3617761015'
+      };
+    } else if (this.platform.is('ios')) {
+      admobid = {
+        banner: 'ca-app-pub-2579181101911625/1699798821',
+        interstitial: 'ca-app-pub-2579181101911625/6646564244'
+      };
+    }
+
     if(this.admob) this.admob.createBanner({
       adId: admobid.banner,
       position: this.admob.AD_POSITION.BOTTOM_CENTER,
@@ -112,17 +109,28 @@ export class HomePage {
 
     if(this.admob) this.admob.showInterstitial();
 
-    this.admob.prepareInterstitial({adId: adId})
+    this.admob.prepareInterstitial({adId: admobid.interstitial})
       .then(() => {
         this.admob.showInterstitial();
       });
   }
 
   ngOnInit(){
-    this.storage.get('userData').then(data => {
-      this.userData = JSON.parse(data);
-      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id);
+    this.dark = this.user.getTheme();
+    this.storage.get('appLanguage').then(data=>{
+      this.language = data;
     });
+    this.translateService.get("HOME.Read_More").subscribe(values => {
+      this.Read_More=values;
+    });
+    this.translateService.get("Filter").subscribe(values => {
+      this.filterOptions = values;
+    });
+    this.translateService.get("Common").subscribe(values => {
+      this.commonTexts = values;
+    });
+    if (this.platform.is('cordova'))
+      this.showAds();
   }
 
   reply(question){
@@ -139,7 +147,7 @@ export class HomePage {
     this.navCtrl.push('MyProfilePage',{isOtherUserProfile : isOtherUser,userId : userId})
   }
 
-  getQuestionsList(pageNum,pageSize,catId,filterId) {
+  getQuestionsList(pageNum,pageSize,catId,filterId,showLoader) {
     let formData = new FormData();
     formData.append('user_id',this.userData.ID);
     formData.append('pageSize',pageSize);
@@ -147,21 +155,23 @@ export class HomePage {
     formData.append('cat_id',catId);
     formData.append('filter_id',filterId);
 
-    this.util.presentLoading();
+    showLoader?this.util.presentLoading():this.isLoading = true;
     this.user.getQuestionsList(formData).subscribe((resp) => {
       // console.log('response get questions >>>',resp)
-      this.util.dismissLoading();
+      showLoader?this.util.dismissLoading():this.isLoading = false;
       let response : any = resp;
       if(response.data){
-        this.scrollToTop();
         this.questionsList = response.data;
         this.questionsList.filter(item=>{item.isViewAll = true});
         this.questionsListForSearch = this.questionsList;
+        setTimeout(()=>{
+          this.scrollToTop();
+        },500);
       }
       this.questionsList.length ? this.isQuestionAvail = true : this.isQuestionAvail = false;
     }, (err) => {
       console.error('ERROR :', err);
-      this.util.dismissLoading();
+      showLoader?this.util.dismissLoading():this.isLoading = false;
     });
   }
 
@@ -283,7 +293,6 @@ export class HomePage {
 
   doRefresh(refresher) {
     this.pageNumber = 0;
-    this.margin='30pt';
     let formData : any = new FormData();
     formData.append('user_id',this.userData.ID);
     formData.append('pageSize',this.pageSize);
@@ -298,10 +307,8 @@ export class HomePage {
         this.questionsList.filter(item=>{item.isViewAll = true});
         this.questionsListForSearch = this.questionsList;
       }
-      this.margin='0pt';
       refresher.complete();
     }, (err) => {
-      this.margin='0pt';
       refresher.complete();
       console.error('ERROR :', err);
     });
@@ -351,7 +358,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 1;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
           }
         },
         {
@@ -359,7 +366,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 2;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
           }
         },
         {
@@ -367,7 +374,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 3;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
           }
         },
         {
@@ -375,7 +382,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 4;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
           }
         }
       ]
@@ -405,12 +412,14 @@ export class HomePage {
       this.cat_id = 5;
     }
     this.pageNumber=0;
-    this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id);
+    this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
   }
 
   scrollToTop() {
-    if (this.content)
-    this.content.scrollToTop();
+    console.log('scroll content is ---', this.content._scroll);
+    if (this.content._scroll){
+      this.content.scrollToTop();
+    }
   }
 
   report(data: any) {

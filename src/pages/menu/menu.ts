@@ -50,7 +50,7 @@ export class MenuPage {
   userImage: any = 'assets/img/profile-default.jpeg';
   fullName: any = 'User Full Name';
   isCategory: any = 0;
-  language : string = 'en';
+  language : string = 'ar';
   dark: any = '';
   private allowClose: Boolean;
   private lastBack: number;
@@ -93,7 +93,7 @@ export class MenuPage {
       } else if(nav.canGoBack()){
         nav.pop();
       } else if(Date.now() - this.lastBack > spamDelay && !this.allowClose) {
-        console.log('nav ======',nav.root);
+        console.log('=================== nav ===================',nav.root);
         if(nav.root == 'HomePage'){
           this.events.publish('refreshFeed', true);
         }
@@ -132,6 +132,12 @@ export class MenuPage {
   ionViewDidLoad() {
     //Open Default Home Page
     this.openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, false,0)
+    setTimeout(()=>{
+      this.loadArticles();
+      setTimeout(()=>{
+        this.loadNotifications();
+      },2000);
+    },5000);
   }
 
   editProfile(){
@@ -173,7 +179,6 @@ export class MenuPage {
         this.storage.set('userData',null);
         this.storage.set('userId', null);
         this.storage.get('isNightMode').then(data=>{
-          console.log('menu >> logout >> night mode >>',data);
           this.navCtrl.setRoot('LoginPage',{isNightMode:data});
           this.util.dismissLoading();
         })
@@ -196,5 +201,25 @@ export class MenuPage {
   openSocial(url) {
     this.menuCtrl.toggle();
     window.open(url);
+  }
+
+  private loadArticles() {
+    let formData : any = new FormData();
+    formData.append('pageSize',10);
+    formData.append('pageNumber',0);
+    this.user.getArticalsList(formData).subscribe((resp) => {
+      let response: any = resp;
+      this.user.setArticles(JSON.stringify(response));
+    });
+  }
+
+  loadNotifications(){
+    this.storage.get('userId').then(userId=>{
+      let data = {user_id:userId, pageSize : 10, pageNumber: 0};
+      this.user.getnotificationcontentData(data).subscribe(response => {
+        let res: any = response;
+        this.user.setNotifications(JSON.stringify(res.data));
+      })
+    })
   }
 }

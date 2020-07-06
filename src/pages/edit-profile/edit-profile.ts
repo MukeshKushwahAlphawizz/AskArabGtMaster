@@ -24,7 +24,7 @@ export class EditProfilePage {
   commonTexts: any = {};
   ProfileEditedSuccessfully: string = '';
   fromSignUp: boolean = false;
-  language: string = 'en';
+  language: string = 'ar';
   constructor(public user: User, public actionSheetCtrl: ActionSheetController,
               public navCtrl: NavController,public util:UtilProvider,
               public storage : Storage,

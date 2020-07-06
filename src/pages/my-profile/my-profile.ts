@@ -21,7 +21,7 @@ export class MyProfilePage {
   followText: string = '';
   FOLLOW: string = '';
   FOLLOWED: string = '';
-  language: string = 'en';
+  language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public storage : Storage,

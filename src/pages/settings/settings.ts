@@ -12,7 +12,7 @@ import {Storage} from "@ionic/storage";
 })
 export class SettingsPage {
   options: any;
-  laguage: string = 'en';
+  laguage: string = 'ar';
   userData:any = {};
   isNightMode: boolean;
   commonText:any={};

@@ -1,0 +1,12 @@
+full-screen-content {
+  .header {
+    will-change: transform;
+    transition: transform 300ms cubic-bezier(0.36,0.66,0.04,1);
+  }
+  .header--visible {
+    transform: translateY(0%);
+  }
+  .header--hidden {
+    transform: translateY(-100%);
+  }
+}

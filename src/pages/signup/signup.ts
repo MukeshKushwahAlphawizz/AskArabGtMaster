@@ -37,7 +37,7 @@ export class SignupPage {
   };
   firebaseToken: string = '';
   Created_Successfully: string = '';
-  language: string = 'en';
+  language: string = 'ar';
   constructor(public navCtrl: NavController,
     public user: User,
     public util:UtilProvider,

@@ -2,6 +2,14 @@ page-home {
   .text-input-md, .text-input-ios{
     margin: 0;
   }
+  ion-spinner {
+    width: 40px;
+    height: 40px;
+  }
+  .pull-refresh{
+    top: 30pt !important;
+    z-index: 9999;
+  }
   .search-div{
     padding: 5pt 10pt;
   }

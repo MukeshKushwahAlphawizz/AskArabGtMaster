@@ -47,7 +47,7 @@ export class QuestionDetailPage {
   followText: string = '';
   commonTexts : any = {};
   dark: string = '';
-  language: string = '';
+  language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public util: UtilProvider,

@@ -23,7 +23,7 @@ export class LoginPage {
   private firebaseToken: string = '';
   isChecked: boolean = false;
   darkMode: boolean = false;
-  language : string = 'en'
+  language : string = 'ar'
   constructor(public navCtrl: NavController,
     public user: User,
     public navParams: NavParams,

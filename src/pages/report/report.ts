@@ -27,7 +27,7 @@ export class ReportPage {
   private EnterReportContent: string = '';
   private SuccessMsg: string = '';
   rank: string = '';
-  language: string = 'en';
+  language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public util: UtilProvider,

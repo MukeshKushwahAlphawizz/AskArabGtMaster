@@ -25,7 +25,7 @@ export class QuestionUserPage {
   otherUser : any = {};
   Please_write_your_question: string = '';
   Question_Posted_Successfully: string = '';
-  language: string = 'en';
+  language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public util: UtilProvider,

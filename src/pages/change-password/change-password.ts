@@ -21,7 +21,7 @@ export class ChangePasswordPage {
   newPass: string = '';
   confirmPass: string = '';
   userData:any = {};
-  language: string = 'en';
+  language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public viewCtrl :ViewController,

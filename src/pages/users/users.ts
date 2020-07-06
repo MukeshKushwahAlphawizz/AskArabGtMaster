@@ -23,7 +23,7 @@ export class UsersPage {
   usersList:any=[];
   type:number=0;//0 followers 1 following
   isUsersAvailable: boolean = true;
-  language : string = 'en'
+  language : string = 'ar';
   constructor(public navCtrl: NavController,
               public util : UtilProvider,
               public user : User,

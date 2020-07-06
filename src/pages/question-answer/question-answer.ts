@@ -21,7 +21,7 @@ export class QuestionAnswerPage {
   pageSize: number = 50;
   pageNumber: number = 0;
   commonText: any = {};
-  language: string = 'en';
+  language: string = 'ar';
   constructor(public navCtrl: NavController,
               public util: UtilProvider,
               public storage : Storage,

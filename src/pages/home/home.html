@@ -1,4 +1,6 @@
-<ion-header [ngClass]="dark">
+<full-screen-content [settings]="customSettings">
+
+<ion-header #target [ngClass]="dark">
   <ion-navbar>
     <ion-buttons left>
       <button menuToggle>
@@ -28,12 +30,13 @@
 </ion-header>
 
 <ion-content [ngClass]="dark">
+  <div margin-top text-center *ngIf="isLoading"><ion-spinner name="crescent"></ion-spinner></div>
   <div *ngIf="isQuestionAvail">
     <ion-refresher class="pull-refresh" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <div [ngStyle]="{marginTop:margin}">
+    <div>
       <div *ngFor="let question of questionsList">
       <div class="comment-like-div">
         <audio id="audio" src="assets/Bubbles.wav" autostart="false" ></audio>
@@ -233,3 +236,5 @@
   </div>
   <div *ngIf="!isQuestionAvail" text-center>{{'HOME.NoQuestionsareAvailable'|translate}}</div>
 </ion-content>
+
+</full-screen-content>

@@ -57,6 +57,9 @@ export class User {
   addPollAnswer : string = 'Question/addPollAnswer/';
 
   theme :any = '';
+  articles :any = '';
+  notification :any = '';
+
   constructor(public api: Api) { }
 
   getTheme(){
@@ -64,6 +67,20 @@ export class User {
   }
   setTheme(theme){
     this.theme = theme;
+  }
+
+  getAllArticles(){
+    return this.articles;
+  }
+  setArticles(articles){
+    this.articles = articles;
+  }
+
+  getAllNotifications(){
+    return this.notification;
+  }
+  setNotifications(notification){
+    this.notification = notification;
   }
 
   login(accountInfo: any) {

@@ -16,7 +16,7 @@ export class ArticlePage {
   isArticleAvailable: boolean = true;
   private pageSize: number = 10;
   private pageNumber: number = 0;
-  private language: string = 'en';
+  private language: string = 'ar';
   constructor(public navCtrl: NavController,
               public user: User,
               public util:UtilProvider,
@@ -31,7 +31,13 @@ export class ArticlePage {
   }
 
   ngOnInit(){
-    this.getAllArticles(false,true);
+    let allArticles = this.user.getAllArticles();
+    if (allArticles){
+      this.articleList=JSON.parse(allArticles).data;
+      this.getAllArticles(true,false);
+    }else {
+      this.getAllArticles(false,true);
+    }
   }
   gotoWriteArticle() {
     this.navCtrl.push('WriteArticlePage');
@@ -55,6 +61,7 @@ export class ArticlePage {
       formData.append('pageNumber',this.pageNumber);
       this.user.getArticalsList(formData).subscribe((resp) => {
         let response :any= resp;
+        this.user.setArticles(JSON.stringify(response));
         if (isRefresh){
           this.articleList = response.data;
         }else {

@@ -23,7 +23,7 @@ export class QuestionAnswerDetailPage {
   dark : any = '';
   isOtherUserProfile:boolean=false;
   commonText: any = {};
-  language: string = 'en';
+  language: string = 'ar';
   constructor(public navCtrl: NavController,
               public util: UtilProvider,
               public user: User,

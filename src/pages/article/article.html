@@ -22,7 +22,7 @@
     <div *ngIf="language==='ar'">
       <div *ngFor="let item of articleList">
         <ion-item (click)="openReadArticle(item)" margin-top padding no-lines text-wrap>
-          <img margin-right item-right class="article-img" [src]="(item.featured_image && item.featured_image != '')?item.featured_image:'assets/img/article1.png'">
+          <img item-right class="article-img" [src]="(item.featured_image && item.featured_image != '')?item.featured_image:'assets/img/article1.png'">
           <h2 text-right>{{item.post_title}}</h2>
           <div margin-top class="row">
             <div text-wrap no-padding col-3 text-right><span class="text-grey small-text">{{item.category}}</span><a class="ar-set-small-icon"><ion-icon style="font-weight: bold" class="text-grey" name="ios-list"></ion-icon></a></div>

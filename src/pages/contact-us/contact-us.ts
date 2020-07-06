@@ -36,7 +36,7 @@ export class ContactUsPage {
       { type: "required", message: "*Please enter your message." },
     ]
   };
-  private language: string = 'en';
+  private language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public formBuilder: FormBuilder,

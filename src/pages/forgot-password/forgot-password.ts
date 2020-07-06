@@ -14,7 +14,7 @@ export class ForgotPasswordPage {
   email: string = '';
   PleaseEnterEmail: string = '';
   Pleaseentervalidmailid: string = '';
-  language: string = 'en';
+  language: string = 'ar';
 
   constructor(public navCtrl: NavController,
               public user: User,

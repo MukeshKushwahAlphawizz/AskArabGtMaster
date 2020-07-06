@@ -24,7 +24,7 @@ export class SubmitAnswerPage {
   imageData: any = '';
   myID : any = '';
   commonTexts: any = {};
-  language: string = 'en';
+  language: string = 'ar';
   constructor(public navCtrl: NavController,
               public util: UtilProvider,
               public user : User,

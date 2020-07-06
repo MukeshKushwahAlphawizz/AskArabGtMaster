@@ -15,6 +15,9 @@
 </ion-header>
 
 <ion-content padding [ngClass]="language=='ar'?'right-align':''">
+  <!--<ion-spinner name="dots"></ion-spinner>
+  <ion-spinner name="circles"></ion-spinner>-->
+
   <div *ngIf="isNotification">
     <ion-refresher class="pull-refresh" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>

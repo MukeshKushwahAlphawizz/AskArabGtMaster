@@ -171,7 +171,7 @@ h1, h2, .set-Ubuntu-font{
   color: white;
 }
 .pull-refresh{
-  top: 0 !important;
+  top: 0pt !important;
   z-index: 9999;
 }
 .has-refresher > .scroll-content{
@@ -183,9 +183,7 @@ ion-textarea .input-cover {
 .text-input-ios{
   width: 100%;
 }
-.label-ios{
- // margin: 0;
-}
+
 .right-align{
   text-align: right !important;
 }

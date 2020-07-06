@@ -91,12 +91,15 @@ export class MyApp {
 
   initTranslate() {
     this.storage.get('appLanguage').then(data=>{
-      if(data && data == 'ar'){
-        this.translate.setDefaultLang('ar');
-        this.translate.use('ar');
-      }else {
+      if(data && data == 'en'){
         this.translate.setDefaultLang('en');
         this.translate.use('en');
+      }else {
+        this.translate.setDefaultLang('ar');
+        this.translate.use('ar');
+        this.storage.set('appLanguage','ar').then(()=>{
+          this.events.publish('appLanguage', 'ar');
+        });
       }
       this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
         this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);

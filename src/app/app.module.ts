@@ -24,6 +24,7 @@ import {ProgressBarModule} from "angular-progress-bar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { AdMobPro } from '@ionic-native/admob-pro';
 import {Deeplinks} from "@ionic-native/deeplinks";
+import {ComponentsModule} from "../components/components.module";
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -48,6 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     ProgressBarModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
