@@ -42,17 +42,17 @@
       <ion-label class="small-subheading-size">{{ 'Setting.Night_Mode' | translate }}</ion-label>
       <ion-toggle [(ngModel)]="isNightMode" (ionChange)="changeTheme($event)"></ion-toggle>
     </ion-item>
-    <div margin-top class="grey-saparator"></div>
+<!--    <div margin-top class="grey-saparator"></div>-->
 
-    <div class="text-grey heading" padding-left padding-right>{{ 'Setting.Sound' | translate }}</div>
-    <ion-item text-right *ngIf="laguage=='ar'" no-lines>
+<!--    <div class="text-grey heading" padding-left padding-right>{{ 'Setting.Sound' | translate }}</div>-->
+    <!--<ion-item text-right *ngIf="laguage=='ar'" no-lines>
       <ion-label class="small-subheading-size">{{ 'Setting.Notification_Sound' | translate }}</ion-label>
       <ion-toggle item-left></ion-toggle>
     </ion-item>
     <ion-item *ngIf="laguage!=='ar'" no-lines>
       <ion-label class="small-subheading-size">{{ 'Setting.Notification_Sound' | translate }}</ion-label>
       <ion-toggle ></ion-toggle>
-    </ion-item>
+    </ion-item>-->
     <div margin-top class="grey-saparator"></div>
     <button [ngClass]="laguage=='ar'?'item-right':''" margin-top (click)="gotoEditProfile()" class="text-grey" ion-item no-lines icon-end>{{ 'Setting.Edit_Profile' | translate }}</button>
     <button [ngClass]="laguage=='ar'?'item-right':''" (click)="gotoChangePassword()" class="text-grey" ion-item no-lines icon-end>{{ 'Setting.Change_Password' | translate }}</button>

@@ -7,6 +7,8 @@ import {Camera} from "@ionic-native/camera";
 import moment from "moment";
 import {TranslateService} from "@ngx-translate/core";
 import {Storage} from "@ionic/storage";
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+import { File } from '@ionic-native/file';
 
 export const CATEGORY_ID = {
   value : 0
@@ -15,6 +17,8 @@ export const CATEGORY_ID = {
 @Injectable()
 export class UtilProvider {
   loading: Loading;
+  private win: any = window;
+
   pleaseWait:string='';
   constructor(private loadingCtrl: LoadingController,
      private toastCtrl: ToastController,
@@ -22,6 +26,8 @@ export class UtilProvider {
      private camera: Camera,
      public platform:Platform,
      public storage:Storage,
+     public file: File,
+     public imageResizer : ImageResizer,
      public events : Events,
      public translateService : TranslateService
    ) {
@@ -117,25 +123,7 @@ presentAlertData() {
   });
   alert.present();
 }
-  //FOR BASIC SERVER ERROR
-  presentAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Server Error',
-      subTitle: 'Something went wrong',
-      cssClass: 'alertDanger',
-      buttons: [
-        {
-        text: 'Try Again!',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-          this.platform.exitApp();
-        }
-      }
-      ]
-    });
-    alert.present();
-  }
+
 //FOR CONFIRM NETWORK ERROR
   presentNetwork() {
     let alert = this.alertCtrl.create({
@@ -187,7 +175,7 @@ presentAlertData() {
   }
 
   takePicture() :any{
-    return new Promise((resolve, reject) => {
+    /*return new Promise((resolve, reject) => {
       this.camera.getPicture({
         targetWidth: 512,
         targetHeight: 512,
@@ -195,31 +183,103 @@ presentAlertData() {
         sourceType: this.camera.PictureSourceType.CAMERA,
         destinationType: this.camera.DestinationType.DATA_URL
       }).then((imageData) => {
-          /*let blob = this.getBlob(imageData, ".jpg")
-          let imageFile = new File([blob], "image.jpg")*/
+        console.log('imageData >>>>', imageData);
+          /!*let blob = this.getBlob(imageData, ".jpg")
+          let imageFile = new File([blob], "image.jpg")*!/
           resolve({imageFile:'',imageData:imageData});
         }, (err) => {
         console.log(err);
         reject(err)
       });
+    })*/
+    return new Promise((resolve, reject) => {
+      this.camera.getPicture({
+        sourceType: this.camera.PictureSourceType.CAMERA,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        saveToPhotoAlbum: false,
+        allowEdit: true,
+        targetWidth: 512,
+        targetHeight: 512,
+        correctOrientation: true
+      }).then((imageData) => {
+        this.imageResizer.resize({
+          uri: imageData,
+          quality: 60,
+          width: 512,
+          height: 512
+        }).then(imagePath => {
+          this.getFileContentAsBase64(imagePath,function(base64Image){
+            // console.log('base64Image >>>> ',base64Image);
+            let image64 :string = base64Image;
+            let imageToResolve = image64.substring(23,base64Image.length);
+            resolve({imageFile:'',imageData:imageToResolve});
+          });
+
+        });
+        /*let blob = this.getBlob(imageData, ".jpg")
+        let imageFile = new File([blob], "image.jpg")*/
+        // resolve({imageFile:'',imageData:imageData});
+      }, (err) => {
+        console.log('ERROR >>',err);
+        reject(err)
+      });
     })
   }
+
 
   aceesGallery() :any{
     return new Promise((resolve, reject) => {
       this.camera.getPicture({
         sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-        destinationType: this.camera.DestinationType.DATA_URL
+        destinationType: this.camera.DestinationType.FILE_URI,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
       }).then((imageData) => {
-        // console.log('data:image/jpeg;base64,' + imageData);
+        // console.log('image data >> ' + imageData);
+        this.imageResizer.resize({
+          uri: imageData,
+          quality: 60,
+          width: 512,
+          height: 512
+        }).then(imagePath => {
+          this.getFileContentAsBase64(imagePath,function(base64Image){
+            // console.log('base64Image >>>> ',base64Image);
+            let image64 :string = base64Image;
+            let imageToResolve = image64.substring(23,base64Image.length);
+            // console.log('imageToResolve >>>> ',imageToResolve);
+            resolve({imageFile:'',imageData:imageToResolve});
+          });
+
+        });
         /*let blob = this.getBlob(imageData, ".jpg")
         let imageFile = new File([blob], "image.jpg")*/
-        resolve({imageFile:'',imageData:imageData});
+        // resolve({imageFile:'',imageData:imageData});
       }, (err) => {
-        console.log(err);
+        console.log('ERROR >>',err);
         reject(err)
       });
     })
+  }
+
+   getFileContentAsBase64(path,callback){
+    this.file.resolveLocalFilesystemUrl(path).then((succ)=>{
+      gotFile(succ);
+    }).catch((err)=>{
+      console.log('err >> ',err);
+    });
+
+    function gotFile(fileEntry) {
+      fileEntry.file(function(file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (succ) => {
+          callback(reader.result);
+        };
+        reader.onerror = error => {
+          console.log('file reader error ===>',error);
+        };
+      });
+    }
   }
 
    timeSince(date:any) {

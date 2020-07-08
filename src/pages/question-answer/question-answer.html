@@ -24,6 +24,7 @@
       {{'Ques&Ans.Answers'|translate}} ({{answersList.length}})
     </ion-segment-button>
   </ion-segment>
+  <div margin-top text-center *ngIf="isLoading"><ion-spinner name="crescent"></ion-spinner></div>
   <!--question list block-->
   <div *ngIf="language=='ar'" dir="rtl" style="margin-top: 20pt" [hidden]="shownSessions > 0">
     <div *ngFor="let question of questionsList">

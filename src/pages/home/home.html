@@ -20,11 +20,25 @@
     </ion-buttons>
   </ion-navbar>
   <div class="search-div">
-    <ion-item style="min-height: 1rem" class="rounded-red" no-lines>
+    <!--<ion-item style="min-height: 1rem" class="rounded-red" no-lines no-padding>
       <ion-input *ngIf="language === 'ar'" dir="rtl" (ionChange)="search($event)" placeholder="{{'HOME.Search'|translate}}" class="ar-search-icon text-grey" type="text">
       </ion-input>
       <ion-input *ngIf="language !== 'ar'" dir="ltr" (ionChange)="search($event)" placeholder="{{'HOME.Search'|translate}}" class="search-icon text-grey" type="text">
       </ion-input>
+    </ion-item>-->
+    <ion-item *ngIf="language === 'ar'" style="min-height: 1rem" class="rounded-red" no-lines no-padding>
+      <ion-input [(ngModel)]="searchText" dir="rtl" class="text-grey" style="font-size: 1.4rem;padding: 6pt; padding-right: 13pt" type="text"
+                 placeholder="{{'HOME.Search'|translate}}"></ion-input>
+      <button (click)="search()" clear item-left icon-only style="background: transparent">
+        <ion-icon style="font-size: 1.9rem;margin-top: 5px;color: #CD1C2B" name="search"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item *ngIf="language !== 'ar'" style="min-height: 1rem" class="rounded-red" no-lines>
+        <ion-input [(ngModel)]="searchText" class="text-grey" style="font-size: 1.4rem;padding: 6pt" type="text"
+                   placeholder="{{'HOME.Search'|translate}}"></ion-input>
+        <button (click)="search()" clear item-right icon-only style="background: transparent">
+          <ion-icon style="font-size: 1.9rem;margin-top: 5px;color: #CD1C2B" name="search"></ion-icon>
+        </button>
     </ion-item>
   </div>
 </ion-header>
@@ -37,7 +51,7 @@
     </ion-refresher>
 
     <div>
-      <div *ngFor="let question of questionsList">
+      <div *ngFor="let question of questionsList" [@fadeInOut]>
       <div class="comment-like-div">
         <audio id="audio" src="assets/Bubbles.wav" autostart="false" ></audio>
         <ion-item no-lines>
@@ -47,16 +61,16 @@
           </div>
           <div class="{{language =='ar'?'ar-content-question':'content-question'}}">
             <div *ngIf="language !=='ar'" class="row">
-              <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
-              <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
               <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
             </div>
             <div *ngIf="language =='ar'" class="row">
               <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
-              <div no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
-              <div no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
             </div>
-            <h2 (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
+            <h2 style="padding: 5pt" (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
             <div *ngIf="language !=='ar'" class="row">
               <button (click)="likeQuestion(question)" style="padding:5px" no-margin ion-button icon-start clear small>
                 <span class="text-grey like-count">({{(question.post_likes_count && question.post_likes_count != '' && question.post_likes_count >= 0)?question.post_likes_count:0}})</span>
@@ -103,16 +117,13 @@
 
               <div class="ans-div">
                 <div margin-top text-wrap no-padding text-left>
-                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="text-grey" style="font-size: 1rem"></span>
+                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="answer-reply-font" style="font-size: 1.4rem"></span>
                   <a (click)="gotoQuestionDetail(question)" class="read-more">{{(question.answer_data[0].answer_content.split(' ').length > 25)?Read_More:''}}</a></div>
                     <div class="row">
                       <button (click)="likeComment(question.answer_data[0])" style="padding:5px" no-margin ion-button icon-start clear small>
                         <span class="text-grey like-count">({{(question.answer_data[0].likes_count && question.answer_data[0].likes_count != '' && question.answer_data[0].likes_count >= 0)?question.answer_data[0].likes_count:0}})</span>
                         <ion-icon [ngClass]="question.answer_data[0].like?'':'text-grey'" name="thumbs-up"></ion-icon>
                       </button>
-                      <!--<button style="padding:5px" no-margin ion-button icon-start clear small>
-                        <ion-icon class="text-grey" name="md-thumbs-down"></ion-icon>
-                      </button>-->
                       <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a>
                         <span class="text-grey small-text">{{question.answer_data[0].answer_date_gmt}}</span></div>
                       <button (click)="reply(question)" class="right-button" ion-button icon-start clear small>
@@ -121,7 +132,7 @@
                       </button>
                     </div>
 
-                <div margin-top (click)="gotoQuestionDetail(question)" *ngIf="question.isViewAll" [@fadeInOut]>
+                <div (click)="gotoQuestionDetail(question)" *ngIf="question.isViewAll" [@fadeInOut]>
                   <div class="row" text-center>
                     <div col-5></div>
                     <div col-2><div class="grey-saparator"></div></div>
@@ -148,9 +159,9 @@
                   <div text-center class="name-div">{{question.answer_data[0].reply[0].reply_author}}</div>
                 </div>
 
-                <div style="margin-left: 57px;margin-bottom: 15pt">
-                  <div text-wrap no-padding text-left>
-                    <span class="text-grey" style="font-size: 1rem">{{question.answer_data[0].reply[0].reply_content}}</span>
+                <div style="margin-left: 42pt;margin-bottom: 15pt">
+                  <div text-wrap no-padding text-left margin-top>
+                    <span class="answer-reply-font" style="font-size: 1.4rem">{{question.answer_data[0].reply[0].reply_content}}</span>
                     <a class="read-more">{{(question.answer_data[0].reply[0].reply_content.split(' ').length > 25)?Read_More:''}}</a></div>
                   <div class="row">
                     <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.answer_data[0].reply[0].reply_date_gmt}}</span></div>
@@ -170,7 +181,7 @@
 
               <div text-right class="ar-ans-div">
                 <div margin-top text-wrap no-padding>
-                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="text-grey" style="font-size: 1rem"></span>
+                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="answer-reply-font" style="font-size: 1.4rem"></span>
                   <a (click)="gotoQuestionDetail(question)" class="read-more">{{(question.answer_data[0].answer_content.split(' ').length > 25)?Read_More:''}}</a></div>
                     <ion-item no-lines no-padding style="min-height: 2rem">
                       <div item-right no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a>
@@ -185,7 +196,7 @@
                       </button>
                     </ion-item>
 
-                <div margin-top (click)="gotoQuestionDetail(question)" *ngIf="question.isViewAll" [@fadeInOut]>
+                <div (click)="gotoQuestionDetail(question)" *ngIf="question.isViewAll" [@fadeInOut]>
                   <div class="row" text-center>
                     <div col-5></div>
                     <div col-2><div class="grey-saparator"></div></div>
@@ -212,9 +223,9 @@
                   <div text-center class="ar-name-div">{{question.answer_data[0].reply[0].reply_author}}</div>
                 </div>
 
-                <div style="margin-right: 57px;margin-bottom: 15pt" text-right>
-                  <div text-wrap no-padding>
-                    <span class="text-grey" style="font-size: 1rem">{{question.answer_data[0].reply[0].reply_content}}</span>
+                <div style="margin-right: 42pt;margin-bottom: 15pt" text-right>
+                  <div text-wrap no-padding margin-top>
+                    <span class="answer-reply-font" style="font-size: 1.4rem">{{question.answer_data[0].reply[0].reply_content}}</span>
                     <a class="read-more">{{(question.answer_data[0].reply[0].reply_content.split(' ').length > 25)?Read_More:''}}</a></div>
                   <ion-item no-lines no-padding style="min-height: 2rem">
                     <div item-left (click)="deleteReply(question.answer_data[0].reply[0].reply_post_ID,question)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'HOME.Delete'|translate}}</span></div>
@@ -234,7 +245,7 @@
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
-  <div *ngIf="!isQuestionAvail" text-center>{{'HOME.NoQuestionsareAvailable'|translate}}</div>
+  <div style="margin-top: 30pt;font-weight: bold;font-size: 1.7rem" *ngIf="!isQuestionAvail && !isLoading" text-center>{{'HOME.NoQuestionsareAvailable'|translate}}</div>
 </ion-content>
 
 </full-screen-content>

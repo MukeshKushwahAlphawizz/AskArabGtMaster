@@ -40,7 +40,6 @@ export class ReportPage {
       this.language = data;
     })
     this.reportData = navParams.data.item;
-    console.log(JSON.stringify(this.reportData));
     this.type = navParams.data.type;
 
     if (this.type === 'question'){

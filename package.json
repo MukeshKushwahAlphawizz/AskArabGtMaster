@@ -27,8 +27,10 @@
     "@ionic-native/facebook": "^4.20.0",
     "@ionic-native/fcm": "^4.20.0",
     "@ionic-native/file": "^4.20.0",
+    "@ionic-native/file-path": "^4.20.0",
     "@ionic-native/google-plus": "^4.20.0",
     "@ionic-native/http": "^4.20.0",
+    "@ionic-native/image-resizer": "^4.20.0",
     "@ionic-native/photo-viewer": "^4.20.0",
     "@ionic-native/social-sharing": "^4.20.0",
     "@ionic-native/splash-screen": "4.20.0",
@@ -51,6 +53,7 @@
     "cordova-plugin-googleplus": "^8.4.0",
     "cordova-plugin-x-socialsharing": "^6.0.0",
     "es6-promise-plugin": "^4.2.2",
+    "info.protonet.imageresizer": "^0.1.1",
     "ionic-angular": "3.9.9",
     "ionic-plugin-deeplinks": "^1.0.20",
     "ionicons": "3.0.0",
@@ -88,7 +91,6 @@
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "1096210779940-60bgkr3298nvcvb5mdnn8jnfq33p0p7a.apps.googleusercontent.com"
       },
-      "cordova-plugin-file": {},
       "cordova-plugin-facebook4": {
         "APP_ID": "152170135996652",
         "APP_NAME": "AskArabGt",
@@ -115,20 +117,10 @@
         "URL_SCHEME": "askarabgt",
         "DEEPLINK_SCHEME": "https",
         "DEEPLINK_HOST": "app.arabgt.com",
-        "ANDROID_PATH_PREFIX": "/",
-        "ANDROID_2_PATH_PREFIX": "/",
-        "ANDROID_3_PATH_PREFIX": "/",
-        "ANDROID_4_PATH_PREFIX": "/",
-        "ANDROID_5_PATH_PREFIX": "/",
-        "DEEPLINK_2_SCHEME": " ",
-        "DEEPLINK_2_HOST": " ",
-        "DEEPLINK_3_SCHEME": " ",
-        "DEEPLINK_3_HOST": " ",
-        "DEEPLINK_4_SCHEME": " ",
-        "DEEPLINK_4_HOST": " ",
-        "DEEPLINK_5_SCHEME": " ",
-        "DEEPLINK_5_HOST": " "
-      }
+        "ANDROID_PATH_PREFIX": "/"
+      },
+      "info.protonet.imageresizer": {},
+      "cordova-plugin-file": {}
     },
     "platforms": [
       "android"

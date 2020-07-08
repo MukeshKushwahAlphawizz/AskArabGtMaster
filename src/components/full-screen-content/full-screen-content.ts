@@ -67,9 +67,11 @@ export class FullScreenContentComponent {
   }
 
   onContentScroll(ev) {
-    ev.domWrite(() => {
-      this.updateHeaderState(ev);
-    });
+    if (ev){
+      ev.domWrite(() => {
+        this.updateHeaderState(ev);
+      });
+    }
   }
 
   // Check if the tolerance has been exceeded

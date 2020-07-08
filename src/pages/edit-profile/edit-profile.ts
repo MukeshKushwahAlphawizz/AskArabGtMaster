@@ -125,7 +125,21 @@ export class EditProfilePage {
     formData.append('my_bio',this.profileForm.value.myBio);
     formData.append('select_country',this.profileForm.value.country);
     formData.append('select_state',this.profileForm.value.state);
+    /*let data = {
+      'ID':this.userData.ID,
+    'user_profile':profileImage,
+    'first_name':this.profileForm.value.name,
+    'last_name':this.profileForm.value.lastname,
+    'user_address':this.profileForm.value.address,
+    'user_gender':this.profileForm.value.gender,
+    'mobile_no':this.profileForm.value.mobilenumber,
+    'user_dob':this.profileForm.value.datebirth,
+    'my_bio':this.profileForm.value.myBio,
+    'select_country':this.profileForm.value.country,
+    'select_state':this.profileForm.value.state
+    };*/
 
+    // console.log('user data ====',data);
     this.util.presentLoading();
     this.user.saveProfile(formData).subscribe((resp) => {
       let response :any = resp;

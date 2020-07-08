@@ -79,6 +79,7 @@ export class LoginPage {
     this.fcm.getToken().then(token => {
       this.firebaseToken = token;
       console.log('firebase token ===>',this.firebaseToken);
+      // console.log('firebase token ========>'+ this.firebaseToken);
     });
     this.fcm.onNotification().subscribe(data => {
       if(data.wasTapped){
@@ -96,7 +97,6 @@ export class LoginPage {
     this.fcm.unsubscribeFromTopic('marketing');
   }
 
-  // Attempt to login in through our User service
 
   doLogin() {
     if (this.isChecked) {

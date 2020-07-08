@@ -1,11 +1,7 @@
 page-home {
   .text-input-md, .text-input-ios{
     margin: 0;
-  }
-  ion-spinner {
-    width: 40px;
-    height: 40px;
-  }
+  } 
   .pull-refresh{
     top: 30pt !important;
     z-index: 9999;
@@ -28,12 +24,12 @@ page-home {
       right: 10pt;
     }
     .content-question{
-      margin-left: 57px;margin-bottom: 15pt
+      margin-left: 57px;margin-bottom: 10pt
     }
     .ar-content-question{
       text-align: right;
       margin-right: 65px;
-      margin-bottom: 15pt
+      margin-bottom: 10pt;
     }
     .question-author-name{
       width: 55px;
@@ -70,19 +66,18 @@ page-home {
     }
 
     .commenter-div{
-      padding-left: 50pt;
+      padding-left: 40pt;
       .image-comment-div{
         top: 10px;
         position: absolute;
       }
       .ans-div{
-        margin-left: 57px;margin-bottom: 10pt
+        margin-left: 57px;margin-bottom: 12pt
       }
       .name-div{
         width: 55px;
         white-space: pre-wrap;
         font-size: 1rem;color: #CD1C2B;
-        color: #CD1C2B;
         text-align: center;
       }
       .user-commenter{
@@ -105,10 +100,10 @@ page-home {
     }
 
     .ar-commenter-div{
-      padding-right: 90pt;
+      padding-right: 88pt;
       .ar-image-comment-div{
         top: 10px;
-        right: 50pt;
+        right: 45pt;
         position: absolute;
       }
       .ans-div{
@@ -208,7 +203,7 @@ page-home {
     }
     .ar-all-questions-div{
       position: absolute;
-      top: 13px;
+      top: 10px;
     }
     .ar-question-author-name{
       width: 55px;
@@ -220,7 +215,7 @@ page-home {
     .user-main{
       height: 50px;
       width: 50px;
-      margin: 0px;
+      margin: 0;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid ;
@@ -246,7 +241,6 @@ page-home {
           width: 55px;
           white-space: pre-wrap;
           font-size: 1rem;color: #CD1C2B;
-          color: #CD1C2B;
           text-align: center;
         }
       }

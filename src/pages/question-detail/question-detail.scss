@@ -30,6 +30,7 @@ page-question-detail {
     object-fit: cover;
     border: 2px solid ;
     border-radius: 50%;
+    margin-left: 5px;
   }
   .name{
     color: #CD1C2B;
@@ -37,7 +38,7 @@ page-question-detail {
     width: 60px;
     text-align: center;
     white-space: normal;
-    margin-left: -5px;
+    //margin-left: -5px;
   }
   .item-md [item-left], .item-md [item-right], .item-md [item-start], .item-md [item-end]{
     margin: 0 !important;
@@ -157,7 +158,8 @@ page-question-detail {
   }
   .reply-div{
     .image-reply-div{
-      top: 10px;
+      top: 5pt;
+      left: 5pt;
       position: absolute;
       .name-div{
         width: 55px;
@@ -178,12 +180,12 @@ page-question-detail {
   }
   .ar-reply-div{
     .ar-image-reply-div{
-      top: 10px;
+      top: 0px;
       right: 0;
       position: absolute;
       .ar-name-div{
         width: 55px;
-        margin-left: -7px;
+        margin-left: -4px;
         white-space: pre-wrap;
         font-size: 1rem;color: #CD1C2B;
       }
@@ -198,7 +200,7 @@ page-question-detail {
       margin-bottom: 0px !important;
     }
     .ar-reply-div{
-      margin-right: 57px;margin-bottom: 15pt
+      margin-right: 57px;margin-bottom: 15pt;margin-top: 8pt;
     }
   }
   .post-img{
@@ -218,10 +220,11 @@ page-question-detail {
     right: 15pt;
   }
   .answer-content{
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 5pt;
     margin-top: 20pt;
   }
+
   .dark .content{
     color: white !important;
     background: #191919 !important;
@@ -235,7 +238,7 @@ page-question-detail {
     right: 10pt;
   }
   .user-answer-div{
-    margin-left: 60px;margin-bottom: 15pt
+    margin-left: 65px;margin-bottom: 15pt
   }
   .ar-user-answer-div{
     margin-right: 60pt;margin-bottom: 15pt;text-align: right;

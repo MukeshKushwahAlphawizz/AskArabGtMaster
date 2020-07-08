@@ -22,6 +22,8 @@ export class QuestionAnswerPage {
   pageNumber: number = 0;
   commonText: any = {};
   language: string = 'ar';
+  isLoading: boolean = false;
+
   constructor(public navCtrl: NavController,
               public util: UtilProvider,
               public storage : Storage,
@@ -93,9 +95,11 @@ export class QuestionAnswerPage {
         user_id:this.userId
       };
     }
-    this.util.presentLoading();
+    // this.util.presentLoading();
+    this.isLoading = true;
     this.user.getMyQuestionAnswerData(data).subscribe((resp) => {
-      this.util.dismissLoading();
+      // this.util.dismissLoading();
+      this.isLoading = false;
       let response : any = resp;
       if(response.status){
         if (response.data_question){
@@ -104,7 +108,6 @@ export class QuestionAnswerPage {
         if (response.data_answer){
           this.answersList = response.data_answer;
         }
-        // console.log('answers list >>',this.answersList);
       }
       if(!response.status && isReload){
         this.questionsList = [];
@@ -112,7 +115,8 @@ export class QuestionAnswerPage {
       }
     }, (err) => {
       console.error('ERROR :', err);
-      this.util.dismissLoading();
+      // this.util.dismissLoading();
+      this.isLoading = false;
     });
   }
 

@@ -16,8 +16,27 @@
     <div class="text-grey" [innerHtml]="questionData.post_content"></div>
 
     <!--Poll-->
-    <div *ngIf="questionData.poll && questionData.poll.length > 0">
-      <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>
+    <div *ngIf="questionData.poll && questionData.poll.length > 0 && language == 'ar'" dir="rtl">
+      <ion-list dir="rtl" *ngIf="questionData.poll_vote_status =='false'" radio-group>
+        <ion-item dir="rtl" *ngFor="let item of questionData.poll;let i = index">
+          <ion-label>{{item}}</ion-label>
+          <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <!--Progress Poll-->
+      <div margin-top margin-bottom *ngIf="questionData.poll_vote_status=='true' && questionData.poll_progress">
+        <div dir="rtl" *ngFor="let progress of questionData.poll_progress">
+          <ion-item no-lines style="min-height: 1rem">
+            <div class="small-font text-grey">{{progress.option}}</div>
+            <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
+          </ion-item>
+          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+          </progress-bar>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="questionData.poll && questionData.poll.length > 0 && language !== 'ar'">
+      <ion-list dir="rtl" *ngIf="questionData.poll_vote_status =='false'" radio-group>
         <ion-item *ngFor="let item of questionData.poll;let i = index">
           <ion-label>{{item}}</ion-label>
           <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
@@ -80,12 +99,13 @@
     </div>
   </div>
 
-  <div class="header-txt">{{'Question.Answers'|translate}} {{questionData.answer_data.length}}</div>
+  <div *ngIf="language == 'ar'" dir="rtl" class="header-txt">{{'Question.Answers'|translate}} {{questionData.answer_data.length}}</div>
+  <div *ngIf="language !== 'ar'" class="header-txt">{{'Question.Answers'|translate}} {{questionData.answer_data.length}}</div>
 
   <div *ngIf="questionData.answer_data.length">
     <div *ngFor="let answer of questionData.answer_data">
-      <ion-item no-margin no-lines>
-        <div class="{{language=='ar'?'ar-user-main-div':'user-main-div'}}" margin-top item-start>
+      <ion-item no-margin no-lines no-padding>
+        <div class="{{language=='ar'?'ar-user-main-div':'user-main-div'}}" style="margin-top: 0;margin-right: 8px;" item-start>
           <img [ngStyle]="{'border-color': util.getRank(answer.answer_user_rank)}" (click)="openMyProfile(true,answer.comment_user_id)" class="user-main" [src]="(answer.user_profile && answer.user_profile != '')?answer.user_profile:'assets/img/profile-default.jpeg'">
           <div class="name">{{answer.answer_author}}</div>
         </div>
@@ -101,14 +121,14 @@
           </div>
         </div>
 
-          <p class="answer-content" text-wrap>{{answer.answer_content}}</p>
+          <p class="answer-content answer-reply-font" text-wrap>{{answer.answer_content}}</p>
           <div>
             <img margin-top padding-top margin-bottom *ngIf="answer.answer_image_link && answer.answer_image_link != ''" [src]="answer.answer_image_link">
           </div>
           <div>
             <iframe *ngIf="answer.getvideo_answer_id !==''" margin-top margin-bottom width="100%" height="250" [src]="answer.getvideo_answer_id | safe" frameborder="0"  allowfullscreen></iframe>
           </div>
-            <ion-item style="min-height: 2rem" *ngIf="language=='ar'">
+            <ion-item no-padding style="min-height: 2rem" *ngIf="language=='ar'">
             <button item-right (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count < 0)?(answer.likes_count * (-1)):0}})</span>
               <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="md-thumbs-down"></ion-icon>
@@ -155,37 +175,37 @@
 
           <!--Reply answers section-->
           <div *ngIf="answer.reply && answer.reply.length && language=='ar'">
-            <ion-item no-lines class="ar-reply-div" *ngFor="let rep of answer.reply; let i = index">
+            <ion-item no-padding no-lines class="ar-reply-div" *ngFor="let rep of answer.reply; let i = index">
               <div class="ar-image-reply-div">
-                <img [ngStyle]="{'border-color': util.getRank(rep.reply_user_rank)}" item-start class="ar-user-replier" [src]="(rep.user_profile !== '')?rep.user_profile:'assets/img/profile-default.jpeg'">
+                <img [ngStyle]="{'border-color': util.getRank(rep.reply_user_rank)}" class="ar-user-replier" [src]="(rep.user_profile !== '')?rep.user_profile:'assets/img/profile-default.jpeg'">
                 <div text-center class="ar-name-div">{{rep.reply_author}}</div>
               </div>
 
               <div class="ar-reply-div">
                 <div text-wrap no-padding text-right>
-                  <span class="text-grey" style="font-size: 1rem">{{rep.reply_content}}</span>
+                  <span class="text-grey answer-reply-font" style="font-size: 1.4rem">{{rep.reply_content}}</span>
                   <div class="row">
-                    <div *ngIf="userData.user_login == rep.reply_author" (click)="deleteReply(rep.reply_post_ID,answer.reply,i)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Question.Delete'|translate}}</span></div>
-                    <div *ngIf="userData.user_login == rep.reply_author" (click)="editReply(rep)" style="margin-left: 5pt;margin-right: 5pt" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Question.Edit'|translate}}</span></div>
-                    <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{rep.reply_date_gmt}}</span></div>
+                    <div col-3 *ngIf="userData.user_login == rep.reply_author" (click)="deleteReply(rep.reply_post_ID,answer.reply,i)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Question.Delete'|translate}}</span></div>
+                    <div col-3 *ngIf="userData.user_login == rep.reply_author" (click)="editReply(rep)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Question.Edit'|translate}}</span></div>
+                    <div col-6 no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{rep.reply_date_gmt}}</span></div>
                   </div>
                 </div>
               </div>
             </ion-item>
           </div>
           <div *ngIf="answer.reply && answer.reply.length && language!=='ar'">
-            <ion-item no-lines class="reply-div" *ngFor="let rep of answer.reply; let i = index">
+            <ion-item no-padding no-lines class="reply-div" *ngFor="let rep of answer.reply; let i = index">
               <div class="image-reply-div">
                 <img [ngStyle]="{'border-color': util.getRank(rep.reply_user_rank)}" item-start class="user-replier" [src]="(rep.user_profile !== '')?rep.user_profile:'assets/img/profile-default.jpeg'">
                 <div text-center class="name-div">{{rep.reply_author}}</div>
               </div>
 
-              <div style="margin-left: 57px;margin-bottom: 15pt">
+              <div style="margin-left: 42pt;margin-bottom: 15pt;margin-top: 10pt;">
                 <div text-wrap no-padding text-left>
-                  <span class="text-grey" style="font-size: 1rem">{{rep.reply_content}}</span>
+                  <span class="text-grey answer-reply-font" style="font-size: 1.4rem">{{rep.reply_content}}</span>
                   <div class="row">
                     <div no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{rep.reply_date_gmt}}</span></div>
-                    <div *ngIf="userData.user_login == rep.reply_author" (click)="editReply(rep)" style="margin-left: 5pt;margin-right: 5pt" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Question.Edit'|translate}}</span></div>
+                    <div style="margin-left: 5px;margin-right: 5px;" *ngIf="userData.user_login == rep.reply_author" (click)="editReply(rep)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Question.Edit'|translate}}</span></div>
                     <div *ngIf="userData.user_login == rep.reply_author" (click)="deleteReply(rep.reply_post_ID,answer.reply,i)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Question.Delete'|translate}}</span></div>
                   </div>
                 </div>

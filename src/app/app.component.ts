@@ -63,10 +63,22 @@ export class MyApp {
       });
 
     });
-    this.initTranslate();
+    
     events.subscribe('setDarkTheme', (value) => {
       this.dark = value;
     });
+    this.storage.get('appLanguage').then(data=>{
+      if(data && data == 'en'){
+        this.storage.set('appLanguage','en').then(()=>{
+          this.events.publish('appLanguage', 'en');
+        });
+      }else {
+        this.storage.set('appLanguage','ar').then(()=>{
+          this.events.publish('appLanguage', 'ar');
+        });
+      }
+    });
+    
     events.subscribe('appLanguage', (value) => {
       this.initTranslate();
     });
@@ -97,9 +109,6 @@ export class MyApp {
       }else {
         this.translate.setDefaultLang('ar');
         this.translate.use('ar');
-        this.storage.set('appLanguage','ar').then(()=>{
-          this.events.publish('appLanguage', 'ar');
-        });
       }
       this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
         this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);

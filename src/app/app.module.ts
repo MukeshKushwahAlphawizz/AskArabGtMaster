@@ -25,9 +25,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { AdMobPro } from '@ionic-native/admob-pro';
 import {Deeplinks} from "@ionic-native/deeplinks";
 import {ComponentsModule} from "../components/components.module";
+import {ImageResizer} from '@ionic-native/image-resizer';
+import { File } from '@ionic-native/file';
 
-// The translate loader needs to know where to load i18n files
-// in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -73,6 +73,8 @@ export function createTranslateLoader(http: HttpClient) {
     PhotoViewer,
     AdMobPro,
     Deeplinks,
+    ImageResizer,
+    File,
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

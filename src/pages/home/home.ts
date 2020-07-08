@@ -59,6 +59,7 @@ export class HomePage {
   commonTexts : any = {};
   language : string = 'ar';
   isLoading: boolean = false;
+  searchText: string = '';
 
   constructor(public navCtrl: NavController,
               public util:UtilProvider,
@@ -72,11 +73,11 @@ export class HomePage {
               public navParams: NavParams) {
     this.storage.get('userData').then(data => {
       this.userData = JSON.parse(data);
-      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
+      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false,'');
     });
     this.events.subscribe('refreshFeed', (value) => {
       this.pageNumber = 0;
-      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true);
+      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true,'');
     });
   }
 
@@ -129,8 +130,8 @@ export class HomePage {
     this.translateService.get("Common").subscribe(values => {
       this.commonTexts = values;
     });
-    if (this.platform.is('cordova'))
-      this.showAds();
+    // if (this.platform.is('cordova'))
+    //   this.showAds();
   }
 
   reply(question){
@@ -147,13 +148,14 @@ export class HomePage {
     this.navCtrl.push('MyProfilePage',{isOtherUserProfile : isOtherUser,userId : userId})
   }
 
-  getQuestionsList(pageNum,pageSize,catId,filterId,showLoader) {
+  getQuestionsList(pageNum,pageSize,catId,filterId,showLoader,searchText) {
     let formData = new FormData();
     formData.append('user_id',this.userData.ID);
     formData.append('pageSize',pageSize);
     formData.append('pageNumber',pageNum);
     formData.append('cat_id',catId);
     formData.append('filter_id',filterId);
+    formData.append('search',searchText);
 
     showLoader?this.util.presentLoading():this.isLoading = true;
     this.user.getQuestionsList(formData).subscribe((resp) => {
@@ -167,6 +169,8 @@ export class HomePage {
         setTimeout(()=>{
           this.scrollToTop();
         },500);
+      }else {
+        this.questionsList = [];
       }
       this.questionsList.length ? this.isQuestionAvail = true : this.isQuestionAvail = false;
     }, (err) => {
@@ -358,7 +362,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 1;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true,'');
           }
         },
         {
@@ -366,7 +370,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 2;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true,'');
           }
         },
         {
@@ -374,7 +378,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 3;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true,'');
           }
         },
         {
@@ -382,7 +386,7 @@ export class HomePage {
           handler: () => {
             this.pageNumber=0;
             this.filter_id = 4;
-            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
+            this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true,'');
           }
         }
       ]
@@ -394,14 +398,25 @@ export class HomePage {
     this.navCtrl.push('SubmitAnswerPage',{question : question, userId : this.userData.ID});
   }
 
-  search(data:any) {
-    let searchText = data.value;
-    this.questionsList = this.questionsListForSearch.filter(item=>{
-      if(item.post_title.toLowerCase().includes(searchText.toLowerCase()) || item.post_content.toLowerCase().includes(searchText.toLowerCase())){
-        return item;
-      }
-    });
+  search() {
+    // console.log(this.searchText);
+    this.scrollToTop();
+    this.pageNumber = 0;
+    this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false,this.searchText);
+    // this.questionsList = this.questionsListForSearch.filter(item=>{
+    //   if(item.post_title.toLowerCase().includes(searchText.toLowerCase()) || item.post_content.toLowerCase().includes(searchText.toLowerCase())){
+    //     return item;
+    //   }
+    // });
   }
+
+  /*search_() {
+    if (this.searchText == ''){
+      console.log('into iffff')
+      this.pageNumber = 0;
+      this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false,this.searchText);
+    }
+  }*/
 
   getCategoryQuestions(category: any) {
     if(category === 'قطع غيار و ميكانيك' || category === 'Parts and Mechanics'){
@@ -412,11 +427,12 @@ export class HomePage {
       this.cat_id = 5;
     }
     this.pageNumber=0;
-    this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false);
+    this.scrollToTop();
+    this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false,'');
   }
 
   scrollToTop() {
-    console.log('scroll content is ---', this.content._scroll);
+    // console.log('scroll content is ---', this.content._scroll);
     if (this.content._scroll){
       this.content.scrollToTop();
     }

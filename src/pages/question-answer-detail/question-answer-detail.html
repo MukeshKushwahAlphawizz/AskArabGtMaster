@@ -18,8 +18,8 @@
 <ion-content padding [ngClass]="dark">
   <div *ngIf="language=='ar'" dir="rtl">
     <div (click)="gotoDetailPage(questionData)" style="margin: 20pt 15pt">
-      <div class="medium-text">{{questionData.post_title}}</div>
-      <div class="content text-grey" [innerHTML]="questionData.post_content"></div>
+      <div class="medium-text bold-font">{{questionData.post_title}}</div>
+      <div class="content bold-font text-grey" [innerHTML]="questionData.post_content"></div>
       <!--Poll-->
       <div margin-top *ngIf="!isOtherUserProfile && questionData.poll && questionData.poll.length > 0">
         <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>
@@ -86,8 +86,8 @@
   </div>
   <div *ngIf="language!=='ar'">
     <div (click)="gotoDetailPage(questionData)" style="margin: 20pt 15pt">
-      <div class="medium-text">{{questionData.post_title}}</div>
-      <div class="content text-grey" [innerHTML]="questionData.post_content"></div>
+      <div class="medium-text bold-font">{{questionData.post_title}}</div>
+      <div class="content bold-font text-grey" [innerHTML]="questionData.post_content"></div>
       <!--Poll-->
       <div margin-top *ngIf="!isOtherUserProfile && questionData.poll && questionData.poll.length > 0">
         <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>

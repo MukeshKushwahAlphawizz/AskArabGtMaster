@@ -1,3 +1,17 @@
+ion-spinner {
+  width: 40px;
+  height: 40px;
+}
+.spinner-md-crescent circle, .spinner-ios-crescent circle{
+  stroke: #CD1C2B !important;
+}
+.answer-reply-font{
+  color: #424242;
+  font-weight: bold;
+}
+.bold-font{
+  font-weight: bold
+}
 .text-grey{
   color: #5F5F5F;
 }
@@ -10,6 +24,7 @@
 }
 .toolbar-title-ios, .toolbar-title-md{
   color: white;
+  font-weight: bold;
 }
 .bar-buttons-md, .bar-buttons-ios{
   color: white;
