@@ -43,13 +43,13 @@
       </div>
     </ion-item>
     <!--English-->
-    <ion-item *ngIf="language !== 'ar'" (click)="gotoDetailPage(item)" margin-top no-lines no-padding>
-      <div style="position: absolute;top: 10pt">
+    <ion-item *ngIf="language !== 'ar'" (click)="gotoDetailPage(item)" no-lines no-padding>
+      <div style="position: absolute;top: 4pt">
       <ion-icon *ngIf="item.from_user_image === ''" item-start class="user1" name="ios-notifications"></ion-icon>
       <img *ngIf="item.from_user_image !== ''" class="user" item-start src="{{item.from_user_image}}">
       </div>
-      <div style="margin-left: 70px;margin-bottom: 10pt">
-        <h3 style="margin-top: 3pt;" text-wrap padding-top>
+      <div style="margin-left: 70px;margin-bottom: 15pt;margin-top: 15pt">
+        <h3 style="margin-top: 3pt;" text-wrap>
           <span *ngIf="item.type !== 'user profile'" style="font-weight: bold;margin-right: 10px;margin-left: 5px">{{item.from_user_name}}</span>{{item.notification}}</h3>
         <div class="row">
           <div class="right-aligned" no-padding text-right><a class="set-small-icon"><ion-icon class="text-grey" name="ios-time-outline"></ion-icon></a>

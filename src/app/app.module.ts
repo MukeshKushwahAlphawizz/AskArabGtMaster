@@ -27,6 +27,7 @@ import {Deeplinks} from "@ionic-native/deeplinks";
 import {ComponentsModule} from "../components/components.module";
 import {ImageResizer} from '@ionic-native/image-resizer';
 import { File } from '@ionic-native/file';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -75,6 +76,7 @@ export function createTranslateLoader(http: HttpClient) {
     Deeplinks,
     ImageResizer,
     File,
+    BackgroundMode,
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

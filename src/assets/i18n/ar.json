@@ -175,7 +175,8 @@
     "ForgotPassword": "هل نسيت كلمة المرور؟",
     "OrConnectUsing": "أو الاتصال باستخدام",
     "DontAccount": "لا تملك حساب؟",
-    "SignUp": "سجل"
+    "SignUp": "سجل",
+    "RememberMe": "تذكرنى"
   },
 
   "ForgotPassword": {

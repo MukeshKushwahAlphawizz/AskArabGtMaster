@@ -90,8 +90,13 @@ export class EditProfilePage {
           text: this.commonTexts.Choose_picture,
           handler: () => {
             this.util.aceesGallery().then(data =>{
-              this.userImage = 'data:image/png;base64,'+data.imageData;
-              this.userProfileToSend = 'data:image/png;base64,'+data.imageData;
+              try {
+                console.log('into try !@!@!@@!@');
+                this.userImage = 'data:image/png;base64,'+data.imageData;
+                this.userProfileToSend = 'data:image/png;base64,'+data.imageData;
+              }catch (e) {
+                console.log('Exception when loading base64',e);
+              }
             });
           }
         }

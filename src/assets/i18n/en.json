@@ -175,7 +175,8 @@
     "ForgotPassword": "Forgot Password?",
     "OrConnectUsing": "Or Connect Using",
     "DontAccount": "Don't have an account?",
-    "SignUp": "Sign Up"
+    "SignUp": "Sign Up",
+    "RememberMe": "Remember Me"
   },
 
   "ForgotPassword": {

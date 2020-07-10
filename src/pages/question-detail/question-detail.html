@@ -131,7 +131,7 @@
             <ion-item no-padding style="min-height: 2rem" *ngIf="language=='ar'">
             <button item-right (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count < 0)?(answer.likes_count * (-1)):0}})</span>
-              <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="md-thumbs-down"></ion-icon>
+              <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="thumbs-down"></ion-icon>
             </button>
             <button item-right (click)="like(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count >=0)?answer.likes_count:0}})</span>
@@ -149,7 +149,7 @@
             </button>
             <button (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count < 0)?(answer.likes_count * (-1)):0}})</span>
-              <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="md-thumbs-down"></ion-icon>
+              <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="thumbs-down"></ion-icon>
             </button>
             <button (click)="reply(answer)" class="right-button" ion-button icon-start clear small>
               <ion-icon name="ios-undo"></ion-icon>

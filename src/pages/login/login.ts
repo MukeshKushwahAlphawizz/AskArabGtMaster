@@ -123,7 +123,7 @@ export class LoginPage {
     this.util.presentLoading();
     this.user.login(formData).subscribe((resp) => {
       let response:any = resp;
-      console.log(response);
+      // console.log(response);
       if(response.data.user_profile !== ''){
         let img = response.data.user_profile.substring(2);
         // response.data.user_profile = 'http://15.206.103.57/Arabgt/'+img;

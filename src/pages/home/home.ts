@@ -71,6 +71,7 @@ export class HomePage {
               public events : Events,
               public actionSheetCtrl:ActionSheetController,
               public navParams: NavParams) {
+
     this.storage.get('userData').then(data => {
       this.userData = JSON.parse(data);
       this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,false,'');
@@ -82,8 +83,8 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.admob.onAdDismiss()
-      .subscribe(() => { console.log('User dismissed ad'); });
+    /*this.admob.onAdDismiss()
+      .subscribe(() => { console.log('User dismissed ad'); });*/
   }
 
   showAds() {

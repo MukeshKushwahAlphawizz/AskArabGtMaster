@@ -12,7 +12,7 @@
 <ion-content>
   <div class="container" (click)="presentActionSheet()">
     <p style="text-align: center;">
-      <img class="user-img" src="{{userImage}}">
+      <img *ngIf="userImage" class="user-img" [src]="userImage">
     </p>
     <p class="text-grey" style="text-align: center;">{{'EditProfile.ChangeProfilePhoto'|translate}}</p>
   </div>

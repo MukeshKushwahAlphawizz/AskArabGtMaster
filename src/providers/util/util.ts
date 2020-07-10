@@ -3,12 +3,14 @@ import {
   LoadingController, ToastController,
   Loading, ModalController, AlertController, Platform, Config, Events
 } from 'ionic-angular';
-import {Camera} from "@ionic-native/camera";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 import moment from "moment";
 import {TranslateService} from "@ngx-translate/core";
 import {Storage} from "@ionic/storage";
 import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 import { File } from '@ionic-native/file';
+import { BackgroundMode } from '@ionic-native/background-mode';
+
 
 export const CATEGORY_ID = {
   value : 0
@@ -24,6 +26,7 @@ export class UtilProvider {
      private toastCtrl: ToastController,
      private alertCtrl: AlertController,
      private camera: Camera,
+     private backgroundMode: BackgroundMode,
      public platform:Platform,
      public storage:Storage,
      public file: File,
@@ -175,89 +178,131 @@ presentAlertData() {
   }
 
   takePicture() :any{
-    /*return new Promise((resolve, reject) => {
-      this.camera.getPicture({
-        targetWidth: 512,
-        targetHeight: 512,
-        correctOrientation: true,
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        destinationType: this.camera.DestinationType.DATA_URL
-      }).then((imageData) => {
-        console.log('imageData >>>>', imageData);
-          /!*let blob = this.getBlob(imageData, ".jpg")
-          let imageFile = new File([blob], "image.jpg")*!/
-          resolve({imageFile:'',imageData:imageData});
-        }, (err) => {
-        console.log(err);
-        reject(err)
-      });
-    })*/
+    this.backgroundMode.enable();
     return new Promise((resolve, reject) => {
-      this.camera.getPicture({
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        saveToPhotoAlbum: false,
-        allowEdit: true,
-        targetWidth: 512,
-        targetHeight: 512,
-        correctOrientation: true
-      }).then((imageData) => {
-        this.imageResizer.resize({
-          uri: imageData,
-          quality: 60,
-          width: 512,
-          height: 512
-        }).then(imagePath => {
-          this.getFileContentAsBase64(imagePath,function(base64Image){
-            // console.log('base64Image >>>> ',base64Image);
-            let image64 :string = base64Image;
-            let imageToResolve = image64.substring(23,base64Image.length);
-            resolve({imageFile:'',imageData:imageToResolve});
+      if (this.platform.is('ios')){
+        const options: CameraOptions = {
+          quality: 100,
+          sourceType: this.camera.PictureSourceType.CAMERA,
+          destinationType: this.camera.DestinationType.FILE_URI,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then((imageData) => {
+          // console.log('path ======', imageData);
+          this.backgroundMode.disable();
+          let options = {
+            uri: imageData,
+            quality: 60,
+            width: 512,
+            height: 512
+          } as ImageResizerOptions;
+          if (this.platform.is('ios')){
+            options = {
+              uri: imageData,
+              quality: 60,
+              fileName:'resize.jpg',
+              width: 512,
+              height: 512
+            };
+          }
+          this.imageResizer.resize(options).then(imagePath => {
+            this.getFileContentAsBase64(imagePath,function(base64Image){
+              let image64 :string = base64Image;
+              let imageToResolve = image64.substring(23,base64Image.length);
+              resolve({imageFile:'',imageData:imageToResolve});
+            });
           });
-
+          /*let blob = this.getBlob(imageData, ".jpg")
+          let imageFile = new File([blob], "image.jpg")*/
+          // resolve({imageFile:'',imageData:imageData});
+        }, (err) => {
+          console.log('ERROR >>',err);
+          reject(err)
         });
-        /*let blob = this.getBlob(imageData, ".jpg")
-        let imageFile = new File([blob], "image.jpg")*/
-        // resolve({imageFile:'',imageData:imageData});
-      }, (err) => {
-        console.log('ERROR >>',err);
-        reject(err)
-      });
+      }else {
+        /*Android*/
+        const options: CameraOptions = {
+          quality: 80,
+          targetWidth: 512,
+          targetHeight: 512,
+          sourceType: this.camera.PictureSourceType.CAMERA,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then((imageData) => {
+          console.log('android image data >> ' + imageData);
+          this.backgroundMode.disable();
+          resolve({imageFile:'',imageData:imageData});
+        }).catch(err=>{
+          console.error(err);
+        })
+      }
     })
   }
 
 
   aceesGallery() :any{
+    this.backgroundMode.enable();
     return new Promise((resolve, reject) => {
-      this.camera.getPicture({
-        sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        saveToPhotoAlbum: false,
-        correctOrientation: true
-      }).then((imageData) => {
-        // console.log('image data >> ' + imageData);
-        this.imageResizer.resize({
-          uri: imageData,
-          quality: 60,
-          width: 512,
-          height: 512
-        }).then(imagePath => {
-          this.getFileContentAsBase64(imagePath,function(base64Image){
-            // console.log('base64Image >>>> ',base64Image);
-            let image64 :string = base64Image;
-            let imageToResolve = image64.substring(23,base64Image.length);
-            // console.log('imageToResolve >>>> ',imageToResolve);
-            resolve({imageFile:'',imageData:imageToResolve});
+      if (this.platform.is('ios')){
+        const options: CameraOptions = {
+          quality: 100,
+          sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+          destinationType: this.camera.DestinationType.FILE_URI,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then((imageData) => {
+          // console.log('image data >> ' + imageData);
+          this.backgroundMode.disable();
+          let options = {
+            uri: imageData,
+            quality: 60,
+            width: 512,
+            height: 512
+          } as ImageResizerOptions;
+          if (this.platform.is('ios')){
+            options = {
+              uri: imageData,
+              quality: 60,
+              fileName:'resize.jpg',
+              width: 512,
+              height: 512
+            };
+          }
+          this.imageResizer.resize(options).then(imagePath => {
+            this.getFileContentAsBase64(imagePath,function(base64Image){
+              let image64 :string = base64Image;
+              let imageToResolve = image64.substring(23,base64Image.length);
+              resolve({imageFile:'',imageData:imageToResolve});
+            });
           });
-
+        }, (err) => {
+          console.log('ERROR >>',err);
+          reject(err)
         });
-        /*let blob = this.getBlob(imageData, ".jpg")
-        let imageFile = new File([blob], "image.jpg")*/
-        // resolve({imageFile:'',imageData:imageData});
-      }, (err) => {
-        console.log('ERROR >>',err);
-        reject(err)
-      });
+      }else {
+        /*Android*/
+        const options: CameraOptions = {
+          quality: 80,
+          targetWidth: 512,
+          targetHeight: 512,
+          sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          encodingType: this.camera.EncodingType.JPEG,
+          mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then((imageData) => {
+          // console.log('android image data >> ' + imageData);
+          this.backgroundMode.disable();
+          resolve({imageFile:'',imageData:imageData});
+        }).catch(err=>{
+          console.error(err);
+        })
+      }
+
     })
   }
 

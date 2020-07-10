@@ -38,13 +38,15 @@
       </ion-item>-->
       <div class="row" padding>
         <ion-item style="min-height: 2rem" col-7 no-lines>
-          <ion-label class="text-grey small-font">Remember Me</ion-label>
-          <ion-checkbox (click)="rememberMe()" [checked]="isChecked" style="margin-right: 5pt"></ion-checkbox>
+          <ion-label class="text-grey small-font">{{'Login.RememberMe'|translate}}</ion-label>
+          <ion-checkbox (click)="rememberMe()" [checked]="isChecked" style="margin-right: 15pt"></ion-checkbox>
         </ion-item>
-        <div text-right col-5 (click)="openForgotPassord()" no-lines class="forget_password">{{'Login.ForgotPassword'|translate}}</div>
+        <div text-left col-5 (click)="openForgotPassord()" no-lines class="forget_password">{{'Login.ForgotPassword'|translate}}</div>
       </div>
 
-      <div text-center><button class="login-btn" [disabled]="loginForm.invalid" ion-button>Log in</button></div>
+      <div text-center><button class="login-btn" [disabled]="loginForm.invalid" ion-button>{{'SignUp.LogIn'|translate}}
+        <!--<ion-spinner *ngIf="isLoading" margin-right name="ios"></ion-spinner>-->
+      </button></div>
       <div class="text-grey connect-using">{{'Login.OrConnectUsing'|translate}}</div>
       <ion-item style="padding: 0pt 33pt;" no-margin no-lines>
         <img (click)="fbLogin()" class="fb-social" no-margin item-left src="assets/img/facebook.png">
@@ -87,13 +89,16 @@
       </ion-item>-->
       <div class="row" padding>
         <ion-item style="min-height: 2rem" col-7 no-lines>
-          <ion-label class="text-grey small-font">Remember Me</ion-label>
+          <ion-label class="text-grey small-font">{{'Login.RememberMe'|translate}}</ion-label>
           <ion-checkbox (click)="rememberMe()" [checked]="isChecked" style="margin-right: 5pt"></ion-checkbox>
         </ion-item>
         <div text-right col-5 (click)="openForgotPassord()" no-lines class="forget_password">{{'Login.ForgotPassword'|translate}}</div>
       </div>
 
-      <div text-center><button class="login-btn" [disabled]="loginForm.invalid" ion-button>Log in</button></div>
+      <div text-center>
+        <button class="login-btn" [disabled]="loginForm.invalid" ion-button>{{'SignUp.LogIn'|translate}}
+          <!--<ion-spinner *ngIf="isLoading" margin-left name="ios"></ion-spinner>-->
+        </button></div>
       <div class="text-grey connect-using">{{'Login.OrConnectUsing'|translate}}</div>
       <ion-item style="padding: 0pt 40pt;" no-lines>
         <img (click)="fbLogin()" class="fb-social" item-left src="assets/img/facebook.png">
