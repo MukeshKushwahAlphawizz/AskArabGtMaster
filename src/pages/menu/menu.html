@@ -9,7 +9,7 @@
     </ion-item>
     <div class="saparator"></div>
     <ion-list text-right padding class="ar-options-list">
-      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,0)" margin-top class="set-background" no-lines>
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,0)" margin-top class="set-background" no-lines>
         <ion-icon class="ar-left-option-icon" item-right name="ios-home"></ion-icon>
         <h2 class="ar-option-label">{{'Menu.Home'|translate}}</h2>
       </ion-item>
@@ -17,10 +17,10 @@
         <ion-icon class="ar-left-option-icon" item-right name="md-chatboxes"></ion-icon>
         <h2 class="ar-option-label">{{'Menu.YourQuestionAnswer'|translate}}</h2>
       </ion-item>
-      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 2 },true,0)" class="set-background" no-lines>
+      <!--<ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 2 },true,0)" class="set-background" no-lines>
         <ion-icon class="ar-left-option-icon" item-right name="md-document"></ion-icon>
         <h2 class="ar-option-label">{{'Menu.Article'|translate}}</h2>
-      </ion-item>
+      </ion-item>-->
       <ion-item text-right (click)="isCategory === 1 ? isCategory = 0 : isCategory = 1" class="set-background" no-lines>
         <ion-icon class="ar-left-option-icon" style="font-weight: bold;padding: 5px 12px;" item-right name="ios-list"></ion-icon>
         <h2 class="ar-option-label">{{'Menu.Categories'|translate}}</h2>
@@ -29,17 +29,17 @@
 
       <ion-item-group text-right>
         <div dir="rtl" *ngIf="isCategory" [@slideIn] class="sub-menu">
-          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,9)" style="margin-right: 35pt;color: white">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,9)" style="margin-right: 35pt;color: white">
             <li>
               <div class="white">{{'Menu.GeneralQuestions'|translate}}</div>
             </li>
           </ul>
-          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,12)" style="margin-right: 35pt;color: white">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,12)" style="margin-right: 35pt;color: white">
             <li>
               <div class="white">{{'Menu.PartsAndMechanics'|translate}}</div>
             </li>
           </ul>
-          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,5)" style="margin-right: 35pt;color: white">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,5)" style="margin-right: 35pt;color: white">
             <li>
               <div class="white">{{'Menu.CarProblems'|translate}}</div>
             </li>
@@ -47,7 +47,7 @@
         </div>
       </ion-item-group>
 
-      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 3 },true,0)" class="set-background" no-lines>
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 },true,0)" class="set-background" no-lines>
         <ion-icon class="ar-left-option-icon" item-right name="md-notifications"></ion-icon>
         <h2 class="ar-option-label">{{'Menu.Notifications'|translate}}</h2>
       </ion-item>
@@ -91,7 +91,7 @@
     </ion-item>
     <div class="saparator"></div>
     <ion-list padding class="options-list">
-      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,0)" margin-top class="set-background" no-lines>
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,0)" margin-top class="set-background" no-lines>
         <ion-icon class="left-option-icon" item-left name="ios-home"></ion-icon>
         <h2 class="option-label">{{'Menu.Home'|translate}}</h2>
       </ion-item>
@@ -99,10 +99,10 @@
         <ion-icon class="left-option-icon" item-left name="md-chatboxes"></ion-icon>
         <h2 class="option-label">{{'Menu.YourQuestionAnswer'|translate}}</h2>
       </ion-item>
-      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 2 },true,0)" class="set-background" no-lines>
+      <!--<ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 2 },true,0)" class="set-background" no-lines>
         <ion-icon class="left-option-icon" item-left name="md-document"></ion-icon>
         <h2 class="option-label">{{'Menu.Article'|translate}}</h2>
-      </ion-item>
+      </ion-item>-->
       <ion-item (click)="isCategory === 1 ? isCategory = 0 : isCategory = 1" class="set-background" no-lines>
         <ion-icon style="font-weight: bold" class="left-option-icon" item-left name="ios-list"></ion-icon>
         <h2 class="option-label">{{'Menu.Categories'|translate}}</h2>
@@ -111,17 +111,17 @@
 
       <ion-item-group>
         <div *ngIf="isCategory" [@slideIn] class="sub-menu">
-          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,9)" style="margin-left: 35pt;color: white">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,9)" style="margin-left: 35pt;color: white">
             <li>
               <div class="white">{{'Menu.GeneralQuestions'|translate}}</div>
             </li>
           </ul>
-          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,12)" style="margin-left: 35pt;color: white">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,12)" style="margin-left: 35pt;color: white">
             <li>
               <div class="white">{{'Menu.PartsAndMechanics'|translate}}</div>
             </li>
           </ul>
-          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, true,5)" style="margin-left: 35pt;color: white">
+          <ul (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,5)" style="margin-left: 35pt;color: white">
             <li>
               <div class="white">{{'Menu.CarProblems'|translate}}</div>
             </li>
@@ -129,7 +129,7 @@
         </div>
       </ion-item-group>
 
-      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 3 },true,0)" class="set-background" no-lines>
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 0 },true,0)" class="set-background" no-lines>
         <ion-icon class="left-option-icon" item-left name="md-notifications"></ion-icon>
         <h2 class="option-label">{{'Menu.Notifications'|translate}}</h2>
       </ion-item>

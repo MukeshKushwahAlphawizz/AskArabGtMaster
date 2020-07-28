@@ -202,7 +202,8 @@
     "Male": "Male",
     "Female": "Female",
     "SAVEANDEXIT": "SAVE AND EXIT",
-    "ProfileEditedSuccessfully": "Profile Edited Successfully"
+    "ProfileEditedSuccessfully": "Profile Edited Successfully",
+    "SKIP": "SKIP"
   },
 
   "ChangePassword": {

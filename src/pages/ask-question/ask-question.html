@@ -39,7 +39,7 @@
       </div>
 
       <div margin-top class="select-main-div">
-        <div class="select text-grey">
+        <div dir="rtl" class="select text-grey">
           <select id="category" (change)="selectCategory()">
             <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.name}}</option>
           </select>
@@ -55,7 +55,7 @@
       </ion-item>
 
       <div *ngIf="isVideoNeeded" [@slideIn]>
-        <div class="select-main-div">
+        <div dir="rtl" class="select-main-div">
           <div class="select text-grey">
             <select id="video" (change)="selectVideoType()">
               <option *ngFor="let type of videoTypeList" value="{{type.name}}">{{type.name}}</option>

@@ -10,12 +10,12 @@ import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 export class TabsPage {
   tab1Root: any = 'HomePage';
   tab2Root: any = 'AskQuestionPage';
-  tab3Root: any = 'ArticlePage';
+  /*tab3Root: any = 'ArticlePage';*/
   tab4Root: any = 'NotificationPage';
 
   tab1Title = " ";
   tab2Title = " ";
-  tab3Title = " ";
+  // tab3Title = " ";
   tab4Title = " ";
   tabIndex: number;
 
@@ -30,7 +30,7 @@ export class TabsPage {
     translateService.get("TAB").subscribe(values => {
       this.tab1Title = values['TAB1_TITLE'];
       this.tab2Title = values['TAB2_TITLE'];
-      this.tab3Title = values['TAB3_TITLE'];
+      /*this.tab3Title = values['TAB3_TITLE'];*/
       this.tab4Title = values['TAB4_TITLE'];
     });
     events.subscribe('notificationRead', (isRead) => {

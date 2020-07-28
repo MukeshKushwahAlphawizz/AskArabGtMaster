@@ -469,7 +469,7 @@ export class QuestionDetailPage {
   }
 
   shareQuestion() {
-     this.socialSharing.share('Ask Arab GT: '+'\n Question :'+this.questionData.post_title+'\n Details :'+ this.questionData.post_content+'\n ','', [],'askarabgt://app.arabgt.com/questionDetail?id='+this.questionData.ID).then((succ) => {
+     this.socialSharing.share('Ask Arab GT: '+'\n Question :'+this.questionData.post_title+'\n Details :'+ this.questionData.post_content+'\n ','', [],'https://ask.arabgt.com/?p='+this.questionData.ID).then((succ) => {
       // Success!
       console.log('shared !!',succ);
     }).catch((err) => {

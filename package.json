@@ -96,7 +96,7 @@
       },
       "cordova-plugin-facebook4": {
         "APP_ID": "152170135996652",
-        "APP_NAME": "AskArabGt",
+        "APP_NAME": "ArabGt",
         "FACEBOOK_HYBRID_APP_EVENTS": "false",
         "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0"
       },
@@ -116,16 +116,28 @@
         "ADMOB_APP_ID": "ca-app-pub-2579181101911625~2959624772",
         "PLAY_SERVICES_VERSION": "16.0.0"
       },
-      "ionic-plugin-deeplinks": {
-        "URL_SCHEME": "askarabgt",
-        "DEEPLINK_SCHEME": "https",
-        "DEEPLINK_HOST": "app.arabgt.com",
-        "ANDROID_PATH_PREFIX": "/"
-      },
       "info.protonet.imageresizer": {},
       "cordova-plugin-androidx": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-background-mode": {}
+      "cordova-plugin-background-mode": {},
+      "ionic-plugin-deeplinks": {
+        "URL_SCHEME": "https",
+        "DEEPLINK_SCHEME": "https",
+        "DEEPLINK_HOST": "ask.arabgt.com",
+        "ANDROID_PATH_PREFIX": "/",
+        "ANDROID_2_PATH_PREFIX": "/",
+        "ANDROID_3_PATH_PREFIX": "/",
+        "ANDROID_4_PATH_PREFIX": "/",
+        "ANDROID_5_PATH_PREFIX": "/",
+        "DEEPLINK_2_SCHEME": " ",
+        "DEEPLINK_2_HOST": " ",
+        "DEEPLINK_3_SCHEME": " ",
+        "DEEPLINK_3_HOST": " ",
+        "DEEPLINK_4_SCHEME": " ",
+        "DEEPLINK_4_HOST": " ",
+        "DEEPLINK_5_SCHEME": " ",
+        "DEEPLINK_5_HOST": " "
+      }
     },
     "platforms": [
       "android"

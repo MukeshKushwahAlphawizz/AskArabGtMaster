@@ -39,9 +39,9 @@ export class ForgotPasswordPage {
     this.viewCtrl.dismiss();
   }
 
-  private forgotPassWord() {
+  forgotPassWord() {
     if (this.email.trim() === '') {
-      this.util.presentToast(this.PleaseEnterEmail)
+      this.util.presentToast(this.PleaseEnterEmail);
       return
     }
     let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -51,7 +51,7 @@ export class ForgotPasswordPage {
       formData.append('user_email',this.email);
 
       this.user.forgotPasswordApi(formData).subscribe((resp) => {
-        let response :any= resp
+        let response :any= resp;
         this.util.dismissLoading();
         this.util.presentToast(response.message);
         this.viewCtrl.dismiss();

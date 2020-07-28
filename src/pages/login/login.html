@@ -1,7 +1,8 @@
 <ion-content>
 <div text-center>
   <img class="logo-img" src="assets/img/logo.png">
-  <h1>{{'Login.WelcomeBack'|translate}}</h1>
+  <h1 *ngIf="language==='ar'" dir="rtl">{{'Login.WelcomeBack'|translate}}</h1>
+  <h1 *ngIf="language!=='ar'">{{'Login.WelcomeBack'|translate}}</h1>
   <!--<div class="text-grey">Lorem ipsum is simply dummy text of the printing</div>-->
   <form (submit)="doLogin()" [formGroup]="loginForm">
     <ion-list dir="rtl" *ngIf="language == 'ar'">
@@ -38,7 +39,7 @@
       </ion-item>-->
       <div class="row" padding>
         <ion-item style="min-height: 2rem" col-7 no-lines>
-          <ion-label class="text-grey small-font">{{'Login.RememberMe'|translate}}</ion-label>
+          <ion-label class="text-grey medium-font">{{'Login.RememberMe'|translate}}</ion-label>
           <ion-checkbox (click)="rememberMe()" [checked]="isChecked" style="margin-right: 15pt"></ion-checkbox>
         </ion-item>
         <div text-left col-5 (click)="openForgotPassord()" no-lines class="forget_password">{{'Login.ForgotPassword'|translate}}</div>
@@ -89,7 +90,7 @@
       </ion-item>-->
       <div class="row" padding>
         <ion-item style="min-height: 2rem" col-7 no-lines>
-          <ion-label class="text-grey small-font">{{'Login.RememberMe'|translate}}</ion-label>
+          <ion-label class="text-grey medium-font">{{'Login.RememberMe'|translate}}</ion-label>
           <ion-checkbox (click)="rememberMe()" [checked]="isChecked" style="margin-right: 5pt"></ion-checkbox>
         </ion-item>
         <div text-right col-5 (click)="openForgotPassord()" no-lines class="forget_password">{{'Login.ForgotPassword'|translate}}</div>

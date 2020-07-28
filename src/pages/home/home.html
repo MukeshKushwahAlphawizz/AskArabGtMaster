@@ -21,14 +21,14 @@
   </ion-navbar>
   <div class="search-div">
     <ion-item *ngIf="language === 'ar'" style="min-height: 1rem" class="rounded-red" no-lines no-padding>
-      <ion-input [(ngModel)]="searchText" dir="rtl" class="text-grey" style="font-size: 1.4rem;padding: 6pt; padding-right: 13pt" type="text"
+      <ion-input (keyup.enter)="search()" [(ngModel)]="searchText" dir="rtl" class="text-grey" style="font-size: 1.4rem;padding: 6pt; padding-right: 13pt" type="text"
                  placeholder="{{'HOME.Search'|translate}}"></ion-input>
       <button (click)="search()" clear item-left icon-only style="background: transparent">
         <ion-icon style="font-size: 1.9rem;margin-top: 5px;color: #CD1C2B" name="search"></ion-icon>
       </button>
     </ion-item>
     <ion-item *ngIf="language !== 'ar'" style="min-height: 1rem" class="rounded-red" no-lines>
-        <ion-input [(ngModel)]="searchText" class="text-grey" style="font-size: 1.4rem;padding: 6pt" type="text"
+        <ion-input (keyup.enter)="search()" [(ngModel)]="searchText" class="text-grey" style="font-size: 1.4rem;padding: 6pt" type="text"
                    placeholder="{{'HOME.Search'|translate}}"></ion-input>
         <button (click)="search()" clear item-right icon-only style="background: transparent">
           <ion-icon style="font-size: 1.9rem;margin-top: 5px;color: #CD1C2B" name="search"></ion-icon>
@@ -54,16 +54,17 @@
           </div>
           <div class="{{language =='ar'?'ar-content-question':'content-question'}}">
             <div *ngIf="language !=='ar'" class="row">
-              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
-              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
-              <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
+              <div (click)="gotoQuestionDetail(question)" col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+              <div (click)="gotoQuestionDetail(question)" col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+              <div (click)="getCategoryQuestions(question.category)" col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
             </div>
             <div *ngIf="language =='ar'" class="row">
-              <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
-              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
-              <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+              <div (click)="gotoQuestionDetail(question)" col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+              <div (click)="gotoQuestionDetail(question)" col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+              <div (click)="getCategoryQuestions(question.category)" col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
             </div>
-            <h2 style="padding: 5pt" (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
+            <h2 *ngIf="language =='ar'" dir="rtl" style="padding: 5pt" (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
+            <h2 *ngIf="language !=='ar'" style="padding: 5pt" (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
             <div *ngIf="language !=='ar'" class="row">
               <button (click)="likeQuestion(question)" style="padding:5px" no-margin ion-button icon-start clear small>
                 <span class="text-grey like-count">({{(question.post_likes_count && question.post_likes_count != '' && question.post_likes_count >= 0)?question.post_likes_count:0}})</span>
@@ -174,7 +175,7 @@
 
               <div text-right class="ar-ans-div">
                 <div margin-top text-wrap no-padding>
-                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="answer-reply-font" style="font-size: 1.4rem"></span>
+                  <span dir="rtl" (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="answer-reply-font" style="font-size: 1.4rem"></span>
                   <a (click)="gotoQuestionDetail(question)" class="read-more">{{(question.answer_data[0].answer_content.split(' ').length > 25)?Read_More:''}}</a></div>
                     <ion-item no-lines no-padding style="min-height: 2rem">
                       <div item-right no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a>
@@ -218,7 +219,7 @@
 
                 <div style="margin-right: 42pt;margin-bottom: 15pt" text-right>
                   <div text-wrap no-padding margin-top>
-                    <span class="answer-reply-font" style="font-size: 1.4rem">{{question.answer_data[0].reply[0].reply_content}}</span>
+                    <span dir="rtl" class="answer-reply-font" style="font-size: 1.4rem">{{question.answer_data[0].reply[0].reply_content}}</span>
                     <a class="read-more">{{(question.answer_data[0].reply[0].reply_content.split(' ').length > 25)?Read_More:''}}</a></div>
                   <ion-item no-lines no-padding style="min-height: 2rem">
                     <div item-left (click)="deleteReply(question.answer_data[0].reply[0].reply_post_ID,question)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'HOME.Delete'|translate}}</span></div>
@@ -264,14 +265,14 @@
   </ion-navbar>
   <div class="search-div">
     <ion-item *ngIf="language === 'ar'" style="min-height: 1rem" class="rounded-red" no-lines no-padding>
-      <ion-input [(ngModel)]="searchText" dir="rtl" class="text-grey" style="font-size: 1.4rem;padding: 6pt; padding-right: 13pt" type="text"
+      <ion-input (keyup.enter)="search()" [(ngModel)]="searchText" dir="rtl" class="text-grey" style="font-size: 1.4rem;padding: 6pt; padding-right: 13pt" type="text"
                  placeholder="{{'HOME.Search'|translate}}"></ion-input>
       <button (click)="search()" clear item-left icon-only style="background: transparent">
         <ion-icon style="font-size: 1.9rem;margin-top: 5px;color: #CD1C2B" name="search"></ion-icon>
       </button>
     </ion-item>
     <ion-item *ngIf="language !== 'ar'" style="min-height: 1rem" class="rounded-red" no-lines>
-      <ion-input [(ngModel)]="searchText" class="text-grey" style="font-size: 1.4rem;padding: 6pt" type="text"
+      <ion-input (keyup.enter)="search()" [(ngModel)]="searchText" class="text-grey" style="font-size: 1.4rem;padding: 6pt" type="text"
                  placeholder="{{'HOME.Search'|translate}}"></ion-input>
       <button (click)="search()" clear item-right icon-only style="background: transparent">
         <ion-icon style="font-size: 1.9rem;margin-top: 5px;color: #CD1C2B" name="search"></ion-icon>
@@ -296,16 +297,17 @@
             </div>
             <div class="{{language =='ar'?'ar-content-question':'content-question'}}">
               <div *ngIf="language !=='ar'" class="row">
-                <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
-                <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
-                <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
+                <div (click)="gotoQuestionDetail(question)" col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+                <div (click)="gotoQuestionDetail(question)" col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+                <div (click)="getCategoryQuestions(question.category)" col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
               </div>
               <div *ngIf="language =='ar'" class="row">
-                <div (click)="getCategoryQuestions(question.category)" no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
-                <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
-                <div (click)="gotoQuestionDetail(question)" no-padding col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+                <div (click)="gotoQuestionDetail(question)" col-4 text-left><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a><span class="text-grey small-text">{{question.post_modified_gmt}}</span></div>
+                <div (click)="gotoQuestionDetail(question)" col-4 text-center><a class="set-small-icon"><ion-icon class="text-grey" name="md-chatboxes"></ion-icon></a><span class="text-grey small-text">{{'HOME.Answer'|translate}} ({{question.answer_count}})</span></div>
+                <div (click)="getCategoryQuestions(question.category)" col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{question.category}}</span></div>
               </div>
-              <h2 style="padding: 5pt" (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
+              <h2 *ngIf="language =='ar'" dir="rtl" style="padding: 5pt" (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
+              <h2 *ngIf="language !=='ar'" style="padding: 5pt" (click)="gotoQuestionDetail(question)" text-wrap>{{question.post_title}}</h2>
               <div *ngIf="language !=='ar'" class="row">
                 <button (click)="likeQuestion(question)" style="padding:5px" no-margin ion-button icon-start clear small>
                   <span class="text-grey like-count">({{(question.post_likes_count && question.post_likes_count != '' && question.post_likes_count >= 0)?question.post_likes_count:0}})</span>
@@ -416,7 +418,7 @@
 
               <div text-right class="ar-ans-div">
                 <div margin-top text-wrap no-padding>
-                  <span (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="answer-reply-font" style="font-size: 1.4rem"></span>
+                  <span dir="rtl" (click)="gotoQuestionDetail(question)" [innerHTML]="question.answer_data[0].answer_content" class="answer-reply-font" style="font-size: 1.4rem"></span>
                   <a (click)="gotoQuestionDetail(question)" class="read-more">{{(question.answer_data[0].answer_content.split(' ').length > 25)?Read_More:''}}</a></div>
                 <ion-item no-lines no-padding style="min-height: 2rem">
                   <div item-right no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-calendar"></ion-icon></a>
@@ -460,7 +462,7 @@
 
                 <div style="margin-right: 42pt;margin-bottom: 15pt" text-right>
                   <div text-wrap no-padding margin-top>
-                    <span class="answer-reply-font" style="font-size: 1.4rem">{{question.answer_data[0].reply[0].reply_content}}</span>
+                    <span dir="rtl" class="answer-reply-font" style="font-size: 1.4rem">{{question.answer_data[0].reply[0].reply_content}}</span>
                     <a class="read-more">{{(question.answer_data[0].reply[0].reply_content.split(' ').length > 25)?Read_More:''}}</a></div>
                   <ion-item no-lines no-padding style="min-height: 2rem">
                     <div item-left (click)="deleteReply(question.answer_data[0].reply[0].reply_post_ID,question)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'HOME.Delete'|translate}}</span></div>

@@ -27,15 +27,15 @@
   "Common": {
     "Delete_Reply": "حذف الرد",
     "Are_you_sure_delete": "هل تريد بالتأكيد الحذف؟",
-    "Choose_take_picture": "اختر أو التقط صورة",
-    "Take_picture": "التقط صوره",
+    "Choose_take_picture": "التقط أو اختر صورة",
+    "Take_picture": " التقط صورة ",
     "Choose_picture": "اختر صورة",
     "Answer_Added_Successfully": "تمت إضافة الإجابة بنجاح",
-    "Select_Video_Type": "حدد نوع الفيديو",
-    "Select_Category": "اختر الفئة",
+    "Select_Video_Type": "اختر نوع الفيديو",
+    "Select_Category": "اختر القسم",
     "General_Questions": "اسئلة عامة",
     "Parts_and_Mechanics": "قطع غيار وميكانيكا",
-    "Car_Problems": "مشاكل السيارة",
+    "Car_Problems": "مشاكل سيارات",
     "ConfirmDelete": "تأكيد الحذف",
     "AreyousureDeleteAccount": "هل انت متأكد انك تريد حذف حسابك؟",
     "QuestionDeletedSuccessfully": "تم حذف السؤال بنجاح"
@@ -55,13 +55,13 @@
 
   "Contact": {
     "ContactUs": "اتصل بنا",
-    "DetailText": "في هذا التطبيق ، يمكنك طرح أسئلتك حول كل ما يتعلق بالسيارات ، والميكانيكا ، والقيادة ، وما إلى ذلك ، حيث يشارك الأفراد المسجلون على الموقع في الإجابة على أسئلتك من خلال تجاربهم ومعرفتهم الشخصية ، يمكنك أيضًا الانضمام إلى العائلة ومشاركتها تجاربنا والإجابة على الأسئلة المطروحة واختيار أفضل الإجابات.",
-    "DetailText1": "بهذه الطريقة ، ومن خلال هذه العملية التفاعلية ، يمكننا تبادل الخبرات والمعرفة بهدف تعزيز ثقافة السيارات ورفع مستوى الوعي حول هذا الموضوع بين جمهورنا العربي الأعزاء ، والذي يمتد من المحيط إلى الخليج الفارسي.",
-    "DetailText2": "أهلا وسهلا بك إلى عائلة عرب جي تي",
-    "ConnectWithUs": "اتصل بنا",
-    "Name": "اسم",
+    "DetailText": "في هذا الموقع يمكنك، طرح التساؤلات التي لديك عن كل ما يتعلق بالسيارات والميكانيك والقيادة وغيرها ، حيث سيتشارك الأفراد المسجلين في الموقع في الإجابة على أسئلتك من خلال تجاربهم ومعرفتهم الشخصية ، كما يمكنك أيضاً الانضمام للعائلة ومشاركتنا بخبراتك والإجابة على الأسئلة المطروحة واختيار الإجابات الأفضل .",
+    "DetailText1": " وبهذا الطريقة ومن خلال هذه العملية التفاعلية يمكننا تبادل الخبرات والمعرفة بهدف تعزيز ثقافة السيارات وزيادة الوعي حول هذا الموضوع بين جمهورنا العربي العزيز والذي يمتد من المحيط إلى الخليج العربي . ",
+    "DetailText2": " أهلاً وسهلاً بك في عائلة عرب جي تي",
+    "ConnectWithUs": "تواصل معنا",
+    "Name": "الاسم",
     "Email": "البريد الإلكتروني",
-    "Message": "رسالة",
+    "Message": "الرسالة",
     "Send": "إرسال",
     "MessageSend": "تم إرسال رسالتك"
   },
@@ -77,7 +77,7 @@
   },
 
   "Report": {
-    "Report": "نقل",
+    "Report": "تبليغ",
     "PleaseBrieflyQuestion": "يرجى توضيح بإيجاز لماذا تشعر أنه يجب الإبلاغ عن هذا السؤال.",
     "PleaseBrieflyAnswer": "يرجى توضيح بإيجاز لماذا تشعر أنه يجب الإبلاغ عن هذه الإجابة.",
     "WriteHere": "اكتب هنا",
@@ -87,8 +87,8 @@
   },
 
   "SubmitAns": {
-    "Submit_Answer": "سلم الاجابة",
-    "Answer": "إجابة",
+    "Submit_Answer": "قدم إجابة",
+    "Answer": "أجب",
     "WriteYourAnswer": "اكتب اجابتك",
     "UploadFile": "رفع ملف",
     "POSTANSWER": "الرد على الأسئلة",
@@ -141,11 +141,11 @@
     "MyStats": "إحصائياتي",
     "UserStats": "إحصائيات المستخدم",
     "ANSWERS": "الإجابات",
-    "QUESTIONS": "أسئلة",
+    "QUESTIONS": "الأسئلة",
     "COMMENTS": "تعليقات",
     "QUESTIONSASK": "طرح الأسئلة",
     "BESTANSWERS": "أفضل الإجابات",
-    "FOLLOW": "إتبع",
+    "FOLLOW": "متابعة",
     "FOLLOWED": "يتبع",
     "FAVORITEQUESTIONS": "أسئلة مفضلة",
     "MEMBERSQUESTIONS": "أسئلة الأعضاء التي أتبعها"
@@ -155,16 +155,16 @@
     "Home": "الصفحة الرئيسية",
     "ContactUs": "اتصل بنا",
     "EditProfile": "تعديل الملف الشخصي",
-    "YourQuestionAnswer": "سؤالك / إجابتك",
+    "YourQuestionAnswer": "أسئلتك وإجاباتك",
     "Article": "مقالة - سلعة",
-    "Categories": "التصنيفات",
+    "Categories": "الأقسام",
     "GeneralQuestions": "اسئلة عامة",
     "PartsAndMechanics": "قطع غيار وميكانيكا",
-    "CarProblems": "مشاكل السيارة",
-    "Notifications": "إشعارات",
+    "CarProblems": "مشاكل سيارات",
+    "Notifications": "التنبيهات",
     "Settings": "الإعدادات",
     "ShareApp": "شارك التطبيق",
-    "Logout": "تسجيل خروج",
+    "Logout": "تسجيل الخروج",
     "FollowUs": "تابعنا"
   },
 
@@ -191,7 +191,7 @@
   "EditProfile": {
     "Edit_Profile": "تعديل الملف الشخصي",
     "ChangeProfilePhoto": "تغيير صورة الملف الشخصي",
-    "Name": "اسم",
+    "Name": "الاسم",
     "LastName": "الكنية",
     "Address": "عنوان",
     "SelectCountry": "حدد الدولة",
@@ -202,7 +202,8 @@
     "Male": "الذكر",
     "Female": "أنثى",
     "SAVEANDEXIT": "حفظ وخروج",
-    "ProfileEditedSuccessfully": "تم تعديل الملف الشخصي بنجاح"
+    "ProfileEditedSuccessfully": "تم تعديل الملف الشخصي بنجاح",
+    "SKIP": "تخطى"
   },
 
   "ChangePassword": {
@@ -214,7 +215,7 @@
   },
 
   "Notifications": {
-    "Notifications": "إشعارات",
+    "Notifications": "التنبيهات",
     "No_Notifications_are_present": "لا توجد إخطارات موجودة.",
     "QuestionNotExist": "قد يتم حذف السؤال أو عدم وجوده."
   },
@@ -237,21 +238,21 @@
   },
 
   "AskQuestion": {
-    "Ask_Question": "اسأل سؤالا",
+    "Ask_Question": "اطرح سؤالاً",
     "Tips_title": "نصائح للحصول على إجابات جيدة بسرعة",
-    "Make_sure": "تأكد من أن سؤالك قد تم طرحه بالفعل",
-    "Keep_your": "اجعل سؤالك قصيرًا ومباشرًا",
-    "Double_check": "تحقق مرة أخرى من القواعد والتهجئة",
+    "Make_sure": "تأكد أن أحداً لم يطرح نفس السؤال من قبل",
+    "Keep_your": "اجعل سؤالك قصيراً ومباشراً",
+    "Double_check": "تأكد من خلو السؤال من الأخطاء الإملائية والنحوية",
     "Write_your_question": "اكتب سؤالك",
-    "Is_this_question": "هل هذا السؤال استطلاع؟",
+    "Is_this_question": "هل هذا السؤال استطلاع رأي؟",
     "WritePollItem": "اكتب عنصر الاستطلاع",
     "ADDMORE": "أضف المزيد",
     "DescribeYourQuestion": "صف سؤالك",
-    "Do_you_need": "هل تحتاج إلى فيديو لشرح أفضل",
+    "Do_you_need": "هل تحتاج إلى فيديو لتوضح أكثر؟",
     "ED_Video": "فيديو ED",
-    "Put_videoID": "ضع هنا معرف الفيديو",
+    "Put_videoID": "ضع هنا رابط الفيديو",
     "ASK_QUESTION": "اسأل سؤالا",
-    "Upload_Image": "تحميل الصور",
+    "Upload_Image": "حمّل صورة",
     "Please_write_your_question": "يرجى كتابة سؤالك",
     "Question_Posted_Successfully": "تم نشر السؤال بنجاح"
   },
@@ -265,13 +266,13 @@
     "Edit": "تعديل",
     "Delete": "حذف",
     "Add_An_Answer": "أضف إجابة",
-    "video_better_explain": "هل تحتاج إلى فيديو لشرح أفضل",
+    "video_better_explain": "هل تحتاج إلى فيديو لتوضح أكثر؟",
     "ED_Video": "فيديو ED",
     "Put_here": "ضع هنا معرف الفيديو",
     "Answer": "إجابة",
-    "Add_Attachment": "إضافة مرفق",
+    "Add_Attachment": "أضف مرفقاً",
     "Add_To_Favorite": "أضف إلى المفضلة",
-    "Follow": "إتبع",
+    "Follow": "متابعة",
     "Added_As_Favorite": "تمت إضافته كمفضل",
     "Followed": "يتبع",
     "Add_Your_Answer": "أضف إجابتك"
@@ -279,12 +280,12 @@
 
   "HOME": {
     "Home": "الصفحة الرئيسية",
-    "Report": "نقل",
+    "Report": "تبليغ",
     "Search": "بحث",
     "Answer": "إجابة",
-    "Submit_Answer": "سلم الاجابة",
+    "Submit_Answer": "قدم إجابة",
     "Reply": "الرد",
-    "View_All_Answer": "عرض جميع الإجابات",
+    "View_All_Answer": "شاهد كل الإجابات",
     "SEND": "إرسال",
     "Edit": "تعديل",
     "Delete": "حذف",

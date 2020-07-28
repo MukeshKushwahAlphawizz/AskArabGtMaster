@@ -36,9 +36,9 @@ export class MyApp {
         '/questionDetail/:id': 'QuestionDetailPage'
       }).subscribe(match => {
         let matchData : any = match;
-        // console.log(matchData.$link.queryString);
-        let question_id = matchData.$link.queryString.substring(3, matchData.$link.queryString.length);
-        // console.log('question_id',question_id);
+        // console.log('deeplinking url >>>>>>>>>>>>>>>>>>>>>>',matchData.$link.queryString);
+        let question_id = matchData.$link.queryString.substring(2, matchData.$link.queryString.length);
+        console.log('question_id',question_id);
         this.getQuestionData(question_id);
 
       }, nomatch => {
@@ -63,7 +63,7 @@ export class MyApp {
       });
 
     });
-    
+
     events.subscribe('setDarkTheme', (value) => {
       this.dark = value;
     });
@@ -78,7 +78,7 @@ export class MyApp {
         });
       }
     });
-    
+
     events.subscribe('appLanguage', (value) => {
       this.initTranslate();
     });

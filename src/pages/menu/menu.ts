@@ -131,18 +131,15 @@ export class MenuPage {
   }
   ionViewDidLoad() {
     //Open Default Home Page
-    this.openPage({ title: 'Home', pageName: 'TabsPage', index: 0 }, false,0)
+    this.openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, false,0)
     setTimeout(()=>{
-      this.loadArticles();
-      setTimeout(()=>{
-        this.loadNotifications();
-      },2000);
+      this.loadNotifications();
     },5000);
   }
 
   editProfile(){
     this.menuCtrl.toggle();
-    this.navCtrl.push('EditProfilePage');
+    this.nav.setRoot('EditProfilePage');
   }
 
   openMyProfile(isOtherUser) {
@@ -160,7 +157,7 @@ export class MenuPage {
       params = { tabIndex: page.index };
     }
     if (this.nav.getActiveChildNav() && page.index != undefined) {
-      if(page.index == 0){
+      if(page.index == 1){
         this.nav.setRoot(page.pageName, params);
       }else{
         this.nav.getActiveChildNav().select(page.index);
@@ -191,7 +188,11 @@ export class MenuPage {
 
   openShareDialog() {
     this.menuCtrl.toggle();
-    this.socialSharing.share('Hello', 'Ask Arab Application', []).then(() => {
+    let message = 'Join Us and Download Arabgt App Now from ( Link ) ';
+    if (this.language == 'ar'){
+      message = 'انضم لعائلة عرب جي تي عبر تحميل تطبيقنا من هنا'
+    }
+    this.socialSharing.share(message, 'ArabGT', []).then(() => {
       // Success!
     }).catch(() => {
       // Error!

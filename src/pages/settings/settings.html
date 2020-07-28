@@ -18,14 +18,14 @@
   <div margin-top>
     <div class="text-grey heading" style="margin-top: 0px" padding-left padding-right>{{ 'Setting.Main_Preferences' | translate }}</div>
     <ion-item no-lines *ngIf="laguage=='ar'">
-      <div item-right class="small-subheading-size">{{ 'Setting.Language' | translate }}</div>
+      <ion-label dir="rtl" item-right class="small-subheading-size">{{ 'Setting.Language' | translate }}</ion-label>
       <ion-select text-left [(ngModel)]="laguage" (ionChange)="selectLanguage()" item-left class="small-subheading-size ar-right-align">
         <ion-option value="en">{{ 'Default' | translate }}</ion-option>
         <ion-option value="ar">{{ 'Arabic' | translate }}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item no-lines *ngIf="laguage!=='ar'">
-      <div item-left class="small-subheading-size">{{ 'Setting.Language' | translate }}</div>
+      <ion-label item-left class="small-subheading-size">{{ 'Setting.Language' | translate }}</ion-label>
       <ion-select [(ngModel)]="laguage" (ionChange)="selectLanguage()" item-right class="small-subheading-size right-align">
         <ion-option value="en">{{ 'Default' | translate }}</ion-option>
         <ion-option value="ar">{{ 'Arabic' | translate }}</ion-option>

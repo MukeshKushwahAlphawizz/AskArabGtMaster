@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   LoadingController, ToastController,
-  Loading, ModalController, AlertController, Platform, Config, Events
+  Loading,  AlertController, Platform, Events
 } from 'ionic-angular';
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import moment from "moment";
@@ -19,8 +19,6 @@ export const CATEGORY_ID = {
 @Injectable()
 export class UtilProvider {
   loading: Loading;
-  private win: any = window;
-
   pleaseWait:string='';
   constructor(private loadingCtrl: LoadingController,
      private toastCtrl: ToastController,
@@ -57,22 +55,22 @@ export class UtilProvider {
     });
   }
   presentLoading() {
-    this.loading = this.loadingCtrl.create({
-      spinner: 'bubbles',
-      content: this.pleaseWait,
-      duration: 5000
-    });
-
-    this.loading.onDidDismiss(() => {
-      // console.log('Dismissed loading');
-    });
-
-    this.loading.present();
+    if (this.loading){
+      this.dismissLoading();
+    }else{
+      this.loading = this.loadingCtrl.create({
+        spinner: 'bubbles',
+        content: this.pleaseWait,
+        duration: 10000
+      });
+      this.loading.present();
+    }
   }
 
   dismissLoading(){
     if(this.loading) {
       this.loading.dismiss();
+      this.loading = null;
     }
   }
 //FOR PRESENT TOAST
@@ -182,28 +180,28 @@ presentAlertData() {
     return new Promise((resolve, reject) => {
       if (this.platform.is('ios')){
         const options: CameraOptions = {
-          quality: 100,
+          quality: 70,
           sourceType: this.camera.PictureSourceType.CAMERA,
-          destinationType: this.camera.DestinationType.FILE_URI,
+          destinationType: this.camera.DestinationType.DATA_URL,
           encodingType: this.camera.EncodingType.JPEG,
           mediaType: this.camera.MediaType.PICTURE
         };
         this.camera.getPicture(options).then((imageData) => {
-          // console.log('path ======', imageData);
           this.backgroundMode.disable();
-          let options = {
+          resolve({imageFile:'',imageData:imageData});
+          /*let options = {
             uri: imageData,
             quality: 60,
-            width: 512,
-            height: 512
+            width: 1280,
+            height: 1280
           } as ImageResizerOptions;
           if (this.platform.is('ios')){
             options = {
               uri: imageData,
               quality: 60,
               fileName:'resize.jpg',
-              width: 512,
-              height: 512
+              width: 1280,
+              height: 1280
             };
           }
           this.imageResizer.resize(options).then(imagePath => {
@@ -212,7 +210,7 @@ presentAlertData() {
               let imageToResolve = image64.substring(23,base64Image.length);
               resolve({imageFile:'',imageData:imageToResolve});
             });
-          });
+          });*/
           /*let blob = this.getBlob(imageData, ".jpg")
           let imageFile = new File([blob], "image.jpg")*/
           // resolve({imageFile:'',imageData:imageData});
@@ -223,16 +221,15 @@ presentAlertData() {
       }else {
         /*Android*/
         const options: CameraOptions = {
-          quality: 80,
-          targetWidth: 512,
-          targetHeight: 512,
+          quality: 70,
+          correctOrientation: true,
           sourceType: this.camera.PictureSourceType.CAMERA,
           destinationType: this.camera.DestinationType.DATA_URL,
           encodingType: this.camera.EncodingType.JPEG,
           mediaType: this.camera.MediaType.PICTURE
         };
         this.camera.getPicture(options).then((imageData) => {
-          console.log('android image data >> ' + imageData);
+          // console.log('android image data >> ' + imageData);
           this.backgroundMode.disable();
           resolve({imageFile:'',imageData:imageData});
         }).catch(err=>{
@@ -248,37 +245,40 @@ presentAlertData() {
     return new Promise((resolve, reject) => {
       if (this.platform.is('ios')){
         const options: CameraOptions = {
-          quality: 100,
+          quality: 70,
+          correctOrientation: true,
           sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-          destinationType: this.camera.DestinationType.FILE_URI,
+          destinationType: this.camera.DestinationType.DATA_URL,
           encodingType: this.camera.EncodingType.JPEG,
           mediaType: this.camera.MediaType.PICTURE
         };
         this.camera.getPicture(options).then((imageData) => {
+          resolve({imageFile:'',imageData:imageData});
           // console.log('image data >> ' + imageData);
-          this.backgroundMode.disable();
+          /*this.backgroundMode.disable();
           let options = {
             uri: imageData,
-            quality: 60,
-            width: 512,
-            height: 512
+            quality: 80,
+            width: 1280,
+            height: 1280
           } as ImageResizerOptions;
           if (this.platform.is('ios')){
             options = {
               uri: imageData,
-              quality: 60,
+              quality: 80,
               fileName:'resize.jpg',
-              width: 512,
-              height: 512
+              width: 1280,
+              height: 1280
             };
           }
           this.imageResizer.resize(options).then(imagePath => {
             this.getFileContentAsBase64(imagePath,function(base64Image){
+              console.log('after compress base64Image ----',JSON.stringify(base64Image));
               let image64 :string = base64Image;
               let imageToResolve = image64.substring(23,base64Image.length);
               resolve({imageFile:'',imageData:imageToResolve});
             });
-          });
+          });*/
         }, (err) => {
           console.log('ERROR >>',err);
           reject(err)
@@ -286,9 +286,7 @@ presentAlertData() {
       }else {
         /*Android*/
         const options: CameraOptions = {
-          quality: 80,
-          targetWidth: 512,
-          targetHeight: 512,
+          quality: 70,
           sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
           destinationType: this.camera.DestinationType.DATA_URL,
           encodingType: this.camera.EncodingType.JPEG,

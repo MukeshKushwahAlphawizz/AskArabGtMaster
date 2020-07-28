@@ -78,6 +78,7 @@ export class HomePage {
     });
     this.events.subscribe('refreshFeed', (value) => {
       this.pageNumber = 0;
+      setTimeout(()=>{this.scrollToTop();},300);
       this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true,'');
     });
   }
@@ -191,14 +192,13 @@ export class HomePage {
       formData.append('filter_id',this.filter_id);
 
       this.user.getQuestionsList(formData).subscribe((resp) => {
-        // console.log('response get questions >>>',resp)
+        infiniteScroll.complete();
         let response : any = resp;
         if(response.data){
           this.questionsList = [...this.questionsList,...response.data];
           this.questionsList.filter(item=>{item.isViewAll = true});
           this.questionsListForSearch = this.questionsList;
         }
-        infiniteScroll.complete();
       }, (err) => {
         console.error('ERROR :', err);
         infiniteScroll.complete();
@@ -420,11 +420,11 @@ export class HomePage {
   }*/
 
   getCategoryQuestions(category: any) {
-    if(category === 'قطع غيار و ميكانيك' || category === 'Parts and Mechanics'){
+    if(category === 'قطع غيار و ميكانيك' ||category === 'قطع غيار وميكانيكا' || category === 'Parts and Mechanics'){
       this.cat_id = 12;
-    }else if(category === 'أسئلة عامة' || category === 'general questions'){
+    }else if(category === 'أسئلة عامة' ||category === 'اسئلة عامة' || category === 'general questions'){
       this.cat_id = 9;
-    }else if(category === 'مشاكل سيارات' || category === 'Car problems'){
+    }else if(category === 'مشاكل السيارة' || category === 'مشاكل سيارات' || category === 'Car problems'){
       this.cat_id = 5;
     }
     this.pageNumber=0;
@@ -433,8 +433,7 @@ export class HomePage {
   }
 
   scrollToTop() {
-    // console.log('scroll content is ---', this.content._scroll);
-    if (this.content._scroll){
+    if (this.content && this.content._scroll){
       this.content.scrollToTop();
     }
   }
@@ -445,7 +444,7 @@ export class HomePage {
 
   editReply(reply) {
     this.util.showInputAlert(reply.reply_author,'Edit Your Reply','Write Here',reply.reply_content).then(data=>{
-      console.log(data);
+      // console.log(data);
       if (data == ''){
         this.util.presentToast('Please Enter the Reply');
         return;

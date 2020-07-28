@@ -1,5 +1,10 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons left>
+      <button menuToggle>
+        <ion-icon class="header-icon" name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title text-center>{{'EditProfile.Edit_Profile'|translate}}</ion-title>
     <ion-buttons *ngIf="!fromSignUp" end>
       <button ion-button icon-only (click)="openMyProfile(false)">
@@ -216,8 +221,7 @@
 
   <div padding text-center>
     <button class="save" ion-button round (click)="save()">{{'EditProfile.SAVEANDEXIT'|translate}}</button>
-    <button *ngIf="fromSignUp" margin-left class="save" ion-button round (click)="skip()">SKIP</button>
-<!--    <button class="save" ion-button [disabled]="profileForm.invalid" (click)="exit()">Save & Exit</button>-->
+    <button *ngIf="fromSignUp" margin-left class="save" ion-button round (click)="skip()">{{'EditProfile.SKIP'|translate}}</button>
   </div>
 </ion-content>
 

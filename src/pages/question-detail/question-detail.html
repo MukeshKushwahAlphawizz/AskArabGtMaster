@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title text-center>{{'Question.Question_Details'|translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="openMyProfile(false,'')">
+      <button padding ion-button icon-only (click)="openMyProfile(false,'')">
         <ion-icon class="white header-icon" name="md-person"></ion-icon>
       </button>
     </ion-buttons>
@@ -12,8 +12,10 @@
   <audio id="audio" src="assets/Bubbles.wav" autostart="false" ></audio>
 
   <div [ngClass]="language == 'ar'?'right-align':''">
-    <h2>{{questionData.post_title}}</h2>
-    <div class="text-grey" [innerHtml]="questionData.post_content"></div>
+    <h2 *ngIf="language == 'ar'" dir="rtl">{{questionData.post_title}}</h2>
+    <h2 *ngIf="language !== 'ar'">{{questionData.post_title}}</h2>
+    <div *ngIf="language == 'ar'" dir="rtl" class="text-grey" [innerHtml]="questionData.post_content"></div>
+    <div *ngIf="language !== 'ar'" class="text-grey" [innerHtml]="questionData.post_content"></div>
 
     <!--Poll-->
     <div *ngIf="questionData.poll && questionData.poll.length > 0 && language == 'ar'" dir="rtl">
@@ -30,7 +32,7 @@
             <div class="small-font text-grey">{{progress.option}}</div>
             <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
           </ion-item>
-          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#d12e3c',  '50': 'rgb(52, 152, 219)', '70': '#32db64'}">
           </progress-bar>
         </div>
       </div>
@@ -49,7 +51,7 @@
             <div class="small-font text-grey">{{progress.option}}</div>
             <div item-right class="small-font text-grey">(Votes {{progress.vote}})</div>
           </ion-item>
-          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#00cbcb',  '40': 'rgb(52, 152, 219)', '80': '#fd8c8e'}">
+          <progress-bar [progress]="progress.progress" [color-degraded]="{'0': '#d12e3c',  '50': 'rgb(52, 152, 219)', '70': '#32db64'}">
           </progress-bar>
         </div>
       </div>
@@ -121,7 +123,8 @@
           </div>
         </div>
 
-          <p class="answer-content answer-reply-font" text-wrap>{{answer.answer_content}}</p>
+          <p *ngIf="language=='ar'" dir="rtl" class="answer-content answer-reply-font" text-wrap>{{answer.answer_content}}</p>
+          <p *ngIf="language!=='ar'" class="answer-content answer-reply-font" text-wrap>{{answer.answer_content}}</p>
           <div>
             <img margin-top padding-top margin-bottom *ngIf="answer.answer_image_link && answer.answer_image_link != ''" [src]="answer.answer_image_link">
           </div>
@@ -129,10 +132,10 @@
             <iframe *ngIf="answer.getvideo_answer_id !==''" margin-top margin-bottom width="100%" height="250" [src]="answer.getvideo_answer_id | safe" frameborder="0"  allowfullscreen></iframe>
           </div>
             <ion-item no-padding style="min-height: 2rem" *ngIf="language=='ar'">
-            <button item-right (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
+            <!--<button item-right (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count < 0)?(answer.likes_count * (-1)):0}})</span>
               <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="thumbs-down"></ion-icon>
-            </button>
+            </button>-->
             <button item-right (click)="like(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count >=0)?answer.likes_count:0}})</span>
               <ion-icon [ngClass]="answer.like?'':'text-grey'" name="thumbs-up"></ion-icon>
@@ -147,10 +150,10 @@
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count >=0)?answer.likes_count:0}})</span>
               <ion-icon [ngClass]="answer.like?'':'text-grey'" name="thumbs-up"></ion-icon>
             </button>
-            <button (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
+            <!--<button (click)="unlike(answer)" style="padding:5px" no-margin ion-button icon-start clear small>
               <span class="text-grey like-count">({{(answer.likes_count && answer.likes_count != '' && answer.likes_count < 0)?(answer.likes_count * (-1)):0}})</span>
               <ion-icon [ngClass]="answer.unlike?'':'text-grey'" name="thumbs-down"></ion-icon>
-            </button>
+            </button>-->
             <button (click)="reply(answer)" class="right-button" ion-button icon-start clear small>
               <ion-icon name="ios-undo"></ion-icon>
               <div>{{'Question.Reply'|translate}}</div>
@@ -183,7 +186,7 @@
 
               <div class="ar-reply-div">
                 <div text-wrap no-padding text-right>
-                  <span class="text-grey answer-reply-font" style="font-size: 1.4rem">{{rep.reply_content}}</span>
+                  <span dir="rtl" class="text-grey answer-reply-font" style="font-size: 1.4rem">{{rep.reply_content}}</span>
                   <div class="row">
                     <div col-3 *ngIf="userData.user_login == rep.reply_author" (click)="deleteReply(rep.reply_post_ID,answer.reply,i)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-trash"></ion-icon></a><span class="text-grey small-text">{{'Question.Delete'|translate}}</span></div>
                     <div col-3 *ngIf="userData.user_login == rep.reply_author" (click)="editReply(rep)" no-padding><a class="set-small-icon"><ion-icon class="text-grey" name="md-create"></ion-icon></a><span class="text-grey small-text">{{'Question.Edit'|translate}}</span></div>
@@ -235,7 +238,14 @@
   </ion-item>
 
   <div *ngIf="isVideoNeeded" [@slideIn]>
-    <div class="select-main-div">
+    <div dir="rtl" *ngIf="language=='ar'" class="select-main-div">
+      <div class="select text-grey">
+        <select id="video" (change)="selectVideoType()">
+          <option *ngFor="let type of videoTypeList" value="{{type.name}}">{{type.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div *ngIf="language !=='ar'" class="select-main-div">
       <div class="select text-grey">
         <select id="video" (change)="selectVideoType()">
           <option *ngFor="let type of videoTypeList" value="{{type.name}}">{{type.name}}</option>
