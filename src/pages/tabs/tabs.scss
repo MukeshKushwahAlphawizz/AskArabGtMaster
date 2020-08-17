@@ -15,8 +15,9 @@ page-tabs {
     background: #CD1C2B;
     border-radius: 50%;
     position: absolute;
-    bottom: 25pt;
-    left: 53pt;
+    bottom: 26pt;
+    left: 55pt;
+    z-index: 99999;
   }
 
   .tabs .tab-button {
@@ -24,5 +25,14 @@ page-tabs {
   }
   .tabs-ios .tab-button-icon{
     height: auto;
+  }
+  .home{
+    height: 50px;
+    width: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 37%;
+    right: 0;
+    z-index: 99999;
   }
 }

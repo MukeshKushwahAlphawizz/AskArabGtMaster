@@ -1,7 +1,8 @@
-{
+﻿{
   "BACK_BUTTON_TEXT": "رجوع",
 
   "CommonErrMsg": {
+    "UserName_required": "*اسم المستخدم مطلوب.",
     "Name_required": "*مطلوب اسم.",
     "Lastname_required": "*إسم العائلة مطلوب.",
     "Address_required": "*العنوان مطلوب.",
@@ -10,7 +11,7 @@
     "Maximumlength12": "* الحد الأقصى للطول هو 12.",
     "DOBrequired": "*تاريخ الميلاد مطلوب.",
     "EmailRequired": "*البريد الالكتروني مطلوب.",
-    "EnterValidEmail": "*لو سمحت أدخل بريد إليكتروني صالح.",
+    "EnterValidEmail": "*لو سمحت أدخل بريد إليكتروني مفعّل.",
     "PasswordRequired": "*كلمة المرور مطلوبة.",
     "MinPasswordLength8": "* يجب أن يكون الحد الأدنى لطول كلمة المرور 8.",
     "EnterMessage": "*أدرج رسالتك من فضلك."
@@ -19,14 +20,14 @@
   "Filter": {
     "ChooseFilterOption": "اختر خيار التصفية",
     "TheLastQuestion": "السؤال الأخير",
-    "MostAnswered": "أجاب معظم",
+    "MostAnswered": "الأكثر إجابة",
     "LatestAnswers": "أحدث الأجوبة",
     "ThereAreNoAnswers": "لا توجد إجابات"
   },
 
   "Common": {
     "Delete_Reply": "حذف الرد",
-    "Are_you_sure_delete": "هل تريد بالتأكيد الحذف؟",
+    "Are_you_sure_delete": "هل أنت متأكد من الحذف؟",
     "Choose_take_picture": "التقط أو اختر صورة",
     "Take_picture": " التقط صورة ",
     "Choose_picture": "اختر صورة",
@@ -34,7 +35,7 @@
     "Select_Video_Type": "اختر نوع الفيديو",
     "Select_Category": "اختر القسم",
     "General_Questions": "اسئلة عامة",
-    "Parts_and_Mechanics": "قطع غيار وميكانيكا",
+    "Parts_and_Mechanics": "قطع غيار وميكانيك",
     "Car_Problems": "مشاكل سيارات",
     "ConfirmDelete": "تأكيد الحذف",
     "AreyousureDeleteAccount": "هل انت متأكد انك تريد حذف حسابك؟",
@@ -43,7 +44,7 @@
 
   "StateDetail": {
     "Comments": "تعليقات",
-    "QuestionAsked": "سئل السؤال",
+    "QuestionAsked": "تم طرح السؤال",
     "BestAnswers": "أفضل الإجابات",
     "FavoriteQuestion": "السؤال المفضل",
     "FollowingQuestion": "السؤال التالي"
@@ -100,7 +101,7 @@
     "Username": "اسم المستخدم",
     "EmailAddress": "عنوان بريد الكتروني",
     "Password": "كلمه السر",
-    "Create": "خلق",
+    "Create": "أنشئ",
     "OrConnectUsing": "أو الاتصال باستخدام",
     "Alreadyhaveanaccount": "هل لديك حساب؟",
     "LogIn": "تسجيل الدخول",
@@ -116,7 +117,7 @@
     "TotalViews": "عدد المشاهدات",
     "Category": "الفئة",
     "TotalLikes": "إجمالي الإعجابات",
-    "TotalDisLikes": "إجمالي إبداءات عدم الإعجاب",
+    "TotalDisLikes": "إجمالي عدم الإعجاب",
     "THESOLUTIONWASDONE": "تم الحل"
   },
 
@@ -136,7 +137,7 @@
     "Profile": "الملف الشخصي",
     "Years": "سنوات",
     "Followers": "متابعون",
-    "Following": "التالية",
+    "Following": "الذين أتابعهم",
     "ASKQUESTION": "اسأل سؤالا",
     "MyStats": "إحصائياتي",
     "UserStats": "إحصائيات المستخدم",
@@ -146,9 +147,9 @@
     "QUESTIONSASK": "طرح الأسئلة",
     "BESTANSWERS": "أفضل الإجابات",
     "FOLLOW": "متابعة",
-    "FOLLOWED": "يتبع",
+    "FOLLOWED": "انت تتابع هذا الحساب",
     "FAVORITEQUESTIONS": "أسئلة مفضلة",
-    "MEMBERSQUESTIONS": "أسئلة الأعضاء التي أتبعها"
+    "MEMBERSQUESTIONS": "أسئلة الأعضاء الذين أتابعهم"
   },
 
   "Menu": {
@@ -156,10 +157,10 @@
     "ContactUs": "اتصل بنا",
     "EditProfile": "تعديل الملف الشخصي",
     "YourQuestionAnswer": "أسئلتك وإجاباتك",
-    "Article": "مقالة - سلعة",
+    "Article": "مقالة ",
     "Categories": "الأقسام",
     "GeneralQuestions": "اسئلة عامة",
-    "PartsAndMechanics": "قطع غيار وميكانيكا",
+    "PartsAndMechanics": "قطع غيار وميكانيك",
     "CarProblems": "مشاكل سيارات",
     "Notifications": "التنبيهات",
     "Settings": "الإعدادات",
@@ -185,21 +186,22 @@
     "EmailAddress": "عنوان بريد الكتروني",
     "NewPasswordWill": "سترسل لك كلمة المرور الجديدة على عنوان بريدك الإلكتروني.",
     "PleaseEnterEmail": "يرجى إدخال البريد الإلكتروني",
-    "Pleaseentervalidmailid": "يرجى إدخال معرف بريد صالح"
+    "Pleaseentervalidmailid": "يرجى إدخال معرف بريد مفعل"
   },
 
   "EditProfile": {
     "Edit_Profile": "تعديل الملف الشخصي",
     "ChangeProfilePhoto": "تغيير صورة الملف الشخصي",
+    "UserName": "اسم المستخدم / اللقب",
     "Name": "الاسم",
     "LastName": "الكنية",
     "Address": "عنوان",
     "SelectCountry": "حدد الدولة",
     "SelectState": "اختر ولايه",
     "MobileNo": "رقم الموبايل.",
-    "DOB": "دوب",
-    "MyBio": "بلدي الحيوي",
-    "Male": "الذكر",
+    "DOB": "تاريخ الميلاد",
+    "MyBio": "المزيد عن حياتي",
+    "Male": "ذكر",
     "Female": "أنثى",
     "SAVEANDEXIT": "حفظ وخروج",
     "ProfileEditedSuccessfully": "تم تعديل الملف الشخصي بنجاح",
@@ -217,7 +219,7 @@
   "Notifications": {
     "Notifications": "التنبيهات",
     "No_Notifications_are_present": "لا توجد إخطارات موجودة.",
-    "QuestionNotExist": "قد يتم حذف السؤال أو عدم وجوده."
+    "QuestionNotExist": "السؤال غير موجود أو تم حذفه"
   },
 
   "Articles": {
@@ -233,22 +235,22 @@
     "SEND": "إرسال",
     "Add_Comments": "أضف تعليقات",
     "Write_Comment": "اكتب تعليق",
-    "Allow_to_reply": "السماح للرد",
+    "Allow_to_reply": "السماح بالرد",
     "ASK_QUESTION": "اسأل سؤالا"
   },
 
   "AskQuestion": {
     "Ask_Question": "اطرح سؤالاً",
     "Tips_title": "نصائح للحصول على إجابات جيدة بسرعة",
-    "Make_sure": "تأكد أن أحداً لم يطرح نفس السؤال من قبل",
+    "Make_sure": "تأكد أنه لم يطرح نفس السؤال من قبل",
     "Keep_your": "اجعل سؤالك قصيراً ومباشراً",
     "Double_check": "تأكد من خلو السؤال من الأخطاء الإملائية والنحوية",
     "Write_your_question": "اكتب سؤالك",
     "Is_this_question": "هل هذا السؤال استطلاع رأي؟",
-    "WritePollItem": "اكتب عنصر الاستطلاع",
+    "WritePollItem": "أنشئ استطلاع رأي",
     "ADDMORE": "أضف المزيد",
     "DescribeYourQuestion": "صف سؤالك",
-    "Do_you_need": "هل تحتاج إلى فيديو لتوضح أكثر؟",
+    "Do_you_need": "هل تحتاج إلى فيديو لتوضح بشكل أكبر؟",
     "ED_Video": "فيديو ED",
     "Put_videoID": "ضع هنا رابط الفيديو",
     "ASK_QUESTION": "اسأل سؤالا",
@@ -313,7 +315,8 @@
     "TAB4_TITLE": "إشعارات"
   },
 
-  "Default": "Default",
+  "English": "English",
   "Arabic": "عربى",
   "PleaseWait": "ارجوك انتظر..."
 }
+

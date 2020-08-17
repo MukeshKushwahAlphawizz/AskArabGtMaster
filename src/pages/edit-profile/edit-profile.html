@@ -27,6 +27,18 @@
     <ion-list dir="rtl">
       <ion-item>
         <!--<label class="text-grey" style="font-size: 1.2rem" floating>Name</label>-->
+        <input formControlName="username" placeholder="{{'EditProfile.UserName'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.username">
+          <div class="error-message"
+               *ngIf="profileForm.get('username').hasError(error.type) && (profileForm.get('username').dirty || profileForm.get('username').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <!--<label class="text-grey" style="font-size: 1.2rem" floating>Name</label>-->
         <input formControlName="name" placeholder="{{'EditProfile.Name'|translate}}" class="text-grey full-input" type="text">
       </ion-item>
       <div class="error-messages">
@@ -124,6 +136,17 @@
   <form *ngIf="language!=='ar'" [formGroup]="profileForm">
     <ion-list>
       <ion-item>
+        <input formControlName="username" placeholder="{{'EditProfile.UserName'|translate}}" class="text-grey full-input" type="text">
+      </ion-item>
+      <div class="error-messages">
+        <ng-container *ngFor="let error of error_messages.username">
+          <div class="error-message"
+               *ngIf="profileForm.get('username').hasError(error.type) && (profileForm.get('username').dirty || profileForm.get('username').touched)">
+            {{ error.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
         <!--<label class="text-grey" style="font-size: 1.2rem" floating>Name</label>-->
         <input formControlName="name" placeholder="{{'EditProfile.Name'|translate}}" class="text-grey full-input" type="text">
       </ion-item>
@@ -220,7 +243,7 @@
   </form>
 
   <div padding text-center>
-    <button class="save" ion-button round (click)="save()">{{'EditProfile.SAVEANDEXIT'|translate}}</button>
+    <button class="save" ion-button round [disabled]="profileForm.invalid" (click)="save()">{{'EditProfile.SAVEANDEXIT'|translate}}</button>
     <button *ngIf="fromSignUp" margin-left class="save" ion-button round (click)="skip()">{{'EditProfile.SKIP'|translate}}</button>
   </div>
 </ion-content>

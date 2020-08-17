@@ -2,6 +2,7 @@
   "BACK_BUTTON_TEXT": "Back",
 
   "CommonErrMsg": {
+    "UserName_required": "*UserName is required.",
     "Name_required": "*Name is required.",
     "Lastname_required": "*Lastname is required.",
     "Address_required": "*Address is required.",
@@ -191,6 +192,7 @@
   "EditProfile": {
     "Edit_Profile": "Edit Profile",
     "ChangeProfilePhoto": "Change Profile Photo",
+    "UserName": "Username/Nickname",
     "Name": "Name",
     "LastName": "Last Name",
     "Address": "Address",
@@ -312,7 +314,7 @@
     "TAB4_TITLE": "Notifications"
   },
 
-  "Default": "Default",
+  "English": "English",
   "Arabic": "عربى",
   "PleaseWait": "please wait..."
 }

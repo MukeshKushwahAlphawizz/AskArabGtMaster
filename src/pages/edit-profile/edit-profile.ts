@@ -45,6 +45,7 @@ export class EditProfilePage {
   private populateLanguageData() {
     this.translateService.get("CommonErrMsg").subscribe(values => {
       this.error_messages = {
+        username: [{ type: "required", message: values.UserName_required }],
         name: [{ type: "required", message: values.Name_required }],
         lastname: [
           { type: "required", message: values.Lastname_required },
@@ -91,7 +92,7 @@ export class EditProfilePage {
           handler: () => {
             this.util.aceesGallery().then(data =>{
               try {
-                console.log('into try !@!@!@@!@');
+                // console.log('into try !@!@!@@!@');
                 this.userImage = 'data:image/png;base64,'+data.imageData;
                 this.userProfileToSend = 'data:image/png;base64,'+data.imageData;
               }catch (e) {
@@ -114,6 +115,9 @@ export class EditProfilePage {
   }
 
   save() {
+    if (this.profileForm.value.username.trim() == ''){
+      return;
+    }
     let profileImage = '';
     if(this.userProfileToSend !== 'assets/img/profile-default.jpeg'){
       profileImage = this.userProfileToSend;
@@ -130,21 +134,8 @@ export class EditProfilePage {
     formData.append('my_bio',this.profileForm.value.myBio);
     formData.append('select_country',this.profileForm.value.country);
     formData.append('select_state',this.profileForm.value.state);
-    /*let data = {
-      'ID':this.userData.ID,
-    'user_profile':profileImage,
-    'first_name':this.profileForm.value.name,
-    'last_name':this.profileForm.value.lastname,
-    'user_address':this.profileForm.value.address,
-    'user_gender':this.profileForm.value.gender,
-    'mobile_no':this.profileForm.value.mobilenumber,
-    'user_dob':this.profileForm.value.datebirth,
-    'my_bio':this.profileForm.value.myBio,
-    'select_country':this.profileForm.value.country,
-    'select_state':this.profileForm.value.state
-    };*/
+    formData.append('user_login',this.profileForm.value.username);
 
-    // console.log('user data ====',data);
     this.util.presentLoading();
     this.user.saveProfile(formData).subscribe((resp) => {
       let response :any = resp;
@@ -164,6 +155,7 @@ export class EditProfilePage {
   setProfileFormData() {
     this.profileForm = this.formBuilder.group(
       {
+        username: new FormControl("", Validators.compose([Validators.required])),
         name: new FormControl("", Validators.compose([Validators.required])),
         lastname: new FormControl("", Validators.compose([Validators.required])),
         address: new FormControl("", Validators.compose([Validators.required])),
@@ -184,6 +176,7 @@ export class EditProfilePage {
     }else {
       this.userImage = 'assets/img/profile-default.jpeg';
     }
+    this.profileForm.controls.username.setValue(this.userData.user_login);
     this.profileForm.controls.name.setValue(this.userData.first_name);
     this.profileForm.controls.lastname.setValue(this.userData.last_name);
     this.profileForm.controls.address.setValue(this.userData.user_address);

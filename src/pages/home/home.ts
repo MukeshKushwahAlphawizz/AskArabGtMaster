@@ -78,6 +78,10 @@ export class HomePage {
     });
     this.events.subscribe('refreshFeed', (value) => {
       this.pageNumber = 0;
+      if (value){
+        this.cat_id = 0;
+        this.filter_id = 0;
+      }
       setTimeout(()=>{this.scrollToTop();},300);
       this.getQuestionsList(this.pageNumber,this.pageSize,this.cat_id,this.filter_id,true,'');
     });

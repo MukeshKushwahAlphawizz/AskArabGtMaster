@@ -318,6 +318,10 @@ color: #CD1C2B !important;
 .progress-outer[_ngcontent-c0]{
   background: transparent;
 }
+.safe-area{
+  margin-top: env(safe-area-inset-top);
+  margin-bottom: env(safe-area-inset-bottom)
+}
 /*.modal-wrapper {
   position: absolute;
   top: 80px;

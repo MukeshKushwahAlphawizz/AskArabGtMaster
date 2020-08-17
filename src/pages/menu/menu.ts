@@ -93,9 +93,9 @@ export class MenuPage {
       } else if(nav.canGoBack()){
         nav.pop();
       } else if(Date.now() - this.lastBack > spamDelay && !this.allowClose) {
-        console.log('=================== nav ===================',nav.root);
+        // console.log('=================== nav ===================',nav.root);
         if(nav.root == 'HomePage'){
-          this.events.publish('refreshFeed', true);
+          this.events.publish('refreshFeed', false);
         }
         this.allowClose = true;
         let toast = this.toastCtrl.create({

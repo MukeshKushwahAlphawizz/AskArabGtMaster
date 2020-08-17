@@ -67,9 +67,10 @@ export class SubmitAnswerPage {
     });
   }
   postAnswer() {
-    if (this.answer.trim() === ''){
+    if (this.answer.trim() === '' && this.imageData ===''){
       return;
     }
+    this.util.presentLoading();
     this.uploadImage(this.imageData).then(url=>{
       let data = {
         user_id:this.navParams.data.userId,
@@ -79,7 +80,6 @@ export class SubmitAnswerPage {
         video_answer_id:'',
         upload_file:url
       };
-      this.util.presentLoading();
       this.user.addAnswer(data).subscribe((resp) => {
         this.util.dismissLoading();
         let response : any = resp;

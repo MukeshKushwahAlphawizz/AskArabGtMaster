@@ -19,7 +19,6 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import {HTTP} from "@ionic-native/http";
 import { SocialSharing } from '@ionic-native/social-sharing';
 import {SafePipe} from "../pipes/safe/safe";
-import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {ProgressBarModule} from "angular-progress-bar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { AdMobPro } from '@ionic-native/admob-pro';
@@ -28,6 +27,7 @@ import {ComponentsModule} from "../components/components.module";
 import {ImageResizer} from '@ionic-native/image-resizer';
 import { File } from '@ionic-native/file';
 import { BackgroundMode } from '@ionic-native/background-mode';
+import {IonicImageViewerModule} from "ionic-img-viewer";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,6 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    IonicImageViewerModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -51,7 +52,9 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     ProgressBarModule,
     ComponentsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      preloadModules: true
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -71,7 +74,6 @@ export function createTranslateLoader(http: HttpClient) {
     HTTP,
     GooglePlus,
     SocialSharing,
-    PhotoViewer,
     AdMobPro,
     Deeplinks,
     ImageResizer,

@@ -9,7 +9,7 @@
   <!--Arabic-->
 <div *ngIf="language =='ar'" text-right>
   <ion-item no-lines text-right>
-    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" (click)="viewPhoto()" item-right class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
+    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-right class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
     <div style="margin-right: 10px">
       <h2 style="font-weight: bold">{{(userData.first_name && userData.first_name != '' && userData.last_name && userData.last_name != '')?userData.first_name +' '+ userData.last_name : userData.user_login}}</h2>
       <div style="margin-top: 7px" class="row">
@@ -117,7 +117,7 @@
   <!--English-->
 <div *ngIf="language !=='ar'">
   <ion-item no-lines>
-    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" (click)="viewPhoto()" item-left class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
+    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-left class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
     <div style="margin-left: 10px">
       <h2 style="font-weight: bold">{{(userData.first_name && userData.first_name != '' && userData.last_name && userData.last_name != '')?userData.first_name +' '+ userData.last_name : userData.user_login}}</h2>
       <div style="margin-top: 7px" class="row">

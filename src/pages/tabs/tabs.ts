@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Tabs} from "ionic-angular/index";
 
 @IonicPage()
 @Component({
@@ -8,6 +9,7 @@ import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  @ViewChild('tabs') tabs: Tabs;
   tab1Root: any = 'HomePage';
   tab2Root: any = 'AskQuestionPage';
   /*tab3Root: any = 'ArticlePage';*/
@@ -38,4 +40,8 @@ export class TabsPage {
     });
   }
 
+  home() {
+    this.tabs.select(1);
+    this.events.publish('refreshFeed', true);
+  }
 }

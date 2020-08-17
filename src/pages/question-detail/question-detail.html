@@ -12,8 +12,26 @@
   <audio id="audio" src="assets/Bubbles.wav" autostart="false" ></audio>
 
   <div [ngClass]="language == 'ar'?'right-align':''">
-    <h2 *ngIf="language == 'ar'" dir="rtl">{{questionData.post_title}}</h2>
-    <h2 *ngIf="language !== 'ar'">{{questionData.post_title}}</h2>
+    <ion-item *ngIf="language == 'ar'" no-lines no-padding dir="rtl">
+      <h2 text-wrap dir="rtl">{{questionData.post_title}}</h2>
+      <div item-left>
+        <img [ngStyle]="{'border-color': util.getRank(questionData.question_user_rank)}"
+             (click)="openMyProfile(true,questionData.post_author)"
+             class="user-main" [src]="(questionData.post_user_profile && questionData.post_user_profile !='')?questionData.post_user_profile:'assets/img/profile-default.jpeg'">
+        <div text-center class="name">{{questionData.user_login}}</div>
+      </div>
+    </ion-item>
+    <ion-item *ngIf="language !== 'ar'" no-lines no-padding>
+      <h2 text-wrap>{{questionData.post_title}}</h2>
+      <div item-left>
+        <img [ngStyle]="{'border-color': util.getRank(questionData.question_user_rank)}"
+             (click)="openMyProfile(true,questionData.post_author)"
+             class="user-main" [src]="(questionData.post_user_profile && questionData.post_user_profile !='')?questionData.post_user_profile:'assets/img/profile-default.jpeg'">
+        <div text-center class="name">{{questionData.user_login}}</div>
+      </div>
+    </ion-item>
+    <!--<h2 *ngIf="language == 'ar'" dir="rtl">{{questionData.post_title}}</h2>
+    <h2 *ngIf="language !== 'ar'">{{questionData.post_title}}</h2>-->
     <div *ngIf="language == 'ar'" dir="rtl" class="text-grey" [innerHtml]="questionData.post_content"></div>
     <div *ngIf="language !== 'ar'" class="text-grey" [innerHtml]="questionData.post_content"></div>
 
@@ -58,7 +76,7 @@
     </div>
     <!--End Poll-->
 
-    <img class="post-img" *ngIf="questionData.image_link && questionData.image_link !== ''" [src]="questionData.image_link">
+    <img #myImage (click)="viewImage(myImage)" class="post-img" *ngIf="questionData.image_link && questionData.image_link !== ''" [src]="questionData.image_link">
     <iframe *ngIf="questionData.video_link !==''" margin-top margin-bottom width="100%" height="250" [src]="questionData.video_link | safe" frameborder="0"  allowfullscreen></iframe>
     <!--<div *ngIf="language==='ar'" class="row option-div">
       <div no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{questionData.category}}</span></div>
@@ -126,7 +144,7 @@
           <p *ngIf="language=='ar'" dir="rtl" class="answer-content answer-reply-font" text-wrap>{{answer.answer_content}}</p>
           <p *ngIf="language!=='ar'" class="answer-content answer-reply-font" text-wrap>{{answer.answer_content}}</p>
           <div>
-            <img margin-top padding-top margin-bottom *ngIf="answer.answer_image_link && answer.answer_image_link != ''" [src]="answer.answer_image_link">
+            <img #myImage1 (click)="viewImage(myImage1)" margin-top padding-top margin-bottom *ngIf="answer.answer_image_link && answer.answer_image_link != ''" [src]="answer.answer_image_link">
           </div>
           <div>
             <iframe *ngIf="answer.getvideo_answer_id !==''" margin-top margin-bottom width="100%" height="250" [src]="answer.getvideo_answer_id | safe" frameborder="0"  allowfullscreen></iframe>

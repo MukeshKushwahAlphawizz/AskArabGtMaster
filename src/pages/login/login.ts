@@ -123,10 +123,9 @@ export class LoginPage {
     this.util.presentLoading();
     this.user.login(formData).subscribe((resp) => {
       let response:any = resp;
-      // console.log(response);
+      console.log(response);
       if(response.data.user_profile !== ''){
         let img = response.data.user_profile.substring(2);
-        // response.data.user_profile = 'http://15.206.103.57/Arabgt/'+img;
         response.data.user_profile = 'https://alphawizz.com/Arabgt/'+img;
       }
       this.storage.set('userData', JSON.stringify(response.data));
@@ -182,7 +181,7 @@ export class LoginPage {
     this.util.presentLoading();
     let socialData = {
       user_login:name,
-      user_email:email,
+      user_email:email?email:'',
       user_profile:imageUrl,
       status:status,
       Firebase_token:this.firebaseToken
@@ -199,7 +198,8 @@ export class LoginPage {
       // this.navCtrl.setRoot('MenuPage')
       this.navCtrl.setRoot('EditProfilePage',{fromSignUp:true});
     }, (err) => {
-      console.error('ERROR :',err);
+      console.error('ERROR ::',err);
+      // this.util.presentToast('Your Email is Blank, Try With Another ID');
       this.util.dismissLoading();
     });
   }

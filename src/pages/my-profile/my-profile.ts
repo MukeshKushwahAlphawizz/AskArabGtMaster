@@ -4,7 +4,7 @@ import {Storage} from "@ionic/storage";
 import {UtilProvider} from "../../providers/util/util";
 import {User} from "../../providers";
 import {TranslateService} from "@ngx-translate/core";
-import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { ImageViewerController } from 'ionic-img-viewer';
 
 
 @IonicPage()
@@ -13,6 +13,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
   templateUrl: 'my-profile.html',
 })
 export class MyProfilePage {
+  _imageViewerCtrl: ImageViewerController;
 
   isOtherUserProfile:boolean = false;
   otherUserId:string = '';
@@ -27,9 +28,10 @@ export class MyProfilePage {
               public storage : Storage,
               public util : UtilProvider,
               public user : User,
-              private photoViewer: PhotoViewer,
+              public imageViewerCtrl: ImageViewerController,
               public translateService:TranslateService,
               public navParams: NavParams) {
+    this._imageViewerCtrl = imageViewerCtrl;
     this.isOtherUserProfile = this.navParams.data.isOtherUserProfile;
     this.otherUserId = this.navParams.data.userId;
     translateService.get("MyProfile").subscribe(values => {
@@ -150,9 +152,11 @@ export class MyProfilePage {
     });
   }
 
-  viewPhoto() {
-    this.photoViewer.show(this.userData.user_profile !==''?this.userData.user_profile:'assets/img/profile-default.jpeg',
-      (this.userData.first_name && this.userData.first_name != '' && this.userData.last_name && this.userData.last_name != '')?this.userData.first_name +' '+ this.userData.last_name : this.userData.user_login, {share: false});
+  viewPhoto(myImage) {
+    const imageViewer = this._imageViewerCtrl.create(myImage);
+    imageViewer.present();
+    /*this.photoViewer.show(this.userData.user_profile !==''?this.userData.user_profile:'assets/img/profile-default.jpeg',
+      (this.userData.first_name && this.userData.first_name != '' && this.userData.last_name && this.userData.last_name != '')?this.userData.first_name +' '+ this.userData.last_name : this.userData.user_login, {share: false});*/
   }
 
   gotoQAndAPage(type) {

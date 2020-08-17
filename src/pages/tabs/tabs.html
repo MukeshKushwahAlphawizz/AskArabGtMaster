@@ -1,9 +1,10 @@
 
-<ion-tabs [selectedIndex]="tabIndex">
+<ion-tabs #tabs [selectedIndex]="tabIndex">
   <ion-tab [root]="tab4Root" [tabTitle]="tab4Title" tabIcon="notifications"></ion-tab>
   <ion-tab [root]="tab1Root" [tabTitle]="tab1Title" tabIcon="home"></ion-tab>
   <ion-tab [root]="tab2Root" [tabTitle]="tab2Title" tabIcon="create"></ion-tab>
   <!--<ion-tab [root]="tab3Root" [tabTitle]="tab3Title" tabIcon="document"></ion-tab>-->
-
 </ion-tabs>
-<div *ngIf="!notificationRead" class="dot"></div>
+<div *ngIf="!notificationRead" class="dot safe-area"></div>
+<div (click)="home()" class="home safe-area"></div>
+

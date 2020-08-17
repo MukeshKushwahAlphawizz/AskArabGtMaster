@@ -179,7 +179,7 @@ export class SignupPage {
     this.util.presentLoading();
     let socialData = {
       user_login:name,
-      user_email:email,
+      user_email:email?email:'',
       user_profile:imageUrl,
       status:status,
       Firebase_token:this.firebaseToken

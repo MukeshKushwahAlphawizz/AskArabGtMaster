@@ -6,6 +6,7 @@ import {Storage} from "@ionic/storage";
 import {TranslateService} from "@ngx-translate/core";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {ImageViewerController} from "ionic-img-viewer";
 
 @IonicPage()
 @Component({
@@ -48,16 +49,18 @@ export class QuestionDetailPage {
   commonTexts : any = {};
   dark: string = '';
   language: string = 'ar';
+  _imageViewerCtrl: ImageViewerController;
 
   constructor(public navCtrl: NavController,
               public util: UtilProvider,
               public user : User,
               public storage : Storage,
+              public imageViewerCtrl: ImageViewerController,
               public socialSharing: SocialSharing,
               public translateService : TranslateService,
               public actionSheetCtrl : ActionSheetController,
               public navParams: NavParams) {
-    // console.log('data from nav params ===',navParams.data);
+    this._imageViewerCtrl = imageViewerCtrl;
     this.dark = user.getTheme();
     this.storage.get('appLanguage').then(data=>{
       this.language = data;
@@ -495,5 +498,10 @@ export class QuestionDetailPage {
         this.util.dismissLoading();
       })
     }
+  }
+
+  viewImage(myImage) {
+    const imageViewer = this._imageViewerCtrl.create(myImage);
+    imageViewer.present();
   }
 }
