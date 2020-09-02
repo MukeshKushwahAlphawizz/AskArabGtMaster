@@ -1,0 +1,26 @@
+page-select-category {
+.set-bg{
+  background: url("../assets/img/car-bg.png");
+  background-size: 100% 100%;
+}
+  .header{
+    margin: 30pt;
+  }
+  .sub-header{
+    margin: 5pt 30pt;
+    color: #616161;
+  }
+  .category-div{
+    margin: 30pt 20pt;
+  }
+  .set-bg-btn{
+    background: #babbc1c7;
+    color: black;
+    font-size: 1.2rem;
+    border: 0.1px inset #CD1C2B;
+  }
+  .enable{
+    background-color: #CD1C2B;
+    color: white;
+  }
+}

@@ -1,0 +1,45 @@
+page-news-home {
+  .cut{
+    transform: rotate(6deg);
+    background: white;
+    height: 30pt;
+    margin: -18pt 0 0 -10pt;
+  }
+  .article-bg{
+    //height: 200px;
+    width: 100%;
+    //object-fit: cover;
+  }
+
+  .select-category{
+    float: left;
+    margin-left: 15pt;
+    border: 1px solid #5F5F5F;
+    border-radius: 15px;
+    width: 150px;
+    padding: 2pt 6pt;
+  }
+
+  select{
+    display: inline-block;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+  }
+  .header{
+    position: absolute;
+    margin: 20pt 25pt;
+    text-align: center;
+  }
+  .article-thumb{
+    height: 60pt;
+    width: 60pt;
+  }
+  .article-list{
+    padding-left: 15pt; margin-top: 25pt
+  }
+  .user-img{
+    height: 20pt;width: 20pt;object-fit: contain;
+  }
+}

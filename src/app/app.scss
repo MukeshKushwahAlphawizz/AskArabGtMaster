@@ -1,3 +1,8 @@
+.bigger-text{font-size: 1.9rem}
+.big-text{font-size: 1.7rem}
+.medium-text{font-size: 1.4rem}
+.small-font{font-size: 1.2rem;}
+.medium-font{font-size: 1.4rem;}
 ion-spinner {
   width: 40px;
   height: 40px;
@@ -13,6 +18,9 @@ ion-spinner {
 }
 .text-grey{
   color: #5F5F5F;
+}
+.text-white{
+  color: white;
 }
 .text-red{
   color: #CD1C2B;
@@ -175,12 +183,7 @@ h1, h2, .set-Ubuntu-font{
   background: #dedede;
   margin-top: 10px;
 }
-.small-font{
-  font-size: 1.2rem;
-}
-.medium-font{
-  font-size: 1.4rem;
-}
+
 .back-button-text, .back-button-icon-ios, .back-button-icon-md{
   color: white;
 }

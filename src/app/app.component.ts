@@ -36,9 +36,7 @@ export class MyApp {
         '/questionDetail/:id': 'QuestionDetailPage'
       }).subscribe(match => {
         let matchData : any = match;
-        // console.log('deeplinking url >>>>>>>>>>>>>>>>>>>>>>',matchData.$link.queryString);
         let question_id = matchData.$link.queryString.substring(2, matchData.$link.queryString.length);
-        console.log('question_id',question_id);
         this.getQuestionData(question_id);
 
       }, nomatch => {

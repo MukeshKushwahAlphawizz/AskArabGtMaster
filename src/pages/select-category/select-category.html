@@ -1,0 +1,18 @@
+<ion-content text-center class="set-bg">
+  <div class="header bigger-text bold-font text-white">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
+  <div class="sub-header small-font">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry</div>
+  <div class="category-div">
+    <div class="row">
+      <div *ngFor="let cat of categoryList" style="padding-right: 8pt;padding-left: 8pt" col-6>
+        <button (click)="selectCategory(cat)" class="set-bg-btn" [ngClass]="cat.isSelected?'enable':''" ion-button full round>{{cat.name}}</button>
+      </div>
+    </div>
+
+    <div style="margin-top: 30pt">
+      <button (click)="goNewsHome()" class="small-font" ion-button round>Next</button>
+    </div>
+    <div margin>
+      <button (click)="back()" class="small-font" ion-button full clear>Back To Home</button>
+    </div>
+  </div>
+</ion-content>
