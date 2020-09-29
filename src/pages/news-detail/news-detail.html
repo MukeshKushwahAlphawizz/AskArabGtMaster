@@ -1,0 +1,43 @@
+<ion-header class="almarai-font">
+  <ion-navbar>
+    <ion-title dir="rtl" text-wrap>{{newsDetail.post_title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content dir="rtl" parallex class="almarai-font">
+  <img class="bg article-bg cut-diagonal" src="{{imageBaseUrl+banner}}">
+  <div [hidden]="!isLoading" class="main-cnt">
+    <ion-item no-lines text-left>
+      <!--<img item-right class="user-img" src="assets/img/profile-default.jpeg">-->
+      <div class="medium-text text-dark">{{newsDetail.display_name}}</div>
+      <span dir="ltr" item-right margin-left class="small-font text-red">{{getDate()}}</span>
+    </ion-item>
+    <div padding class="bg-white">
+      <div class="bigger-text bold-font">{{newsDetail.post_title}}</div>
+      <p style="line-height: 30px" text-wrap class="content-font text-dark" [innerHTML]="getSenitizedUrl(newsDetail.post_content)"></p>
+      <div margin-top>
+        <ion-slides margin-top pager dir="ltr" loop>
+          <ion-slide *ngFor="let img of gallaryImages">
+            <img class="slider-img" src="{{imageBaseUrl+img}}">
+          </ion-slide>
+        </ion-slides>
+      </div>
+      <div *ngIf="tagList && tagList.length" margin-top>
+        <span><button ion-button no-padding clear><ion-icon class="bigger-text text-red" name="md-pricetags"></ion-icon></button></span>
+        <span *ngFor="let tag of tagList">
+          <button (click)="selectTag(tag)" class="set-bg-btn smallest-font" ion-button small round>{{tag}}</button>
+        </span>
+      </div>
+    </div>
+    <div margin class="recent-articles-txt text-red bold-font">{{'RELATEDNEWS'|translate}}</div>
+    <div class="row">
+      <ion-item *ngFor="let related of releatedPost" no-lines no-padding col-6 (click)="openRelated(related)">
+        <img class="small-car" item-left src="{{imageBaseUrl+related.URL}}">
+        <div>
+          <div text-wrap class="smaller-font bold-font">{{related.Title}}</div>
+          <div style="margin-top: 5pt" class="smaller-font">{{related.UserName}}</div>
+        </div>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>

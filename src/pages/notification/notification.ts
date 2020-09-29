@@ -150,7 +150,7 @@ export class NotificationPage {
   }
 
   gotoDetailPage(item) {
-    console.log(item);
+    // console.log(item);
     if (item.type && item.type =='user profile'){
       this.navCtrl.push('MyProfilePage',{isOtherUserProfile : true,userId : item.user_id})
     }else if (item.type && item.type =='Ask a question'){

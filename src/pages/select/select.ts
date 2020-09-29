@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Storage} from "@ionic/storage";
 
 
 @IonicPage()
@@ -9,13 +10,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SelectPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public storage:Storage,
+              public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
   }
 
   goCategory() {
-    this.navCtrl.push('SelectCategoryPage');
+    this.storage.get('selectedCategories').then(data=>{
+      if (data){
+        this.navCtrl.push('NewsTabsPage');
+      }else {
+        this.navCtrl.push('SelectCategoryPage');
+      }
+    })
+  }
+
+  goMenuPage() {
+    this.navCtrl.push('MenuPage');
   }
 }

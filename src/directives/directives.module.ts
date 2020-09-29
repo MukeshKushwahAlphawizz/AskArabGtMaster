@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
+import { ParallexDirective } from './parallex/parallex';
 @NgModule({
-	declarations: [],
+	declarations: [ParallexDirective],
 	imports: [],
-	exports: []
+	exports: [ParallexDirective]
 })
 export class DirectivesModule {}

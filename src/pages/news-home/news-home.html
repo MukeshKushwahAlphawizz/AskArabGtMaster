@@ -1,19 +1,34 @@
-<ion-content>
-
-  <div text-center>
-    <div class="header medium-text bold-font text-white">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-    <img class="article-bg" src="assets/img/car-cut1.png">
-    <div class="cut"></div>
-    <div class="select-category">
-      <select class="text-grey small-font">
-        <option>Select Category</option>
-        <option>Category1</option>
-        <option>Category2</option>
-        <option>Category3</option>
+<ion-content dir="rtl" parallex class="almarai-font">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div [hidden]="!(newsList && newsList.length)" (click)="newsDetailPage(newsList[0])" text-center class="header big-text bold-font text-white">{{newsList[0]?newsList[0].Title:''}}</div>
+  <img [hidden]="!(newsList && newsList.length)" (click)="newsDetailPage(newsList[0])" class="bg cut-diagonal" [src]="newsList[0] && newsList[0].URL !==''?imageBaseUrl+newsList[0].URL:''">
+  <div text-center class="main-cnt">
+    <div [hidden]="!(newsList && newsList.length)" class="select-category">
+      <select [(ngModel)]="selectedCategory" (change)="changeCategory()" class="text-grey small-font">
+        <option value="اختر الفئة">اختر الفئة</option>
+        <option value="جديد الأخبار">جديد الأخبار</option>
+        <option value="حوادث">حوادث</option>
+        <option value="شركات السيارات">شركات السيارات</option>
+        <option value="متفرقات">متفرقات</option>
       </select>
     </div>
     <div class="article-list">
-      <ion-item no-lines no-padding>
+      <div *ngFor="let news of newsList;let i = index">
+        <ion-item *ngIf="i!==0" no-lines (click)="newsDetailPage(news)">
+          <img class="article-thumb" item-left no-margin [src]="news.URL !=='' ?imageBaseUrl+news.URL:'assets/img/small-car.png'">
+          <div>
+            <div text-wrap class="small-font bold-font" style="padding-top: 5pt">{{news.Title}}</div>
+            <ion-item no-lines no-padding>
+              <!--<img item-left class="user-img" src="assets/img/profile-default.jpeg">-->
+              <div class="small-font" style="color: #516171">{{news.UserName}}</div>
+              <div dir="ltr" item-right class="text-red small-font">{{getDate(news.Date)}}</div>
+            </ion-item>
+          </div>
+        </ion-item>
+      </div>
+      <!--<ion-item no-lines (click)="newsDetailPage()">
         <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
         <div>
           <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
@@ -25,7 +40,7 @@
         </div>
       </ion-item>
 
-      <ion-item no-lines no-padding>
+      <ion-item no-lines (click)="newsDetailPage()">
         <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
         <div>
           <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
@@ -37,7 +52,7 @@
         </div>
       </ion-item>
 
-      <ion-item no-lines no-padding>
+      <ion-item no-lines (click)="newsDetailPage()">
         <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
         <div>
           <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
@@ -47,19 +62,15 @@
             <div item-right class="text-red small-font">4mins ago</div>
           </ion-item>
         </div>
-      </ion-item>
-
-      <ion-item no-lines no-padding>
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines no-padding>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
+      </ion-item>-->
     </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
+
+  <div *ngIf="isEmptyList" style="margin: 30pt" class="bold-font big-text" text-center>
+    No News Available
+  </div>
+
 </ion-content>

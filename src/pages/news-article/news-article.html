@@ -1,9 +1,7 @@
-<ion-content>
-
-  <div text-center>
-    <div class="header medium-text bold-font text-white">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-    <img class="article-bg" src="assets/img/car-article.png">
-    <div class="cut"></div>
+<ion-content dir="rtl" parallex class="almarai-font">
+  <div (click)="articleDetailPage()" class="header medium-text bold-font text-white">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
+  <img (click)="articleDetailPage()" class="bg cut-diagonal" src="assets/img/car-article.png">
+  <div text-center class="main-cnt">
     <div class="select-category">
       <select class="text-grey small-font">
         <option>Select Category</option>
@@ -13,7 +11,7 @@
       </select>
     </div>
     <div class="article-list">
-      <ion-item no-lines no-padding>
+      <ion-item no-lines (click)="articleDetailPage()">
         <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
         <div>
           <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
@@ -25,7 +23,7 @@
         </div>
       </ion-item>
 
-      <ion-item no-lines no-padding>
+      <ion-item no-lines (click)="articleDetailPage()">
         <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
         <div>
           <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
@@ -37,7 +35,19 @@
         </div>
       </ion-item>
 
-      <ion-item no-lines no-padding>
+      <ion-item no-lines (click)="articleDetailPage()">
+        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
+        <div>
+          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
+          <ion-item no-lines>
+            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
+            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
+            <div item-right class="text-red small-font">4mins ago</div>
+          </ion-item>
+        </div>
+      </ion-item>
+
+      <ion-item no-lines (click)="articleDetailPage()">
         <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
         <div>
           <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
@@ -49,7 +59,31 @@
         </div>
       </ion-item>
 
-      <ion-item no-lines no-padding>
+      <ion-item no-lines (click)="articleDetailPage()">
+        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
+        <div>
+          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
+          <ion-item no-lines no-padding>
+            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
+            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
+            <div item-right class="text-red small-font">4mins ago</div>
+          </ion-item>
+        </div>
+      </ion-item>
+
+      <ion-item no-lines (click)="articleDetailPage()">
+        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
+        <div>
+          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
+          <ion-item no-lines no-padding>
+            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
+            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
+            <div item-right class="text-red small-font">4mins ago</div>
+          </ion-item>
+        </div>
+      </ion-item>
+
+      <ion-item no-lines (click)="articleDetailPage()">
         <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
         <div>
           <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>

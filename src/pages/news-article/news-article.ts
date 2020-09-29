@@ -13,4 +13,7 @@ export class NewsArticlePage {
   ionViewDidLoad() {
   }
 
+  articleDetailPage() {
+    this.navCtrl.push('ArticleDetailPage');
+  }
 }

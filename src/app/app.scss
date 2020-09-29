@@ -2,7 +2,11 @@
 .big-text{font-size: 1.7rem}
 .medium-text{font-size: 1.4rem}
 .small-font{font-size: 1.2rem;}
+.smaller-font{font-size: 1rem;}
+.smallest-font{font-size: 0.8rem;}
 .medium-font{font-size: 1.4rem;}
+.content-font{font-size: 1.6rem;}
+.italic-font{font-style: italic}
 ion-spinner {
   width: 40px;
   height: 40px;
@@ -21,6 +25,9 @@ ion-spinner {
 }
 .text-white{
   color: white;
+}
+.bg-white{
+  background: white;
 }
 .text-red{
   color: #CD1C2B;
@@ -325,11 +332,16 @@ color: #CD1C2B !important;
   margin-top: env(safe-area-inset-top);
   margin-bottom: env(safe-area-inset-bottom)
 }
-/*.modal-wrapper {
-  position: absolute;
-  top: 80px;
-  left: 45px;
-  display: block;
-  width: 70%;
-  height: 62%;
-}*/
+.dark .header, .dark .cut{
+  background: transparent;
+}
+.dark .tabs .tab-button-text{
+  color: #999999;
+}
+.cut-diagonal{
+  clip-path: polygon(0 0, 0 80%, 100% 100%, 100% 0);
+}
+
+.almarai-font{
+  font-family: Almarai;
+}

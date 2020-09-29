@@ -54,7 +54,7 @@ export class MyApp {
       })
       storage.get('userData').then(data=>{
         if(data){
-          this.rootPage = 'MenuPage';
+          this.rootPage = 'SelectPage';
         }else {
           this.rootPage = 'LoginPage'
         }

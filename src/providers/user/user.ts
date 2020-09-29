@@ -316,4 +316,5 @@ export class User {
     let seq = this.api.post(this.addPollAnswer,data,{}).share();
     return seq;
   }
+
 }

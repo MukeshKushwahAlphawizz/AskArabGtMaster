@@ -1,0 +1,43 @@
+page-article-detail {
+
+  .article-bg{
+    width: 100%;
+  }
+  .bg{
+    width: 100%;
+  }
+  .user-img{
+    height: 20pt;width: 20pt;object-fit: contain;border-radius: 50%;
+  }
+  .text-dark{
+    color: #516171;
+  }
+  .slider-img{
+    margin-bottom: 25pt;
+  }
+
+  .set-bg-btn{
+    background: #999;
+    color: white;
+    padding: 0 5px;
+    border: 0.1px inset;
+  }
+
+  .recent-articles-txt{
+    margin-top:25pt;
+    margin-bottom: 15pt;
+  }
+  .small-car{
+    height: 38pt;width: 38pt;object-fit: contain;
+  }
+  .label{
+    margin: 0;
+  }
+  .user-small{
+    height: 15pt;width: 15pt;object-fit: contain;border-radius: 50%;
+  }
+  .main-cnt{
+    width: 100%;
+  }
+
+}

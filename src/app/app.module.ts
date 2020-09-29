@@ -27,6 +27,8 @@ import {ImageResizer} from '@ionic-native/image-resizer';
 import { File } from '@ionic-native/file';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import {IonicImageViewerModule} from "ionic-img-viewer";
+import { Phase2ApisProvider } from '../providers/phase2-apis/phase2-apis';
+import { NewsArticlesProvider } from '../providers/news-articles/news-articles';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -78,7 +80,9 @@ export function createTranslateLoader(http: HttpClient) {
     File,
     BackgroundMode,
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    Phase2ApisProvider,
+    NewsArticlesProvider
   ]
 })
 export class AppModule { }

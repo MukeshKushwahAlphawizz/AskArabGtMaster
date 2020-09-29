@@ -135,7 +135,7 @@ export class LoginPage {
         this.storage.set('isNightMode',this.darkMode);
       }
       this.util.dismissLoading();
-      this.navCtrl.setRoot('MenuPage')
+      this.navCtrl.setRoot('SelectPage');
     }, (err) => {
       this.util.dismissLoading();
       this.util.presentToast(err.error.message);
@@ -170,7 +170,7 @@ export class LoginPage {
   googleLogin(){
     this.googlePlus.login({})
       .then(res => {
-        console.log('response ====>', res);
+        // console.log('response ====>', res);
         let googleData : any = res;
         this.callSocialRegisterApi(googleData.givenName,googleData.email,googleData.imageUrl?googleData.imageUrl:'',3);
       })

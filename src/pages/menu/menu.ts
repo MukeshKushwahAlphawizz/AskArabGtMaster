@@ -175,6 +175,7 @@ export class MenuPage {
       this.user.logoutUser(data).subscribe(response =>{
         this.storage.set('userData',null);
         this.storage.set('userId', null);
+        this.storage.set('selectedCategories', null);
         this.storage.get('isNightMode').then(data=>{
           this.navCtrl.setRoot('LoginPage',{isNightMode:data});
           this.util.dismissLoading();

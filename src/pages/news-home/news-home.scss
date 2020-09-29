@@ -6,9 +6,7 @@ page-news-home {
     margin: -18pt 0 0 -10pt;
   }
   .article-bg{
-    //height: 200px;
     width: 100%;
-    //object-fit: cover;
   }
 
   .select-category{
@@ -18,6 +16,7 @@ page-news-home {
     border-radius: 15px;
     width: 150px;
     padding: 2pt 6pt;
+    background: white;
   }
 
   select{
@@ -29,17 +28,26 @@ page-news-home {
   }
   .header{
     position: absolute;
-    margin: 20pt 25pt;
+    padding: 20pt 25pt;
     text-align: center;
+    z-index: 9999;
   }
   .article-thumb{
     height: 60pt;
     width: 60pt;
   }
   .article-list{
-    padding-left: 15pt; margin-top: 25pt
+    margin-top: 25pt
   }
   .user-img{
-    height: 20pt;width: 20pt;object-fit: contain;
+    height: 20pt;width: 20pt;
+  }
+  img{
+    object-fit: cover;
+  }
+  .bg{
+    width: 100%;
+    height: 200pt;
+    object-fit: cover;
   }
 }

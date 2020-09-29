@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ViewController} from "ionic-angular/index";
+import {Storage} from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -8,14 +9,13 @@ import {ViewController} from "ionic-angular/index";
   templateUrl: 'select-category.html',
 })
 export class SelectCategoryPage {
-
   categoryList:any=[
     {
-      name: 'ACURA',
+      name: 'BMW',
       isSelected:false
     },
     {
-      name: 'ALPHA ROMEO',
+      name: 'MERCEDES',
       isSelected:false
     },
     {
@@ -23,35 +23,27 @@ export class SelectCategoryPage {
       isSelected:false
     },
     {
-      name: 'BMW',
+      name: 'CHEVROLET',
       isSelected:false
     },
     {
-      name: 'BENTLEY',
+      name: 'KIA',
       isSelected:false
     },
     {
-      name: 'BUICK',
+      name: 'HYUNDAI',
       isSelected:false
     },
     {
-      name: 'ACURA',
+      name: 'RANGE ROVER',
       isSelected:false
     },
     {
-      name: 'AUDI',
+      name: 'JAGUAR',
       isSelected:false
     },
     {
       name: 'ALPHA ROMEO',
-      isSelected:false
-    },
-    {
-      name: 'BMW',
-      isSelected:false
-    },
-    {
-      name: 'BUICK',
       isSelected:false
     },
     {
@@ -61,6 +53,7 @@ export class SelectCategoryPage {
   ]
   constructor(public navCtrl: NavController,
               public viewCtrl: ViewController,
+              public storage: Storage,
               public navParams: NavParams) {
   }
 
@@ -76,6 +69,14 @@ export class SelectCategoryPage {
   }
 
   goNewsHome() {
-    this.navCtrl.push('NewsTabsPage');
+    let categories:any = [];
+    this.categoryList.filter(item=>{
+      if (item.isSelected){
+        categories.push(item.name);
+      }
+    });
+    this.storage.set('selectedCategories',categories).then(()=>{
+      this.navCtrl.push('NewsTabsPage');
+    });
   }
 }
