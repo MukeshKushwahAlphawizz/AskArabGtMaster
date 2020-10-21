@@ -153,6 +153,7 @@
   },
 
   "Menu": {
+    "NewsArticles": "News & Articles",
     "Home": "Home",
     "ContactUs": "Contact Us",
     "EditProfile": "Edit Profile",

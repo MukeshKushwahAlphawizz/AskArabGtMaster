@@ -131,7 +131,9 @@ export class MenuPage {
   }
   ionViewDidLoad() {
     //Open Default Home Page
-    this.openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, false,0)
+    setTimeout(()=>{
+      this.openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, false,0)
+    },10);
     setTimeout(()=>{
       this.loadNotifications();
     },5000);
@@ -223,5 +225,9 @@ export class MenuPage {
         this.user.setNotifications(JSON.stringify(res.data));
       })
     })
+  }
+
+  openNewsArticle() {
+    this.navCtrl.setRoot('NewsTabsPage');
   }
 }

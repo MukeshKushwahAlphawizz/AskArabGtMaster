@@ -1,0 +1,93 @@
+<ion-header class="almarai-font">
+  <ion-navbar>
+    <ion-title dir="rtl" text-wrap>{{videoDetail.post_title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content dir="rtl" class="almarai-font">
+  <!--<iframe [hidden]="videoUrl" class="bg article-bg" width="100%" height="300" [src]="videoUrl|safe" frameborder="0"  allowfullscreen allow="autoplay"></iframe>-->
+
+  <!--<div class=`"embedly-responsive" style="position: relative;padding-bottom: 56.2061%;height: 0;overflow: hidden;">
+    <iframe class="embedly-embed" frameborder="0" scrolling="no" allowfullscreen
+            src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2Fvideoseries%3Flist%3DRDUiN3AY7bdBg&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DUiN3AY7bdBg&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FUiN3AY7bdBg%2Fhqdefault.jpg&args=showinfo%3D0&key=57209a61cba14abeac6d2fce14dbf5f9&type=text%2Fhtml&schema=youtube"
+            width="854" height="480" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;">
+    </iframe>
+  </div>-->
+
+  <div [hidden]="!isLoading" class="main-cnt">
+    <div *ngFor="let urlVideo of videoUrlArr; let i = index ">
+      <div>
+        <blockquote class="bg embedly-card" data-card-key="57209a61cba14abeac6d2fce14dbf5f9" data-card-controls="0"
+                    data-card-branding="0"><h4><a href="{{urlVideo}}"></a></h4></blockquote>
+        <div *ngIf="i==0">
+          <ion-item no-lines text-left>
+            <!--<img item-right class="user-img" src="assets/img/profile-default.jpeg">-->
+            <div class="medium-text text-dark">{{videoDetail.display_name}}</div>
+            <span dir="ltr" item-right margin-left class="small-font text-red">{{getDate()}}</span>
+          </ion-item>
+          <div padding class="bg-white">
+            <div class="bigger-text bold-font">{{videoDetail.post_title}}</div>
+
+            <p style="line-height: 30px" text-wrap class="content-font text-dark" [innerHTML]="getSenitizedUrl(videoDetail.post_content)"></p>
+
+            <div margin-top>
+              <ion-slides margin-top pager dir="ltr" loop>
+                <ion-slide *ngFor="let img of gallaryImages">
+                  <img class="slider-img" src="{{imageBaseUrl+img}}">
+                </ion-slide>
+              </ion-slides>
+            </div>
+            <div *ngIf="tagList && tagList.length" margin-top>
+              <span><button ion-button no-padding clear><ion-icon class="bigger-text text-red" name="md-pricetags"></ion-icon></button></span>
+              <span *ngFor="let tag of tagList">
+          <button (click)="selectTag(tag)" class="set-bg-btn smallest-font" ion-button small round>{{tag}}</button>
+        </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="videoUrlArr.length ===0">
+      <ion-item no-lines text-left>
+        <!--<img item-right class="user-img" src="assets/img/profile-default.jpeg">-->
+        <div class="medium-text text-dark">{{videoDetail.display_name}}</div>
+        <span dir="ltr" item-right margin-left class="small-font text-red">{{getDate()}}</span>
+      </ion-item>
+      <div padding class="bg-white">
+        <div class="bigger-text bold-font">{{videoDetail.post_title}}</div>
+
+        <p style="line-height: 30px" text-wrap class="content-font text-dark" [innerHTML]="getSenitizedUrl(videoDetail.post_content)"></p>
+
+        <div margin-top>
+          <ion-slides margin-top pager dir="ltr" loop>
+            <ion-slide *ngFor="let img of gallaryImages">
+              <img class="slider-img" src="{{imageBaseUrl+img}}">
+            </ion-slide>
+          </ion-slides>
+        </div>
+        <div *ngIf="tagList && tagList.length" margin-top>
+          <span><button ion-button no-padding clear><ion-icon class="bigger-text text-red" name="md-pricetags"></ion-icon></button></span>
+          <span *ngFor="let tag of tagList">
+          <button (click)="selectTag(tag)" class="set-bg-btn smallest-font" ion-button small round>{{tag}}</button>
+        </span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="releatedPost.length" margin class="recent-articles-txt text-red bold-font">أخبار ذات صلة</div>
+    <div class="row">
+      <ion-item *ngFor="let related of releatedPost" no-lines no-padding col-6 (click)="openRelated(related)">
+        <img class="small-car" item-left src="{{imageBaseUrl+related.URL}}">
+        <div>
+          <div text-wrap class="smaller-font bold-font">{{related.Title}}</div>
+          <div style="margin-top: 5pt" class="smaller-font">{{related.UserName}}</div>
+        </div>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>
+<ion-footer dir="rtl" style="background: transparent" text-center>
+  <button class="small-font" (click)="share()" no-margin ion-button icon-start clear full>
+    <ion-icon margin-left name="ios-redo"></ion-icon>
+    <div>{{'Question.Share'|translate}}</div>
+  </button>
+</ion-footer>

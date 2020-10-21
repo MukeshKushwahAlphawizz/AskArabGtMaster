@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ArticleDetailPage } from './article-detail';
+import { VideoDetailPage } from './video-detail';
 import {DirectivesModule} from "../../directives/directives.module";
+import {PipesModule} from "../../pipes/pipes.module";
 import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
-    ArticleDetailPage,
+    VideoDetailPage,
   ],
     imports: [
-        IonicPageModule.forChild(ArticleDetailPage),
+        IonicPageModule.forChild(VideoDetailPage),
         DirectivesModule,
+        PipesModule,
         TranslateModule,
     ],
 })
-export class ArticleDetailPageModule {}
+export class VideoDetailPageModule {}

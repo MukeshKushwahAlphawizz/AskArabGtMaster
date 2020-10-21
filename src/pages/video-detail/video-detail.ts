@@ -1,32 +1,42 @@
 import {Component, ViewChild} from '@angular/core';
-import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
-import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Content, Events, ViewController} from "ionic-angular/index";
 import {UtilProvider} from "../../providers/util/util";
-import {Content, Events} from "ionic-angular/index";
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer} from "@angular/platform-browser";
+import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
 import {SocialSharing} from "@ionic-native/social-sharing";
 
+/**
+ * Generated class for the VideoDetailPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: 'page-news-detail',
-  templateUrl: 'news-detail.html',
+  selector: 'page-video-detail',
+  templateUrl: 'video-detail.html',
 })
-export class NewsDetailPage {
+export class VideoDetailPage {
+
   @ViewChild(Content) content: Content;
   tagList: any = [];
   gallaryImages :any = [];
   releatedPost :any = [];
-  newsDetail:any={}
+  videoUrl:any = '';
+  videoDetail:any={}
   imageBaseUrl : any = 'https://www.arabgt.com/wp-content/uploads/';
   banner:any='';
   isLoading:boolean=false;
   postId: any = '';
+  isPlayVideo: boolean = false;
+  videoUrlArr: any = [];
   constructor(public navCtrl: NavController,
               public util : UtilProvider,
               public event : Events,
+              public socialSharing : SocialSharing,
               public sanitizer : DomSanitizer,
-              public socialSharing: SocialSharing,
               public viewController : ViewController,
               public api : NewsArticlesProvider,
               public navParams: NavParams) {
@@ -39,7 +49,7 @@ export class NewsDetailPage {
   }
 
   selectTag(tag: any) {
-    this.event.publish('tagSelect',tag);
+    this.event.publish('tagVideoSelect',tag);
     this.viewController.dismiss();
   }
   getSenitizedUrl(html){
@@ -51,10 +61,13 @@ export class NewsDetailPage {
       post_id:this.postId
     }
     this.util.presentLoading();
-    this.api.getNewsDetail(data).subscribe(res=>{
+    this.api.getVideoDetail(data).subscribe(res=>{
       let resp : any = res;
       if (resp.status){
-        this.newsDetail = resp.data;
+        this.videoDetail = resp.data;
+        this.videoUrl = resp.videourl[0];
+        this.videoUrlArr = resp.videourl;
+
         this.tagList = resp.TagName;
         this.gallaryImages = resp.Gallery;
         this.releatedPost = resp.RelatedPost;
@@ -71,7 +84,7 @@ export class NewsDetailPage {
   }
 
   getDate() {
-    return this.util.timeSince(new Date(this.newsDetail.post_date).getTime());
+    return this.util.timeSince(new Date(this.videoDetail.post_date).getTime());
   }
 
   openRelated(related: any) {
@@ -83,8 +96,11 @@ export class NewsDetailPage {
     this.content.scrollToTop();
   }
 
+  playVideo() {
+    this.isPlayVideo = true;
+  }
   share() {
-    this.socialSharing.share('ArabGT: '+'\n News :'+this.newsDetail.post_title,'', [],'').then((succ) => {
+    this.socialSharing.share('ArabGT: '+'\n News :'+this.videoDetail.post_title,'', [],'').then((succ) => {
     }).catch((err) => {
     });
   }

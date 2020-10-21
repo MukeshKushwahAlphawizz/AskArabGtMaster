@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+  <ion-buttons (click)="back()" left>
+    <button ion-button clear>
+      <ion-icon style="font-size: 2.5rem" class="white back-arrow" name="md-arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title text-center dir="rtl">اختر الماركة</ion-title>
+    <ion-buttons end>
+      <button ion-button clear>
+      </button>
+    </ion-buttons>
+</ion-navbar>
+</ion-header>
+
+<ion-content padding dir="rtl">
+  <div margin>
+    <div padding margin-bottom text-center class="big-text">موصى به لك</div>
+    <div class="row">
+      <div *ngFor="let brand of brandList" margin-top col-6>
+        <ion-item no-lines class="box" (click)="selectBrand(brand)">
+          <div margin-right class="medium-text bold-font">{{brand.Brand}}</div>
+          <ion-icon item-right class="text-red" name="md-add"></ion-icon>
+        </ion-item>
+      </div>
+    </div>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

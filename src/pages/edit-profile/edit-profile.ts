@@ -143,7 +143,7 @@ export class EditProfilePage {
       if(response.status){
         this.storage.set('userData', JSON.stringify(response.all_activities))
         this.util.presentToast(this.ProfileEditedSuccessfully);
-        this.fromSignUp?this.navCtrl.setRoot('SelectPage'):this.viewCtrl.dismiss();
+        this.fromSignUp?this.navCtrl.setRoot('MenuPage'):this.viewCtrl.dismiss();
       }else {
         this.util.presentToast(response.message);
       }
@@ -231,6 +231,6 @@ export class EditProfilePage {
   }
 
   skip() {
-    this.navCtrl.setRoot('SelectPage');
+    this.navCtrl.setRoot('MenuPage');
   }
 }

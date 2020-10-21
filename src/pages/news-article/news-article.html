@@ -1,99 +1,29 @@
 <ion-content dir="rtl" parallex class="almarai-font">
-  <div (click)="articleDetailPage()" class="header medium-text bold-font text-white">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-  <img (click)="articleDetailPage()" class="bg cut-diagonal" src="assets/img/car-article.png">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div (click)="articleDetailPage(articleList[0])" class="header big-text bold-font text-white">{{articleList[0]?articleList[0].Title:''}}</div>
+  <img [hidden]="!isEmptyList" (click)="articleDetailPage(articleList[0])" class="bg cut-diagonal" [src]="articleList[0] && articleList[0].URL !==''?imageBaseUrl+articleList[0].URL:''">
   <div text-center class="main-cnt">
-    <div class="select-category">
-      <select class="text-grey small-font">
-        <option>Select Category</option>
-        <option>Category1</option>
-        <option>Category2</option>
-        <option>Category3</option>
-      </select>
+    <div *ngIf="isEmptyList" text-right (click)="selectBrands()" class="small-font select-category">{{brand}}
+    <span style="float: left"><ion-icon name="ios-arrow-down"></ion-icon></span>
     </div>
     <div class="article-list">
-      <ion-item no-lines (click)="articleDetailPage()">
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines no-padding>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
-
-      <ion-item no-lines (click)="articleDetailPage()">
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines no-padding>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
-
-      <ion-item no-lines (click)="articleDetailPage()">
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
-
-      <ion-item no-lines (click)="articleDetailPage()">
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines no-padding>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
-
-      <ion-item no-lines (click)="articleDetailPage()">
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines no-padding>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
-
-      <ion-item no-lines (click)="articleDetailPage()">
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines no-padding>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
-
-      <ion-item no-lines (click)="articleDetailPage()">
-        <img class="article-thumb" item-left no-margin src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="small-font bold-font" style="padding-top: 5pt">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines no-padding>
-            <img item-left class="user-img" src="assets/img/profile-default.jpeg">
-            <div class="small-font" style="color: #516171">Mohammad Rehman</div>
-            <div item-right class="text-red small-font">4mins ago</div>
-          </ion-item>
-        </div>
-      </ion-item>
+      <div *ngFor="let article of articleList;let i=index">
+        <ion-item *ngIf="i!==0" no-lines (click)="articleDetailPage(article)">
+          <img class="article-thumb" item-left no-margin [src]="article.URL !=='' ?imageBaseUrl+article.URL:'assets/img/small-car.png'">
+          <div>
+            <div text-wrap class="small-font bold-font" style="padding-top: 5pt">{{article.Title}}</div>
+            <ion-item no-lines no-padding>
+              <div class="small-font" style="color: #516171">{{article.UserName}}</div>
+              <div dir="ltr" item-right class="text-red small-font">{{getDate(article.Date)}}</div>
+            </ion-item>
+          </div>
+        </ion-item>
+      </div>
     </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

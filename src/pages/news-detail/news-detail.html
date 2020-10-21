@@ -8,7 +8,6 @@
   <img class="bg article-bg cut-diagonal" src="{{imageBaseUrl+banner}}">
   <div [hidden]="!isLoading" class="main-cnt">
     <ion-item no-lines text-left>
-      <!--<img item-right class="user-img" src="assets/img/profile-default.jpeg">-->
       <div class="medium-text text-dark">{{newsDetail.display_name}}</div>
       <span dir="ltr" item-right margin-left class="small-font text-red">{{getDate()}}</span>
     </ion-item>
@@ -25,19 +24,25 @@
       <div *ngIf="tagList && tagList.length" margin-top>
         <span><button ion-button no-padding clear><ion-icon class="bigger-text text-red" name="md-pricetags"></ion-icon></button></span>
         <span *ngFor="let tag of tagList">
-          <button (click)="selectTag(tag)" class="set-bg-btn smallest-font" ion-button small round>{{tag}}</button>
+          <button (click)="selectTag(tag)" class="set-bg-btn small-font" ion-button small round>{{tag}}</button>
         </span>
       </div>
     </div>
-    <div margin class="recent-articles-txt text-red bold-font">{{'RELATEDNEWS'|translate}}</div>
+    <div *ngIf="releatedPost.length" margin class="recent-articles-txt big-text text-red bold-font">أخبار ذات صلة</div>
     <div class="row">
-      <ion-item *ngFor="let related of releatedPost" no-lines no-padding col-6 (click)="openRelated(related)">
+      <ion-item *ngFor="let related of releatedPost" no-lines no-padding (click)="openRelated(related)">
         <img class="small-car" item-left src="{{imageBaseUrl+related.URL}}">
         <div>
-          <div text-wrap class="smaller-font bold-font">{{related.Title}}</div>
-          <div style="margin-top: 5pt" class="smaller-font">{{related.UserName}}</div>
+          <div text-wrap class="medium-text bold-font">{{related.Title}}</div>
+          <div style="margin-top: 5pt" class="small-font">{{related.UserName}}</div>
         </div>
       </ion-item>
     </div>
   </div>
 </ion-content>
+<ion-footer dir="rtl" style="background: transparent" text-center>
+  <button class="small-font" (click)="share()" no-margin ion-button icon-start clear full>
+    <ion-icon margin-left name="ios-redo"></ion-icon>
+    <div>{{'Question.Share'|translate}}</div>
+  </button>
+</ion-footer>

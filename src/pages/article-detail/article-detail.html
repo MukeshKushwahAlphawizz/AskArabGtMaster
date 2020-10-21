@@ -1,89 +1,48 @@
 <ion-header class="almarai-font">
   <ion-navbar>
-    <ion-title>Article Heading</ion-title>
+    <ion-title dir="rtl" text-wrap>{{articleDetail.post_title}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content dir="rtl" parallex class="almarai-font">
-  <img class="bg article-bg cut-diagonal" src="assets/img/car-article.png">
-  <div class="main-cnt">
+  <img class="bg article-bg cut-diagonal" src="{{imageBaseUrl+banner}}">
+  <div [hidden]="!isLoading" class="main-cnt">
     <ion-item no-lines text-left>
-      <img item-right class="user-img" src="assets/img/profile-default.jpeg">
-      <div class="medium-text text-dark">Jonhy Vino<span margin-left class="small-font text-red">4 min ago</span></div>
+      <div class="medium-text text-dark">{{articleDetail.display_name}}</div>
+      <span dir="ltr" item-right margin-left class="small-font text-red">{{getDate()}}</span>
     </ion-item>
     <div padding class="bg-white">
-      <div class="bigger-text bold-font">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-      <div class="small-font text-dark">Today, we will present to you our test for a new star that charts the future of the next technological development in cars from German manufacturers, to familiarize you closely with the all-electric Audi E-Tron 2020 that raises the banner of challenge in the face of American Tesla cars.</div>
-      <div margin-top class="small-font text-dark">Although our Arab markets are still afraid of using fully electric cars, this is a future that most car makers focus on, and the star of today's episode will be one of the most successful advanced models</div>
-      <div margin-top class="small-font text-dark">Although our Arab markets are still afraid of using fully electric cars</div>
-      <div margin-top class="big-text bold-font">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-      <img margin-top src="assets/img/video.png">
-      <div margin-top class="small-font text-dark">Although our Arab markets are still afraid of using fully electric cars, this is a future that most car makers focus on, and the star of today's episode will be one of the most successful advanced models</div>
-      <div margin-top class="small-font text-dark">Although our Arab markets are still afraid of using fully electric cars</div>
-      <ion-slides margin-top pager dir="ltr" loop>
-        <ion-slide>
-          <img class="slider-img" src="assets/img/car-slide.png">
-        </ion-slide>
-        <ion-slide>
-          <img class="slider-img" src="assets/img/car-slide.png">
-        </ion-slide>
-        <ion-slide>
-          <img class="slider-img" src="assets/img/car-slide.png">
-        </ion-slide>
-      </ion-slides>
-      <div margin-top class="small-font text-dark">Although our Arab markets are still afraid of using fully electric cars, this is a future that most car makers focus on, and the star of today's episode will be one of the most successful advanced models</div>
-      <div margin-top class="small-font text-dark">Although our Arab markets are still afraid of using fully electric cars</div>
+      <div class="bigger-text bold-font">{{articleDetail.post_title}}</div>
+      <p style="line-height: 30px" text-wrap class="content-font text-dark" [innerHTML]="getSenitizedUrl(articleDetail.post_content)"></p>
       <div margin-top>
+        <ion-slides margin-top pager dir="ltr" loop>
+          <ion-slide *ngFor="let img of gallaryImages">
+            <img class="slider-img" src="{{imageBaseUrl+img}}">
+          </ion-slide>
+        </ion-slides>
+      </div>
+      <div *ngIf="tagList && tagList.length" margin-top>
         <span><button ion-button no-padding clear><ion-icon class="bigger-text text-red" name="md-pricetags"></ion-icon></button></span>
         <span *ngFor="let tag of tagList">
-          <button (click)="selectTag(tag)" class="set-bg-btn smallest-font" ion-button small round>{{tag.name}}</button>
+          <button (click)="selectTag(tag)" class="set-bg-btn small-font" ion-button small round>{{tag}}</button>
         </span>
       </div>
     </div>
-    <div margin class="recent-articles-txt text-red bold-font">RELATED ARTICLES</div>
+    <div *ngIf="releatedPost.length" margin class="recent-articles-txt big-text text-red bold-font">أخبار ذات صلة</div>
     <div class="row">
-      <ion-item no-lines no-padding col-6>
-        <img class="small-car" item-left src="assets/img/small-car.png">
+      <ion-item *ngFor="let related of releatedPost" no-lines no-padding (click)="openRelated(related)">
+        <img class="small-car" item-left src="{{imageBaseUrl+related.URL}}">
         <div>
-          <div text-wrap class="smallest-font bold-font">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines>
-            <img item-left class="user-small" src="assets/img/profile-default.jpeg">
-            <div class="smallest-font">Masudur Rehman</div>
-          </ion-item>
-        </div>
-      </ion-item>
-      <ion-item no-lines no-padding col-6>
-        <img class="small-car" item-left src="assets/img/small-car.png">
-        <div>
-          <div text-wrap class="smallest-font italic-font bold-font">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-          <ion-item no-lines>
-            <img item-left class="user-small" src="assets/img/profile-default.jpeg">
-            <div class="smallest-font">Masudur Rehman</div>
-          </ion-item>
+          <div text-wrap class="medium-text bold-font">{{related.Title}}</div>
+          <div style="margin-top: 5pt" class="small-font">{{related.UserName}}</div>
         </div>
       </ion-item>
     </div>
-    <div class="row" margin-bottom padding-bottom>
-    <ion-item no-lines no-padding col-6>
-      <img class="small-car" item-left src="assets/img/small-car.png">
-      <div>
-        <div text-wrap class="smallest-font bold-font">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-        <ion-item no-lines>
-          <img item-left class="user-small" src="assets/img/profile-default.jpeg">
-          <div class="smallest-font">Masudur Rehman</div>
-        </ion-item>
-      </div>
-    </ion-item>
-    <ion-item no-lines no-padding col-6>
-      <img class="small-car" item-left src="assets/img/small-car.png">
-      <div>
-        <div text-wrap class="smallest-font italic-font bold-font">Lorem Ipsum Is Simply Dummy Text Of The Printing</div>
-        <ion-item no-lines>
-          <img item-left class="user-small" src="assets/img/profile-default.jpeg">
-          <div class="smallest-font">Masudur Rehman</div>
-        </ion-item>
-      </div>
-    </ion-item>
-  </div>
   </div>
 </ion-content>
+<ion-footer dir="rtl" style="background: transparent" text-center>
+  <button class="small-font" (click)="share()" no-margin ion-button icon-start clear full>
+    <ion-icon margin-left name="ios-redo"></ion-icon>
+    <div>{{'Question.Share'|translate}}</div>
+  </button>
+</ion-footer>

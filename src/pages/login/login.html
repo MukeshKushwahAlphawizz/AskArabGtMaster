@@ -1,4 +1,8 @@
 <ion-content>
+  <div>
+    <!--<img (click)="back()" class="back-arrow" src="assets/img/ios-back.png">-->
+    <ion-icon class="back-arrow" (click)="back()" name="md-arrow-back"></ion-icon>
+  </div>
 <div text-center>
   <img class="logo-img" src="assets/img/logo.png">
   <h1 *ngIf="language==='ar'" dir="rtl">{{'Login.WelcomeBack'|translate}}</h1>

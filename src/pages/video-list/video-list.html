@@ -1,0 +1,28 @@
+<ion-content dir="rtl" parallex class="almarai-font">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div (click)="videoDetailPage(videoList[0])" class="header big-text bold-font text-white">{{videoList[0]?videoList[0].Title:''}}</div>
+  <ion-icon (click)="videoDetailPage(videoList[0])" class="play-icon-top" name="play"></ion-icon>
+  <img [hidden]="!isEmptyList" (click)="videoDetailPage(videoList[0])" class="bg cut-diagonal" [src]="videoList[0] && videoList[0].URL !==''?imageBaseUrl+videoList[0].URL:''">
+  <div text-center class="main-cnt">
+    <div class="article-list">
+      <div *ngFor="let video of videoList;let i=index">
+        <ion-item *ngIf="i!==0" no-lines (click)="videoDetailPage(video)">
+          <ion-icon class="play-icon" name="play"></ion-icon>
+          <img class="article-thumb" item-left no-margin [src]="video.URL !=='' ?imageBaseUrl+video.URL:'assets/img/small-car.png'">
+          <div>
+            <div text-wrap class="small-font bold-font" style="padding-top: 5pt">{{video.Title}}</div>
+            <ion-item no-lines no-padding>
+              <div class="small-font" style="color: #516171">{{video.UserName}}</div>
+              <div dir="ltr" item-right class="text-red small-font">{{getDate(video.Date)}}</div>
+            </ion-item>
+          </div>
+        </ion-item>
+      </div>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

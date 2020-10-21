@@ -9,7 +9,13 @@
     </ion-item>
     <div class="saparator"></div>
     <ion-list text-right padding class="ar-options-list">
-      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,0)" margin-top class="set-background" no-lines>
+
+      <ion-item text-right (click)="openNewsArticle()" margin-top class="set-background" no-lines>
+        <ion-icon class="ar-left-option-icon" style="padding: 5px 7px !important;" item-right name="paper"></ion-icon>
+        <h2 class="ar-option-label">{{'Menu.NewsArticles'|translate}}</h2>
+      </ion-item>
+
+      <ion-item text-right (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,0)" class="set-background" no-lines>
         <ion-icon class="ar-left-option-icon" item-right name="ios-home"></ion-icon>
         <h2 class="ar-option-label">{{'Menu.Home'|translate}}</h2>
       </ion-item>
@@ -91,7 +97,12 @@
     </ion-item>
     <div class="saparator"></div>
     <ion-list padding class="options-list">
-      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,0)" margin-top class="set-background" no-lines>
+      <ion-item (click)="openNewsArticle()" margin-top class="set-background" no-lines>
+        <ion-icon class="left-option-icon" style="padding: 5px 7px !important;" item-left name="paper"></ion-icon>
+        <h2 class="option-label">{{'Menu.NewsArticles'|translate}}</h2>
+      </ion-item>
+
+      <ion-item (click)="openPage({ title: 'Home', pageName: 'TabsPage', index: 1 }, true,0)" class="set-background" no-lines>
         <ion-icon class="left-option-icon" item-left name="ios-home"></ion-icon>
         <h2 class="option-label">{{'Menu.Home'|translate}}</h2>
       </ion-item>

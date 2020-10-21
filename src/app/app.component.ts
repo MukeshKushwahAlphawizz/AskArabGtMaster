@@ -16,7 +16,6 @@ export class MyApp {
   rootPage = '';
   dark: any = '';
   @ViewChild(Nav) navChild:Nav;
-  // rootPage = 'QuestionAnswerPage';
 
   constructor(private translate: TranslateService,
               public storage:Storage,
@@ -24,7 +23,10 @@ export class MyApp {
               public user : User,
               private deeplinks: Deeplinks,
               private util: UtilProvider,
-              public events : Events, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+              public events : Events,
+              private config: Config,
+              private statusBar: StatusBar,
+              private splashScreen: SplashScreen) {
     platform.ready().then(() => {
      this.statusBar.styleLightContent();
        setTimeout(()=>{
@@ -52,13 +54,20 @@ export class MyApp {
           this.dark = ''
         }
       })
-      storage.get('userData').then(data=>{
+      /*storage.get('userData').then(data=>{
         if(data){
           this.rootPage = 'SelectPage';
         }else {
           this.rootPage = 'LoginPage'
         }
-      });
+      });*/
+      this.storage.get('selectedCategories').then(data=>{
+        if (data){
+          this.rootPage = 'NewsTabsPage';
+        }else {
+          this.rootPage = 'SelectCategoryPage';
+        }
+      })
 
     });
 

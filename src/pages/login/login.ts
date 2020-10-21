@@ -135,7 +135,7 @@ export class LoginPage {
         this.storage.set('isNightMode',this.darkMode);
       }
       this.util.dismissLoading();
-      this.navCtrl.setRoot('SelectPage');
+      this.navCtrl.setRoot('MenuPage');
     }, (err) => {
       this.util.dismissLoading();
       this.util.presentToast(err.error.message);
@@ -252,5 +252,9 @@ export class LoginPage {
         this.isChecked = rememberData.isRemember;
       }
     })
+  }
+
+  back() {
+    this.navCtrl.pop();
   }
 }

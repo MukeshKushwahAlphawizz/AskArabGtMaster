@@ -76,7 +76,7 @@ export class SelectCategoryPage {
       }
     });
     this.storage.set('selectedCategories',categories).then(()=>{
-      this.navCtrl.push('NewsTabsPage');
+      this.navCtrl.setRoot('NewsTabsPage');
     });
   }
 }

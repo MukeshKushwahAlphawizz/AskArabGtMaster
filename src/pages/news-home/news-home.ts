@@ -4,7 +4,7 @@ import {Storage} from "@ionic/storage";
 import {UtilProvider} from "../../providers/util/util";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
 import {Content} from "ionic-angular";
-import {Events} from "ionic-angular/index";
+import {App, Events} from "ionic-angular/index";
 
 
 @IonicPage()
@@ -27,6 +27,7 @@ export class NewsHomePage {
               public api:NewsArticlesProvider,
               public util:UtilProvider,
               public event:Events,
+              public app: App,
               public navParams: NavParams) {
     this.event.subscribe('tagSelect', (value) => {
       this.tag = value;
@@ -70,7 +71,6 @@ export class NewsHomePage {
         this.util.presentLoading();
       }
       this.api.getAllNews(form).subscribe(res=>{
-        // console.log('response ===',res);
         let resp : any = res;
         if (resp.status){
           resolve(resp.data);
@@ -78,7 +78,9 @@ export class NewsHomePage {
           reject(false);
         }
         if (showLoader){
-          this.util.dismissLoading();
+          setTimeout(()=>{
+            this.util.dismissLoading();
+          },300);
         }
       },error => {
         console.error(error);
@@ -91,7 +93,7 @@ export class NewsHomePage {
   }
 
   newsDetailPage(news) {
-    this.navCtrl.push('NewsDetailPage',{postId:news.Postid,banner:news.URL});
+    this.app.getRootNav().push('NewsDetailPage',{postId:news.Postid,banner:news.URL});
   }
 
   changeCategory() {
