@@ -34,7 +34,7 @@ export class UtilProvider {
    ) {
     this.initTranslate();
     translateService.get("PleaseWait").subscribe(values => {
-      this.pleaseWait = values;
+      // this.pleaseWait = values;
     });
     events.subscribe('appLanguage', (value) => {
       this.initTranslate();
@@ -50,7 +50,7 @@ export class UtilProvider {
         this.translateService.use('ar');
       }
       this.translateService.get("PleaseWait").subscribe(values => {
-        this.pleaseWait = values;
+        // this.pleaseWait = values;
       });
     });
   }

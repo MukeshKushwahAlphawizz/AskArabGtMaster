@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {App, Tabs} from "ionic-angular/index";
+import {App, Events, Tabs} from "ionic-angular/index";
 import {Storage} from "@ionic/storage";
 
 
@@ -11,11 +11,11 @@ import {Storage} from "@ionic/storage";
 })
 export class NewsTabsPage {
   @ViewChild('newstabs') newstabs: Tabs;
-  tabIndex: any = 1;
+  tabIndex: any = 3;
   tab1Title: any = 'أخبار';
-  tab2Title: any = 'مقالات';
-  tab3Title: any = 'أشرطة فيديو';
-  tab4Title: any = 'Q&A';
+  tab2Title: any = 'تقارير';
+  tab3Title: any = 'فيديو';
+  tab4Title: any = 'المنتدى';
 
   tab1Root: any = 'NewsHomePage';
   tab2Root: any = 'NewsArticlePage';
@@ -25,7 +25,11 @@ export class NewsTabsPage {
   constructor(public navCtrl: NavController,
               public storage : Storage,
               public app: App,
+              public events: Events,
               public navParams: NavParams) {
+    events.subscribe('sequence',value=>{
+      this.setTabs(parseInt(value))
+    })
   }
 
   ionViewDidLoad() {
@@ -40,4 +44,17 @@ export class NewsTabsPage {
         }
       });
   }
+
+  setTabs(value) {
+    if (value === 0){
+      this.home();
+    }else {
+      try {
+        this.newstabs.select(value);
+      }catch (err){
+        // console.log(err);
+      }
+    }
+  }
+
 }

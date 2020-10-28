@@ -47,16 +47,16 @@ export class NewsHomePage {
   }
   ionViewDidLoad() {
     this.pageSize = 0;
-    this.storage.get('selectedCategories').then(data=>{
+    this.getNewsData('جديد الأخبار',true).then(succ=>{
+      this.newsList = succ;
+      this.pageSize = this.pageSize+1;
+      this.newsList.length? this.isEmptyList = false:this.isEmptyList = true;
+    }).catch(err=>{
+      this.newsList.length? this.isEmptyList = false:this.isEmptyList = true;
+    });
+    /*this.storage.get('selectedCategories').then(data=>{
       this.brands = data;
-      this.getNewsData('جديد الأخبار',true).then(succ=>{
-        this.newsList = succ;
-        this.pageSize = this.pageSize+1;
-        this.newsList.length? this.isEmptyList = false:this.isEmptyList = true;
-      }).catch(err=>{
-       this.newsList.length? this.isEmptyList = false:this.isEmptyList = true;
-      });
-    })
+    })*/
   }
 
   getNewsData(category,showLoader){
@@ -93,7 +93,11 @@ export class NewsHomePage {
   }
 
   newsDetailPage(news) {
-    this.app.getRootNav().push('NewsDetailPage',{postId:news.Postid,banner:news.URL});
+    /*let detailPageData = {postId:news.Postid,banner:news.URL};
+    this.storage.set('detailPageData',JSON.stringify(detailPageData)).then(()=>{
+      this.app.getRootNav().push('NewsMenuPage',{postId:news.Postid,banner:news.URL,type:1});
+    })*/
+    this.app.getRootNav().push('NewsMenuPage',{postId:news.Postid,banner:news.URL,type:3});
   }
 
   changeCategory() {
@@ -111,7 +115,7 @@ export class NewsHomePage {
 
   doRefresh(refresher) {
     this.pageSize=0;
-    this.getNewsData(this.selectedCategory,false).then(succ=>{
+    this.getNewsData(this.selectedCategory ==='اختر الفئة'?'جديد الأخبار':this.selectedCategory,false).then(succ=>{
       refresher.complete();
       this.newsList = succ;
       this.pageSize = this.pageSize+1;
@@ -126,7 +130,7 @@ export class NewsHomePage {
   }
 
   doInfinite(infiniteScroll) {
-    this.getNewsData(this.selectedCategory,false).then(succ=>{
+    this.getNewsData(this.selectedCategory ==='اختر الفئة'?'جديد الأخبار':this.selectedCategory,false).then(succ=>{
       infiniteScroll.complete();
       let res : any = succ
       this.newsList = [...this.newsList,...res];
@@ -142,6 +146,8 @@ export class NewsHomePage {
     return this.util.timeSince(new Date(date).getTime());
   }
   scrollToTop() {
-    this.content.scrollToTop();
+    if (this.content){
+      this.content.scrollToTop();
+    }
   }
 }

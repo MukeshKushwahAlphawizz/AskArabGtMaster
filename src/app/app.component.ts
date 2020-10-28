@@ -13,7 +13,7 @@ import {UtilProvider} from "../providers/util/util";
   template: `<ion-nav [ngClass]="dark" #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage = '';
+  rootPage = 'NewsTabsPage';
   dark: any = '';
   @ViewChild(Nav) navChild:Nav;
 
@@ -61,13 +61,13 @@ export class MyApp {
           this.rootPage = 'LoginPage'
         }
       });*/
-      this.storage.get('selectedCategories').then(data=>{
+      /*this.storage.get('selectedCategories').then(data=>{
         if (data){
           this.rootPage = 'NewsTabsPage';
         }else {
           this.rootPage = 'SelectCategoryPage';
         }
-      })
+      })*/
 
     });
 

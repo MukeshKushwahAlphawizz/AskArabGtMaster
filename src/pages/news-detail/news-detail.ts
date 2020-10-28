@@ -39,8 +39,10 @@ export class NewsDetailPage {
   }
 
   selectTag(tag: any) {
-    this.event.publish('tagSelect',tag);
-    this.viewController.dismiss();
+    this.back();
+    setTimeout(()=>{
+      this.event.publish('tagSelect',tag);
+    },500)
   }
   getSenitizedUrl(html){
     return  this.sanitizer.bypassSecurityTrustHtml(html);
@@ -79,13 +81,18 @@ export class NewsDetailPage {
     this.banner = related.URL;
     this.getNewsDetails();
   }
+
   scrollToTop() {
     this.content.scrollToTop();
   }
 
   share() {
-    this.socialSharing.share('ArabGT: '+'\n News :'+this.newsDetail.post_title,'', [],'').then((succ) => {
+    this.socialSharing.share('ArabGT: '+'\n News :'+this.newsDetail.post_title,'', [],'https://arabgt.com/?p='+this.postId).then((succ) => {
     }).catch((err) => {
     });
+  }
+
+  back() {
+    this.event.publish('backToHome','3');
   }
 }

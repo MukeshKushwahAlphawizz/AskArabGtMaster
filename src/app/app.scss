@@ -345,3 +345,23 @@ color: #CD1C2B !important;
 .almarai-font{
   font-family: Almarai;
 }
+.header-top{
+  position: absolute;
+  background: transparent;
+  z-index: 99999;
+  width: 100%;
+  .header-back-icon{
+    padding: 6px 10px;
+    font-size: 2.5rem;
+    margin: 6pt;
+    border-radius: 50%;
+    border: 1px solid #CD1C2B;
+  }
+  .header-menu-icon{
+    font-size: 2.5rem;
+  }
+  .right{
+    float: right;
+    padding: 10pt 15pt;
+  }
+}

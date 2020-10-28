@@ -1,0 +1,25 @@
+page-news-menu {
+  .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input, .item-md ion-icon[item-start] + .item-inner, .item-md ion-icon[item-start] + .item-input{
+    margin-left: 0px !important;
+  }
+  .main{
+    padding-top: 60pt !important;
+  }
+  .options-list{
+    padding-top: 60pt !important;
+    padding-right: 40pt !important;
+  }
+  .set-background{
+    background: transparent;
+  }
+  .dark .set-background{
+    background: transparent !important;
+  }
+  .left-option-icon{
+    font-size: 3rem !important;
+    color: #CD1C2B;
+  }
+  .option-label{
+    font-size: 1.7rem;
+  }
+}

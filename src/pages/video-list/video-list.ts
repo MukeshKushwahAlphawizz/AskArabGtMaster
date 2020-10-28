@@ -61,7 +61,8 @@ export class VideoListPage {
   }
 
   videoDetailPage(video) {
-    this.app.getRootNav().push('VideoDetailPage',{postId:video.Postid,banner:video.URL});
+    this.app.getRootNav().push('NewsMenuPage',{postId:video.Postid,banner:video.URL,type:1});
+    // this.app.getRootNav().push('VideoDetailPage',{postId:video.Postid,banner:video.URL});
   }
 
   getVideoList(isRefresh) {

@@ -40,8 +40,10 @@ export class ArticleDetailPage {
   }
 
   selectTag(tag: any) {
-    this.event.publish('tagSelectArticle',tag);
-    this.viewController.dismiss();
+    this.back();
+    setTimeout(()=>{
+      this.event.publish('tagSelectArticle',tag);
+    },500)
   }
   getSenitizedUrl(html){
     return  this.sanitizer.bypassSecurityTrustHtml(html);
@@ -88,8 +90,12 @@ export class ArticleDetailPage {
   }
 
   share() {
-    this.socialSharing.share('ArabGT: '+'\n Review :'+this.articleDetail.post_title,'', [],'').then((succ) => {
+    this.socialSharing.share('ArabGT: '+'\n Review :'+this.articleDetail.post_title,'', [],'https://arabgt.com/?p='+this.postId).then((succ) => {
     }).catch((err) => {
     });
+  }
+
+  back() {
+    this.event.publish('backToHome','2');
   }
 }

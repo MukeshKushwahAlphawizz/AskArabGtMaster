@@ -6,12 +6,6 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
 import {SocialSharing} from "@ionic-native/social-sharing";
 
-/**
- * Generated class for the VideoDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -23,15 +17,21 @@ export class VideoDetailPage {
   @ViewChild(Content) content: Content;
   tagList: any = [];
   gallaryImages :any = [];
-  releatedPost :any = [];
+  videoList: any = [];
   videoUrl:any = '';
   videoDetail:any={}
   imageBaseUrl : any = 'https://www.arabgt.com/wp-content/uploads/';
   banner:any='';
   isLoading:boolean=false;
+  isLoader:boolean=false;
   postId: any = '';
   isPlayVideo: boolean = false;
   videoUrlArr: any = [];
+
+  pageSize:any=0;
+  pageNumber:any=5;
+  isEmptyList: boolean = false;
+
   constructor(public navCtrl: NavController,
               public util : UtilProvider,
               public event : Events,
@@ -45,12 +45,15 @@ export class VideoDetailPage {
   }
 
   ionViewDidLoad() {
+    this.pageSize = 0;
     this.getNewsDetails();
   }
 
   selectTag(tag: any) {
-    this.event.publish('tagVideoSelect',tag);
-    this.viewController.dismiss();
+    this.back();
+    setTimeout(()=>{
+      this.event.publish('tagVideoSelect',tag);
+    },500)
   }
   getSenitizedUrl(html){
     return  this.sanitizer.bypassSecurityTrustHtml(html);
@@ -70,7 +73,20 @@ export class VideoDetailPage {
 
         this.tagList = resp.TagName;
         this.gallaryImages = resp.Gallery;
-        this.releatedPost = resp.RelatedPost;
+        // this.releatedPost = resp.RelatedPost;
+
+        this.getRelatedVideos(false).then(result=>{
+          this.videoList = result;
+          this.videoList = this.videoList.filter(item=>{
+            if (this.postId !== item.Postid){
+              return item;
+            }
+          })
+          this.pageSize = this.pageSize+1;
+          this.videoList.lenght?this.isEmptyList=false:this.isEmptyList=true;
+        }).catch(err=>{
+          this.videoList.lenght?this.isEmptyList=false:this.isEmptyList=true;
+        })
       }
       setTimeout(()=>{
         this.scrollToTop();
@@ -90,6 +106,7 @@ export class VideoDetailPage {
   openRelated(related: any) {
     this.postId = related.Postid;
     this.banner = related.URL;
+    this.pageSize++;
     this.getNewsDetails();
   }
   scrollToTop() {
@@ -100,8 +117,54 @@ export class VideoDetailPage {
     this.isPlayVideo = true;
   }
   share() {
-    this.socialSharing.share('ArabGT: '+'\n News :'+this.videoDetail.post_title,'', [],'').then((succ) => {
+    this.socialSharing.share('ArabGT: '+'\n News :'+this.videoDetail.post_title,'', [],'https://arabgt.com/?p='+this.postId).then((succ) => {
     }).catch((err) => {
     });
+  }
+
+  getRelatedVideos(isRefresh) {
+    return new Promise((resolve, reject) => {
+      if (isRefresh){
+        this.isLoader = true;
+      }
+      let formData = new FormData();
+      formData.append('pageSize',this.pageSize);
+      formData.append('pageNumber',this.pageNumber);
+      /*formData.append('tag',this.tag);*/
+      this.api.getAllVideos(formData).subscribe(res=>{
+        if (isRefresh){
+          setTimeout(()=>{
+            this.isLoader = false;
+          },300);
+        }
+        let resp:any = res;
+        if (resp.status){
+          resolve(resp.data);
+        }else {
+          this.util.presentToast('لا توجد بيانات متاحة');
+          reject(false);
+        }
+      },error => {
+        reject(false);
+        if (isRefresh){
+          this.isLoader = false;
+        }
+      });
+    })
+  }
+
+  loadMore() {
+    this.getRelatedVideos(true).then(result=>{
+      let res : any = result
+      this.videoList = [...this.videoList,...res];
+      this.pageSize = this.pageSize+1;
+      this.videoList.lenght?this.isEmptyList=false:this.isEmptyList=true;
+    }).catch(err=>{
+      this.videoList.lenght?this.isEmptyList=false:this.isEmptyList=true;
+    })
+  }
+
+  back() {
+    this.event.publish('backToHome','1');
   }
 }

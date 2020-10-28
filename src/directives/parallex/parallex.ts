@@ -32,6 +32,8 @@ export class ParallexDirective {
   update(ev){
     if(ev.scrollTop>0){
       this.ta=ev.scrollTop/2;
+    }else {
+      this.ta = 0;
     }
     this.re.setElementStyle(this.header,'webkitTransform','translate3d(0,'+ this.ta +'px,0) scale(1,1)')
   }

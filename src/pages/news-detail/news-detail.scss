@@ -1,5 +1,4 @@
 page-news-detail {
-
   .article-bg{
     width: 100%;
   }
@@ -56,5 +55,7 @@ page-news-detail {
     height: 200pt!important;
     padding: 10pt 0;
   }
-
+  .bar-buttons-md, .bar-buttons-ios{
+    background: transparent !important;
+  }
 }

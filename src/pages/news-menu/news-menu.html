@@ -1,0 +1,31 @@
+<ion-menu dir="rtl" side="right" [ngClass]="dark" [content]="content" type="overlay">
+  <ion-content class="main">
+    <ion-list padding class="options-list">
+      <ion-item (click)="back('3')" class="set-background" margin-top>
+        <ion-icon class="left-option-icon" style="padding: 5px 7px !important;" item-left name="md-paper"></ion-icon>
+        <h1 class="option-label">المنتدى</h1>
+      </ion-item>
+      <ion-item (click)="back('2')" margin-top class="set-background">
+        <ion-icon class="left-option-icon" style="padding: 5px 7px !important;" item-left name="ios-paper"></ion-icon>
+        <h1 class="option-label">فيديو</h1>
+      </ion-item>
+      <ion-item (click)="back('1')" margin-top class="set-background">
+        <ion-icon class="left-option-icon" style="padding: 5px 7px !important;" item-left name="logo-youtube"></ion-icon>
+        <h1 class="option-label">تقارير</h1>
+      </ion-item>
+      <ion-item (click)="back('0')" margin-top class="set-background">
+        <ion-icon class="left-option-icon" style="padding: 5px 7px !important;" item-left name="chatboxes"></ion-icon>
+        <h1 class="option-label">أخبار</h1>
+      </ion-item>
+      <ion-item (click)="openUrl('https://sayartii.com/')" class="set-background" margin-top padding-top>
+        <div class="bigger-text">بيع و شراء السيارات</div>
+        <div class="medium-font"><a href="">https://sayartii.com/</a></div>
+      </ion-item>
+      <ion-item (click)="openUrl('https://aeperf.com/')" class="set-background" margin-top>
+        <div class="bigger-text">شراء قطع سيارات</div>
+        <div class="medium-font"><a href="">https://aeperf.com/</a></div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>

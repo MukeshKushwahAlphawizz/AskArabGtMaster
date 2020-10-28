@@ -55,7 +55,8 @@ export class NewsArticlePage {
   }
 
   articleDetailPage(article) {
-    this.app.getRootNav().push('ArticleDetailPage',{postId:article.Postid,banner:article.URL});
+    this.app.getRootNav().push('NewsMenuPage',{postId:article.Postid,banner:article.URL,type:2});
+    // this.app.getRootNav().push('ArticleDetailPage',{postId:article.Postid,banner:article.URL});
   }
 
   getBrandList() {
