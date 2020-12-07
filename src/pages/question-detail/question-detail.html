@@ -39,8 +39,8 @@
     <div *ngIf="questionData.poll && questionData.poll.length > 0 && language == 'ar'" dir="rtl">
       <ion-list dir="rtl" *ngIf="questionData.poll_vote_status =='false'" radio-group>
         <ion-item dir="rtl" *ngFor="let item of questionData.poll;let i = index">
-          <ion-label>{{item}}</ion-label>
-          <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+          <ion-label>{{item.title}}</ion-label>
+          <ion-radio (ionSelect)="selectPoll($event)" value="{{item.title}}"></ion-radio>
         </ion-item>
       </ion-list>
       <!--Progress Poll-->
@@ -58,8 +58,8 @@
     <div *ngIf="questionData.poll && questionData.poll.length > 0 && language !== 'ar'">
       <ion-list dir="rtl" *ngIf="questionData.poll_vote_status =='false'" radio-group>
         <ion-item *ngFor="let item of questionData.poll;let i = index">
-          <ion-label>{{item}}</ion-label>
-          <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+          <ion-label>{{item.title}}</ion-label>
+          <ion-radio (ionSelect)="selectPoll($event)" value="{{item.title}}"></ion-radio>
         </ion-item>
       </ion-list>
       <!--Progress Poll-->
@@ -75,8 +75,11 @@
       </div>
     </div>
     <!--End Poll-->
-
-    <img #myImage (click)="viewImage(myImage)" class="post-img" *ngIf="questionData.image_link && questionData.image_link !== ''" [src]="questionData.image_link">
+    <img #myImage (click)="viewImage(myImage)" class="post-img"
+         *ngIf="questionData.image_link &&
+          questionData.image_link !== '' &&
+          questionData.image_link !== 'https://ask.arabgt.com/wp-content/uploads/ '"
+         [src]="questionData.image_link">
     <iframe *ngIf="questionData.video_link !==''" margin-top margin-bottom width="100%" height="250" [src]="questionData.video_link | safe" frameborder="0"  allowfullscreen></iframe>
     <!--<div *ngIf="language==='ar'" class="row option-div">
       <div no-padding col-4 text-right><a class="set-small-icon"><ion-icon class="text-grey" name="md-help"></ion-icon></a><span class="text-grey small-text">{{questionData.category}}</span></div>

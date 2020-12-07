@@ -56,7 +56,13 @@ export class VideoDetailPage {
     },500)
   }
   getSenitizedUrl(html){
-    return  this.sanitizer.bypassSecurityTrustHtml(html);
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+  returnSenitizedUrl(url){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
+  returnSenitizedUrl1(url){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   getNewsDetails(){

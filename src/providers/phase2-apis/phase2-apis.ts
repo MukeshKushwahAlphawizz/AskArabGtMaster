@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Phase2ApisProvider {
-  url: string = 'https://arabgt.wpstagecoach.com/arabgt/application/index.php/Api/';
+  // url: string = 'https://arabgt.wpstagecoach.com/arabgt/application/index.php/Api/'; //stage
+  url: string = 'https://www.arabgt.com/app/news-app/application/index.php/Api/'; //live
 
   constructor(public http: HttpClient) {
   }

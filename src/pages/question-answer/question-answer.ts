@@ -69,6 +69,10 @@ export class QuestionAnswerPage {
   }
 
   gotoQuestionDetail(question) {
+    console.log('question is >>>>>>>>',question);
+    if (question.poll[0] && question.poll[0].title === '' && question.poll[0] && question.poll[0].value === ''){
+      question.poll = [];
+    }
     let modal = this.modalCtrl.create('QuestionAnswerDetailPage',{question:question,isOtherUser:this.isOtherUserProfile});
     modal.onDidDismiss(data => {
       if (data && data.reload){
@@ -176,7 +180,9 @@ export class QuestionAnswerPage {
     this.user.getQuestionByIdData(data).subscribe(res =>{
       let response : any = res;
       if (response.status){
-        // console.log(response.data[0]);
+        if (response.data[0].poll[0] && response.data[0].poll[0].title === '' && response.data[0].poll[0] && response.data[0].poll[0].value === ''){
+          response.data[0].poll = [];
+        }
         this.navCtrl.push('QuestionDetailPage',{question:response.data[0]})
       }
       this.util.dismissLoading();

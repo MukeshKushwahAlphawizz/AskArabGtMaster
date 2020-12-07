@@ -18,11 +18,13 @@ export class MyProfilePage {
   isOtherUserProfile:boolean = false;
   otherUserId:string = '';
   userData:any={}
+  userProfileData:any={}
   myId: any = '';
   followText: string = '';
   FOLLOW: string = '';
   FOLLOWED: string = '';
   language: string = 'ar';
+  userDataStorage: any = {};
 
   constructor(public navCtrl: NavController,
               public storage : Storage,
@@ -47,6 +49,7 @@ export class MyProfilePage {
     if (!this.isOtherUserProfile){
       this.storage.get('userData').then(data=>{
         let userData = JSON.parse(data);
+        this.userDataStorage = JSON.parse(data);
         this.getMyProfileData(userData.ID);
       })
     }else {
@@ -66,20 +69,30 @@ export class MyProfilePage {
   }
 
   openAskQuestion() {
-    if(this.userData.ID){
+    // console.log('this.myId',this.myId);
+    if(this.myId){
       this.navCtrl.push('QuestionUserPage',{myId:this.myId,userData:this.userData});
     }
   }
   getMyProfileData(id) {
     let formData = new FormData();
     formData.append('user_id',id);
-
-    // this.util.presentLoading();
     this.user.getProfile(formData).subscribe((resp) => {
-      // this.util.dismissLoading();
       let response : any = resp;
       if(response.data){
         this.userData = response.data;
+        this.userProfileData = response.user_profile;
+        this.userDataStorage.mobile_no=this.userProfileData.phone;
+        this.userDataStorage.user_dob=this.userProfileData.age;
+        this.userDataStorage.my_bio=this.userProfileData.description;
+        this.userDataStorage.user_gender=this.userProfileData.sex;
+        this.userDataStorage.select_country=this.userProfileData.country;
+        this.userDataStorage.user_address=this.userProfileData.user_address;
+        this.userDataStorage.user_login=this.userProfileData.user_login;
+        this.userDataStorage.first_name=this.userProfileData.first_name;
+        this.userDataStorage.last_name=this.userProfileData.last_name;
+        this.userDataStorage.user_profile=this.userData.user_profile;
+        this.storage.set('userData',JSON.stringify(this.userDataStorage));
       }
     }, (err) => {
       console.error('ERROR :', err);
@@ -91,20 +104,17 @@ export class MyProfilePage {
     let formData = new FormData();
     formData.append('user_id',this.otherUserId);
     formData.append('my_id',this.myId);
-
-    // this.util.presentLoading();
     this.user.getOthersProfile(formData).subscribe((resp) => {
-      // this.util.dismissLoading();
       let response : any = resp;
       if(response.data){
         this.userData = response.data;
+        this.userProfileData = response.user_profiles;
         if(this.userData.follow_status && this.userData.follow_status == 'true'){
           this.followText = this.FOLLOWED;
         }
       }
     }, (err) => {
       console.error('ERROR :', err);
-      // this.util.dismissLoading();
     });
   }
 

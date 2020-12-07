@@ -6,9 +6,8 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  // url: string = 'http://15.206.103.57/Arabgt/Api/';
-  url: string = 'https://alphawizz.com/Arabgt/Api/';
-
+  // url: string = 'https://alphawizz.com/Arabgt/Api/'; //stage
+  url: string = 'http://www.arabgt.com/app/qa-app/index.php/Api/'; //live
   constructor(public http: HttpClient) {
   }
 

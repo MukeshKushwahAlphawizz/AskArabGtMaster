@@ -47,7 +47,7 @@ export class NewsHomePage {
   }
   ionViewDidLoad() {
     this.pageSize = 0;
-    this.getNewsData('جديد الأخبار',true).then(succ=>{
+    this.getNewsData('',true).then(succ=>{
       this.newsList = succ;
       this.pageSize = this.pageSize+1;
       this.newsList.length? this.isEmptyList = false:this.isEmptyList = true;
@@ -68,7 +68,7 @@ export class NewsHomePage {
       form.append('tag',this.tag);
       form.append('brands',this.brands);
       if (showLoader){
-        this.util.presentLoading();
+        this.util.presentLoader();
       }
       this.api.getAllNews(form).subscribe(res=>{
         let resp : any = res;
@@ -79,13 +79,13 @@ export class NewsHomePage {
         }
         if (showLoader){
           setTimeout(()=>{
-            this.util.dismissLoading();
+            this.util.dismissLoader();
           },300);
         }
       },error => {
         console.error(error);
         if (showLoader){
-          this.util.dismissLoading();
+          this.util.dismissLoader();
         }
         reject(false)
       })
@@ -115,7 +115,7 @@ export class NewsHomePage {
 
   doRefresh(refresher) {
     this.pageSize=0;
-    this.getNewsData(this.selectedCategory ==='اختر الفئة'?'جديد الأخبار':this.selectedCategory,false).then(succ=>{
+    this.getNewsData(this.selectedCategory ==='اختر الفئة'?'':this.selectedCategory,false).then(succ=>{
       refresher.complete();
       this.newsList = succ;
       this.pageSize = this.pageSize+1;
@@ -130,7 +130,7 @@ export class NewsHomePage {
   }
 
   doInfinite(infiniteScroll) {
-    this.getNewsData(this.selectedCategory ==='اختر الفئة'?'جديد الأخبار':this.selectedCategory,false).then(succ=>{
+    this.getNewsData(this.selectedCategory ==='اختر الفئة'?'':this.selectedCategory,false).then(succ=>{
       infiniteScroll.complete();
       let res : any = succ
       this.newsList = [...this.newsList,...res];

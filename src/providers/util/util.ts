@@ -61,13 +61,31 @@ export class UtilProvider {
       this.loading = this.loadingCtrl.create({
         spinner: 'bubbles',
         content: this.pleaseWait,
-        duration: 10000
+        duration: 15000
+      });
+      this.loading.present();
+    }
+  }
+
+  presentLoader() {
+    if (this.loading){
+      this.dismissLoading();
+    }else{
+      this.loading = this.loadingCtrl.create({
+        spinner: 'bubbles',
+        content: this.pleaseWait,
       });
       this.loading.present();
     }
   }
 
   dismissLoading(){
+    if(this.loading) {
+      this.loading.dismiss();
+      this.loading = null;
+    }
+  }
+  dismissLoader(){
     if(this.loading) {
       this.loading.dismiss();
       this.loading = null;

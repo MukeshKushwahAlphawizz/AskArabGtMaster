@@ -23,9 +23,9 @@
       <!--Poll-->
       <div margin-top *ngIf="!isOtherUserProfile && questionData.poll && questionData.poll.length > 0">
         <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>
-          <ion-item *ngFor="let item of questionData.poll;let i = index">
-            <ion-label>{{item}}</ion-label>
-            <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+          <ion-item *ngFor="let item of questionData.poll">
+            <ion-label>{{item.title}}</ion-label>
+            <ion-radio (ionSelect)="selectPoll($event)" value="{{item.title}}"></ion-radio>
           </ion-item>
         </ion-list>
         <!--Progress Poll-->
@@ -91,9 +91,9 @@
       <!--Poll-->
       <div margin-top *ngIf="!isOtherUserProfile && questionData.poll && questionData.poll.length > 0">
         <ion-list *ngIf="questionData.poll_vote_status =='false'" radio-group>
-          <ion-item *ngFor="let item of questionData.poll;let i = index">
-            <ion-label>{{item}}</ion-label>
-            <ion-radio (ionSelect)="selectPoll($event)" value="option{{i+1}}"></ion-radio>
+          <ion-item *ngFor="let item of questionData.poll">
+            <ion-label>{{item.title}}</ion-label>
+            <ion-radio (ionSelect)="selectPoll($event)" value="{{item.title}}"></ion-radio>
           </ion-item>
         </ion-list>
         <!--Progress Poll-->

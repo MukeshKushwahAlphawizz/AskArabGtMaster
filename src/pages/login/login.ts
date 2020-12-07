@@ -126,7 +126,8 @@ export class LoginPage {
       console.log(response);
       if(response.data.user_profile !== ''){
         let img = response.data.user_profile.substring(2);
-        response.data.user_profile = 'https://alphawizz.com/Arabgt/'+img;
+        // response.data.user_profile = 'https://alphawizz.com/Arabgt/'+img; //stage
+        response.data.user_profile = 'http://www.arabgt.com/app/qa-app/index.php/'+img; //live
       }
       this.storage.set('userData', JSON.stringify(response.data));
       this.storage.set('userId', response.data.ID);

@@ -212,8 +212,9 @@
       </div>
 
       <ion-item>
-        <ion-label class="text-grey" style="font-size: 1.2rem" floating>{{'EditProfile.DOB'|translate}}</ion-label>
-        <ion-datetime formControlName="datebirth" class="text-grey" value="1990-02-19"></ion-datetime>
+        <input formControlName="datebirth" placeholder="{{'EditProfile.DOB'|translate}}" class="text-grey full-input" type="number">
+        <!--<ion-label class="text-grey" style="font-size: 1.2rem" floating>{{'EditProfile.DOB'|translate}}</ion-label>
+        <ion-datetime formControlName="datebirth" class="text-grey" value="1990-02-19"></ion-datetime>-->
       </ion-item>
 
       <div class="error-messages">
@@ -243,7 +244,8 @@
   </form>
 
   <div padding text-center>
-    <button class="save" ion-button round [disabled]="profileForm.invalid" (click)="save()">{{'EditProfile.SAVEANDEXIT'|translate}}</button>
+    <!--<button class="save" ion-button round [disabled]="profileForm.invalid" (click)="save()">{{'EditProfile.SAVEANDEXIT'|translate}}</button>-->
+    <button class="save" ion-button round (click)="save()">{{'EditProfile.SAVEANDEXIT'|translate}}</button>
     <button *ngIf="fromSignUp" margin-left class="save" ion-button round (click)="skip()">{{'EditProfile.SKIP'|translate}}</button>
   </div>
 </ion-content>

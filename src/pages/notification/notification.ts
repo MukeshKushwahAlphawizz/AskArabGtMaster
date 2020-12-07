@@ -166,7 +166,9 @@ export class NotificationPage {
     this.user.getQuestionByIdData(data).subscribe(res =>{
       let response : any = res;
       if (response.status){
-        // console.log(response.data[0]);
+        if (response.data[0].poll[0] && response.data[0].poll[0].title === '' && response.data[0].poll[0] && response.data[0].poll[0].value === ''){
+          response.data[0].poll = [];
+        }
         this.navCtrl.push('QuestionDetailPage',{question:response.data[0]})
       }else {
         this.util.presentToast(this.QuestionNotExist);

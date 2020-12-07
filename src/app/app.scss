@@ -365,3 +365,25 @@ color: #CD1C2B !important;
     padding: 10pt 15pt;
   }
 }
+
+.header-back-icon{
+  padding: 9px 10px !important;
+  font-size: 2.5rem !important;
+  margin: 6pt;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+.bar-button-ios{
+  height: 44px!important;
+}
+.list-ios > .item-block:first-child{
+  border-top: none;
+}
+ion-footer{
+  margin-top: env(safe-area-inset-top);
+  margin-bottom: env(safe-area-inset-bottom);
+  background: white!important;
+}
+.dark ion-footer{
+  background-color: #000 !important;
+}

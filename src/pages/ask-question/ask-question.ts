@@ -50,7 +50,7 @@ export class AskQuestionPage {
   imageName: string = '';
   UploadImage: string = '';
   categoryList :any = [];
-  videoTypeList:any = [{name:''},{name:'YouTube'},{name:'Vimeo'},{name:'Dailymotion'},{name:'Facebook'}]
+  videoTypeList:any = [{name:''},{name:'youtube'},{name:'vimeo'},{name:'dailymotion'},{name:'facebook'}]
   questionInfo:any={
     post_title:"",
     post_content:"",
@@ -147,9 +147,9 @@ export class AskQuestionPage {
       this.user.uploadImageData({upload_file:data}).subscribe((resp) => {
         let response: any = resp;
         if (response.status){
-          resolve(response.message);
+          resolve(response);
         }else {
-          reject(response.message);
+          reject(response);
         }
       },error => {
         reject(error);
@@ -163,8 +163,9 @@ export class AskQuestionPage {
       return;
     }
     this.util.presentLoading();
-    this.uploadImage(this.questionInfo.upload_file).then(url=>{
-      this.questionInfo.upload_file = url;
+    this.uploadImage(this.questionInfo.upload_file).then(data=>{
+      let imageData :any = data;
+      this.questionInfo.upload_file = imageData.message;
       this.questionInfo['Poll[]'] = [];
       this.pollArray.filter(item =>{
         this.questionInfo['Poll[]'].push(item.item);
@@ -180,6 +181,7 @@ export class AskQuestionPage {
       formData.append('Poll[]',this.questionInfo['Poll[]']);
       formData.append('VedioType',this.questionInfo.VedioType);
       formData.append('Link',this.questionInfo.Link);
+      formData.append('imagename',imageData.imagename?imageData.imagename:'');
 
       this.user.addQuestion(formData).subscribe((resp) => {
         let response :any = resp;

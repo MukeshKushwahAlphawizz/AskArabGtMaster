@@ -1,16 +1,33 @@
 <ion-header class="almarai-font">
-  <div class="header-top" dir="ltr">
+  <!--<div class="header-top" dir="ltr">
     <ion-icon (click)="back()" class="header-back-icon text-red" name="md-arrow-back"></ion-icon>
     <span menuToggle class="right"><ion-icon class="text-red header-menu-icon" name="md-menu"></ion-icon></span>
-  </div>
+  </div>-->
+  <ion-navbar>
+    <ion-buttons left>
+      <button (click)="back()" ion-button icon-only>
+        <ion-icon class="header-back-icon text-white" name="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only menuToggle>
+        <ion-icon class="white header-icon" name="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content dir="rtl" class="almarai-font">
   <div [hidden]="!isLoading" class="main-cnt">
     <div *ngFor="let urlVideo of videoUrlArr; let i = index ">
       <div>
+        <!--<blockquote class="bg embedly-card" data-card-key="57209a61cba14abeac6d2fce14dbf5f9" data-card-controls="0"
+                    data-card-branding="0"><h4><a [href]="returnSenitizedUrl(urlVideo)"></a></h4></blockquote>
+-->
+        <!--<blockquote class="bg embedly-card" data-card-key="57209a61cba14abeac6d2fce14dbf5f9" data-card-controls="0"
+                    data-card-branding="0"><h4><a [href]="getSenitizedUrl(urlVideo)"></a></h4></blockquote>-->
         <blockquote class="bg embedly-card" data-card-key="57209a61cba14abeac6d2fce14dbf5f9" data-card-controls="0"
-                    data-card-branding="0"><h4><a href="{{urlVideo}}"></a></h4></blockquote>
+                    data-card-branding="0"><h4><a [href]="(urlVideo) | safe"></a></h4></blockquote>
         <div *ngIf="i==0">
           <ion-item no-lines text-left>
             <!--<img item-right class="user-img" src="assets/img/profile-default.jpeg">-->

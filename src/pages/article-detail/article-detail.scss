@@ -25,7 +25,10 @@ page-article-detail {
     margin-bottom: 15pt;
   }
   .small-car{
-    height: 38pt;width: 38pt;object-fit: contain;padding: 0!important;
+    height: 60pt !important;
+    width: 60pt;
+    object-fit: cover !important;
+    padding: 0 !important;
   }
   .label{
     margin: 0;
@@ -42,7 +45,7 @@ page-article-detail {
     width: 100%;
     img {
       object-fit: contain;
-      height: auto !important;
+      height: auto;
       padding: 10pt;
     }
   }

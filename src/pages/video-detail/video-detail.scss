@@ -45,7 +45,6 @@ page-video-detail {
   }
   .main-cnt{
     width: 100%;
-    margin-top: 35pt;
     img {
       object-fit: contain;
       height: auto;
@@ -58,16 +57,17 @@ page-video-detail {
     padding: 10pt 0;
   }
   .view-more-div{
-    margin: 20pt;
+    margin: 30pt;
   }
   .play-icon{
     font-size: 2.5rem;
     border: 2px solid white;
     color: white;
     border-radius: 50%;
-    padding: 5pt 7pt 5pt 10pt;
+    padding: 5pt 8pt 5pt 11pt;
     position: absolute;
-    right: 22pt;
+    right: 21pt;
+    top: 16pt;
     margin-top: 3pt;
     font-weight: bold;
   }

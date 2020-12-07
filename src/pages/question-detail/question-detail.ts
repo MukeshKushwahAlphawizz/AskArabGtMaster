@@ -31,7 +31,7 @@ export class QuestionDetailPage {
   isVideoNeeded: boolean = false;
   userData :any = '';
   questionData : any = [];
-  videoTypeList:any = [{name:''},{name:'YouTube'},{name:'Vimeo'},{name:'Dailymotion'},{name:'Facebook'}];
+  videoTypeList:any = [{name:''},{name:'youtube'},{name:'vimeo'},{name:'dailymotion'},{name:'facebook'}];
   vedioType: any = '';
   videoLink: any = '';
   answer: string = '';

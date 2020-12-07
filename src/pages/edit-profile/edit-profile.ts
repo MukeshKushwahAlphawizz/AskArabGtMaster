@@ -141,7 +141,20 @@ export class EditProfilePage {
       let response :any = resp;
       this.util.dismissLoading();
       if(response.status){
-        this.storage.set('userData', JSON.stringify(response.all_activities))
+        let user : any = response.all_activities;
+
+        this.userData.user_gender = user.sex;
+        this.userData.my_bio = user.description;
+        this.userData.mobile_no = user.phone;
+        this.userData.user_address = user.user_address;
+        this.userData.first_name = user.first_name;
+        this.userData.last_name = user.last_name;
+        this.userData.select_country = user.country;
+        this.userData.select_state = user.state;
+        this.userData.user_login = user.user_login;
+        this.userData.user_dob = user.age;
+
+        this.storage.set('userData', JSON.stringify(this.userData))
         this.util.presentToast(this.ProfileEditedSuccessfully);
         this.fromSignUp?this.navCtrl.setRoot('MenuPage'):this.viewCtrl.dismiss();
       }else {

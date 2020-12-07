@@ -104,8 +104,13 @@ export class SubmitAnswerPage {
           this.questionData.answer_data.push(pushData);
           this.util.presentToast(this.commonTexts.Answer_Added_Successfully);
           this.viewCtrl.dismiss();
+          if (this.questionData.poll[0].title === '' && this.questionData.poll[0].value === '' && this.questionData.poll[0].id === 0){
+            this.questionData.poll = [];
+          }
+          if (this.questionData.poll[0] && this.questionData.poll[0].title === '' && this.questionData.poll[0] && this.questionData.poll[0].value === ''){
+            response.data[0].poll = [];
+          }
           this.navCtrl.push('QuestionDetailPage',{question:this.questionData})
-
         }
       }, (err) => {
         console.error('ERROR :', err);

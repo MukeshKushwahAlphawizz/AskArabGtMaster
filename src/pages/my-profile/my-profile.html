@@ -11,24 +11,25 @@
   <ion-item no-lines text-right>
     <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-right class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
     <div style="margin-right: 10px">
-      <h2 style="font-weight: bold">{{(userData.first_name && userData.first_name != '' && userData.last_name && userData.last_name != '')?userData.first_name +' '+ userData.last_name : userData.user_login}}</h2>
+      <h2 *ngIf="!isOtherUserProfile && userProfileData" style="font-weight: bold">{{(userProfileData.first_name && userProfileData.first_name != '' && userProfileData.last_name && userProfileData.last_name != '')?userProfileData.first_name +' '+ userProfileData.last_name : userProfileData.user_login}}</h2>
+      <h2 *ngIf="isOtherUserProfile && userProfileData.nickname" style="font-weight: bold">{{userProfileData.nickname && userProfileData.nickname != ''?userProfileData.nickname: userProfileData.first_name+userProfileData.last_name}}</h2>
       <div style="margin-top: 7px" class="row">
         <div no-padding col-6 text-left>
-          <span text-wrap class="text-grey bold-font small-font">{{(userData.user_address !=='')?userData.user_address:'No Address'}}</span>
+          <span text-wrap class="text-grey bold-font small-font">{{(userProfileData.user_address && userProfileData.user_address !=='')?userProfileData.user_address:'No Address'}}</span>
           <a class="set-left-margin small-font"><ion-icon name="md-pin"></ion-icon></a>
         </div>
         <div no-padding col-6 text-left>
-          <span style="overflow: hidden;" class="text-grey bold-font small-font">{{(userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>
+          <span style="overflow: hidden;" class="text-grey bold-font small-font">{{(userData.user_dob && userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>
           <a class="set-left-margin small-font"><ion-icon name="md-calendar"></ion-icon></a>
         </div>
       </div>
       <div style="margin-top: 7px" class="row">
         <div no-padding col-6 text-left>
-          <span class="text-grey bold-font small-font">{{(userData.user_gender !=='')?userData.user_gender:'Male'}}</span>
+          <span class="text-grey bold-font small-font">{{(userProfileData.sex && userProfileData.sex !=='' && userProfileData.sex !=='1')?userProfileData.sex:'Male'}}</span>
           <a class="small-font set-left-margin"><ion-icon name="ios-man"></ion-icon></a>
         </div>
         <div no-padding col-6 text-left>
-          <span class="text-grey bold-font small-font">{{(userData.age !== '')?userData.age:0}} {{'MyProfile.Years'|translate}}</span>
+          <span class="text-grey bold-font small-font">{{(userProfileData.age && userProfileData.age !== '')?userProfileData.age:0}} {{'MyProfile.Years'|translate}}</span>
           <a class="small-font set-left-margin"><ion-icon name="md-heart"></ion-icon></a>
         </div>
       </div>
@@ -37,7 +38,7 @@
       </div>
     </div>
   </ion-item>
-  <p text-center class="small-font bold-font text-grey">{{userData.my_bio}}</p>
+  <p text-center class="small-font bold-font text-grey">{{userProfileData.description}}</p>
   <!--division for my profile-->
   <div *ngIf="!isOtherUserProfile" text-center class="row followers-following-div">
     <div (click)="gotoUserPage(0)" padding col-6>
@@ -119,21 +120,22 @@
   <ion-item no-lines>
     <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-left class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
     <div style="margin-left: 10px">
-      <h2 style="font-weight: bold">{{(userData.first_name && userData.first_name != '' && userData.last_name && userData.last_name != '')?userData.first_name +' '+ userData.last_name : userData.user_login}}</h2>
+      <h2 *ngIf="!isOtherUserProfile && userProfileData" style="font-weight: bold">{{(userProfileData.first_name && userProfileData.first_name != '' && userProfileData.last_name && userProfileData.last_name != '')?userProfileData.first_name +' '+ userProfileData.last_name : userProfileData.user_login}}</h2>
+      <h2 *ngIf="isOtherUserProfile && userProfileData.nickname" style="font-weight: bold">{{userProfileData.nickname && userProfileData.nickname != ''?userProfileData.nickname: userProfileData.first_name+userProfileData.last_name}}</h2>
       <div style="margin-top: 7px" class="row">
         <div no-padding col-6 text-left><a class="small-font"><ion-icon name="md-pin"></ion-icon></a>
-          <span text-wrap class="text-grey bold-font set-left-margin small-font">{{(userData.user_address !=='')?userData.user_address:'No Address'}}</span>
+          <span text-wrap class="text-grey bold-font set-left-margin small-font">{{(userProfileData.user_address && userProfileData.user_address !=='')?userProfileData.user_address:'No Address'}}</span>
         </div>
         <div no-padding col-6 text-left><a class="small-font"><ion-icon name="md-calendar"></ion-icon></a>
-          <span style="overflow: hidden;" class="text-grey bold-font small-font set-left-margin">{{(userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>
+          <span style="overflow: hidden;" class="text-grey bold-font small-font set-left-margin">{{(userData.user_dob && userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>
         </div>
       </div>
       <div style="margin-top: 7px" class="row">
         <div no-padding col-6 text-left><a class="small-font"><ion-icon name="ios-man"></ion-icon></a>
-          <span class="text-grey bold-font small-font set-left-margin">{{(userData.user_gender !=='')?userData.user_gender:'Male'}}</span>
+          <span class="text-grey bold-font small-font set-left-margin">{{(userProfileData.sex && userProfileData.sex !=='')?userProfileData.sex:'Male'}}</span>
         </div>
         <div no-padding col-6 text-left><a class="small-font"><ion-icon name="md-heart"></ion-icon></a>
-          <span class="text-grey bold-font small-font set-left-margin">{{(userData.age !== '')?userData.age:0}} {{'MyProfile.Years'|translate}}</span>
+          <span class="text-grey bold-font small-font set-left-margin">{{(userProfileData.age && userProfileData.age !== '')?userProfileData.age:0}} {{'MyProfile.Years'|translate}}</span>
         </div>
       </div>
       <div *ngIf="!isOtherUserProfile" (click)="editProfile()" class="small-font bold-font" style="margin-top: 10px"><a style="padding-right: 5pt">
@@ -141,7 +143,7 @@
       </div>
     </div>
   </ion-item>
-  <p text-center class="small-font bold-font text-grey">{{userData.my_bio}}</p>
+  <p text-center class="small-font bold-font text-grey">{{userProfileData.description}}</p>
   <!--division for my profile-->
   <div *ngIf="!isOtherUserProfile" text-center class="row followers-following-div">
     <div (click)="gotoUserPage(0)" padding col-6>

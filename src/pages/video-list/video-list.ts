@@ -4,13 +4,6 @@ import {App, Content, Events, ModalController} from "ionic-angular/index";
 import {UtilProvider} from "../../providers/util/util";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
 
-/**
- * Generated class for the VideoListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-video-list',

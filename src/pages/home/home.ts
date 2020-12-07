@@ -211,6 +211,10 @@ export class HomePage {
   }
 
   gotoQuestionDetail(question) {
+    //check for blank poll array
+    if (question.poll[0] && question.poll[0].title === '' && question.poll[0] && question.poll[0].value === ''){
+      question.poll = [];
+    }
     this.navCtrl.push('QuestionDetailPage',{question:question})
   }
 

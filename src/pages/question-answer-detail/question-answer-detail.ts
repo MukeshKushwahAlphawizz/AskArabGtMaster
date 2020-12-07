@@ -114,7 +114,9 @@ export class QuestionAnswerDetailPage {
     this.user.getQuestionByIdData(data).subscribe(res =>{
       let response : any = res;
       if (response.status){
-        console.log(response.data[0]);
+        if (response.data[0].poll[0] && response.data[0].poll[0].title === '' && response.data[0].poll[0] && response.data[0].poll[0].value === ''){
+          response.data[0].poll = [];
+        }
         this.navCtrl.push('QuestionDetailPage',{question:response.data[0]})
       }
       this.util.dismissLoading();
@@ -129,7 +131,7 @@ export class QuestionAnswerDetailPage {
       this.util.presentLoading();
       this.user.addPollAnswerData(sendData).subscribe(response =>{
         let res : any = response;
-        console.log('addPollAnswerData',res);
+        // console.log('addPollAnswerData',res);
         if (res.status){
           this.questionData.poll_progress = res.poll_progress;
           this.questionData.poll_vote_status = 'true';
