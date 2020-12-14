@@ -92,7 +92,6 @@ export class SignupPage {
 
     this.util.presentLoading();
     this.user.signup(account).subscribe((resp) => {
-      console.log('resp>>>>',resp);
       let response :any = resp;
       this.util.dismissLoading();
       if(response.status){

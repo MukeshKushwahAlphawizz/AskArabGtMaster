@@ -1,4 +1,4 @@
-<ion-menu [ngClass]="dark" *ngIf="language=='ar'" [content]="content" type="overlay" side="right">
+<ion-menu (ionOpen)="openMenu()" [ngClass]="dark" *ngIf="language=='ar'" [content]="content" type="overlay" side="right">
   <ion-content text-right class="set-background">
     <ion-item text-right padding class="set-background user-block" no-lines>
       <ion-avatar (click)="openMyProfile(false)" item-right>
@@ -86,7 +86,7 @@
     </ion-list>
   </ion-content>
 </ion-menu>
-<ion-menu [ngClass]="dark" *ngIf="language!=='ar'" [content]="content" type="overlay">
+<ion-menu (ionOpen)="openMenu()" [ngClass]="dark" *ngIf="language!=='ar'" [content]="content" type="overlay">
   <ion-content class="set-background">
     <ion-item padding class="set-background user-block" no-lines>
       <ion-avatar (click)="openMyProfile(false)" item-start>

@@ -91,7 +91,7 @@ export class MyProfilePage {
         this.userDataStorage.user_login=this.userProfileData.user_login;
         this.userDataStorage.first_name=this.userProfileData.first_name;
         this.userDataStorage.last_name=this.userProfileData.last_name;
-        this.userDataStorage.user_profile=this.userData.user_profile;
+        this.userDataStorage.user_profile=this.userProfileData.user_profile;
         this.storage.set('userData',JSON.stringify(this.userDataStorage));
       }
     }, (err) => {
@@ -165,9 +165,7 @@ export class MyProfilePage {
   viewPhoto(myImage) {
     const imageViewer = this._imageViewerCtrl.create(myImage);
     imageViewer.present();
-    /*this.photoViewer.show(this.userData.user_profile !==''?this.userData.user_profile:'assets/img/profile-default.jpeg',
-      (this.userData.first_name && this.userData.first_name != '' && this.userData.last_name && this.userData.last_name != '')?this.userData.first_name +' '+ this.userData.last_name : this.userData.user_login, {share: false});*/
-  }
+    }
 
   gotoQAndAPage(type) {
     let id = this.userData.ID
@@ -178,7 +176,7 @@ export class MyProfilePage {
   }
 
   gotoUserPage(type) {
-    let id = this.userData.ID
+    let id = this.userDataStorage.ID
     if (this.isOtherUserProfile){
       id = this.otherUserId;
     }
@@ -195,5 +193,17 @@ export class MyProfilePage {
 
   editProfile() {
     this.navCtrl.push('EditProfilePage');
+  }
+
+  getUserRegisterDate() {
+    if (this.userDataStorage.user_registered){
+      let arr = this.userDataStorage.user_registered.split(' ')[0];
+      return arr;
+    }else if (this.userData.user_registered){
+      let arr = this.userData.user_registered.split(' ')[0];
+      return arr;
+    }else {
+      return '0000-00-00';
+    }
   }
 }

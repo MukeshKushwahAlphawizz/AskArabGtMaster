@@ -9,7 +9,8 @@
   <!--Arabic-->
 <div *ngIf="language =='ar'" text-right>
   <ion-item no-lines text-right>
-    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-right class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
+    <!--<img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-right class="user-profile" [src]="(userProfileData.user_profile && userProfileData.user_profile != ''&& userProfileData.user_profile != 'http://ask.arabgt.com/wp-content/uploads/')?userProfileData.user_profile:'assets/img/profile-default.jpeg'">-->
+    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-right class="user-profile" [src]="(userData.user_profile && userData.user_profile != ''&& userData.user_profile != 'http://ask.arabgt.com/wp-content/uploads/')?userData.user_profile:'assets/img/profile-default.jpeg'">
     <div style="margin-right: 10px">
       <h2 *ngIf="!isOtherUserProfile && userProfileData" style="font-weight: bold">{{(userProfileData.first_name && userProfileData.first_name != '' && userProfileData.last_name && userProfileData.last_name != '')?userProfileData.first_name +' '+ userProfileData.last_name : userProfileData.user_login}}</h2>
       <h2 *ngIf="isOtherUserProfile && userProfileData.nickname" style="font-weight: bold">{{userProfileData.nickname && userProfileData.nickname != ''?userProfileData.nickname: userProfileData.first_name+userProfileData.last_name}}</h2>
@@ -19,13 +20,14 @@
           <a class="set-left-margin small-font"><ion-icon name="md-pin"></ion-icon></a>
         </div>
         <div no-padding col-6 text-left>
-          <span style="overflow: hidden;" class="text-grey bold-font small-font">{{(userData.user_dob && userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>
+          <!--<span style="overflow: hidden;" class="text-grey bold-font small-font">{{(userData.user_dob && userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>-->
+          <span style="overflow: hidden;" class="text-grey bold-font small-font">{{getUserRegisterDate()}}</span>
           <a class="set-left-margin small-font"><ion-icon name="md-calendar"></ion-icon></a>
         </div>
       </div>
       <div style="margin-top: 7px" class="row">
         <div no-padding col-6 text-left>
-          <span class="text-grey bold-font small-font">{{(userProfileData.sex && userProfileData.sex !=='' && userProfileData.sex !=='1')?userProfileData.sex:'Male'}}</span>
+          <span class="text-grey bold-font small-font">{{(userProfileData.sex && userProfileData.sex !=='' && userProfileData.sex !=='1')?userProfileData.sex=='2'?'Female':'Male':'Male'}}</span>
           <a class="small-font set-left-margin"><ion-icon name="ios-man"></ion-icon></a>
         </div>
         <div no-padding col-6 text-left>
@@ -118,7 +120,8 @@
   <!--English-->
 <div *ngIf="language !=='ar'">
   <ion-item no-lines>
-    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-left class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">
+    <!--<img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-left class="user-profile" [src]="(userData.user_profile && userData.user_profile != '')?userData.user_profile:'assets/img/profile-default.jpeg'">-->
+    <img [ngStyle]="{'border-color': util.getRank(userData.rank)}" #myImage (click)="viewPhoto(myImage)" item-right class="user-profile" [src]="(userData.user_profile && userData.user_profile != ''&& userData.user_profile != 'http://ask.arabgt.com/wp-content/uploads/')?userData.user_profile:'assets/img/profile-default.jpeg'">
     <div style="margin-left: 10px">
       <h2 *ngIf="!isOtherUserProfile && userProfileData" style="font-weight: bold">{{(userProfileData.first_name && userProfileData.first_name != '' && userProfileData.last_name && userProfileData.last_name != '')?userProfileData.first_name +' '+ userProfileData.last_name : userProfileData.user_login}}</h2>
       <h2 *ngIf="isOtherUserProfile && userProfileData.nickname" style="font-weight: bold">{{userProfileData.nickname && userProfileData.nickname != ''?userProfileData.nickname: userProfileData.first_name+userProfileData.last_name}}</h2>
@@ -127,12 +130,13 @@
           <span text-wrap class="text-grey bold-font set-left-margin small-font">{{(userProfileData.user_address && userProfileData.user_address !=='')?userProfileData.user_address:'No Address'}}</span>
         </div>
         <div no-padding col-6 text-left><a class="small-font"><ion-icon name="md-calendar"></ion-icon></a>
-          <span style="overflow: hidden;" class="text-grey bold-font small-font set-left-margin">{{(userData.user_dob && userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>
+          <!--<span style="overflow: hidden;" class="text-grey bold-font small-font set-left-margin">{{(userData.user_dob && userData.user_dob !=='')?userData.user_dob:'0000-00-00'}}</span>-->
+          <span style="overflow: hidden;" class="text-grey bold-font small-font set-left-margin">{{getUserRegisterDate()}}</span>
         </div>
       </div>
       <div style="margin-top: 7px" class="row">
         <div no-padding col-6 text-left><a class="small-font"><ion-icon name="ios-man"></ion-icon></a>
-          <span class="text-grey bold-font small-font set-left-margin">{{(userProfileData.sex && userProfileData.sex !=='')?userProfileData.sex:'Male'}}</span>
+          <span class="text-grey bold-font small-font set-left-margin">{{(userProfileData.sex && userProfileData.sex !=='' && userProfileData.sex !=='1')?(userProfileData.sex=='2'?'Female':'Male'):'Male'}}</span>
         </div>
         <div no-padding col-6 text-left><a class="small-font"><ion-icon name="md-heart"></ion-icon></a>
           <span class="text-grey bold-font small-font set-left-margin">{{(userProfileData.age && userProfileData.age !== '')?userProfileData.age:0}} {{'MyProfile.Years'|translate}}</span>

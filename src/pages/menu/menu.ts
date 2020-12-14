@@ -117,7 +117,7 @@ export class MenuPage {
   ionViewWillEnter() {
     this.storage.get('userData').then(data=>{
       let userData = JSON.parse(data);
-      if(userData && userData.user_profile && userData.user_profile !== ''){
+      if(userData && userData.user_profile && userData.user_profile !== '' && userData.user_profile !== 'http://ask.arabgt.com/wp-content/uploads/'){
         this.userImage=userData.user_profile;
       }
       if(userData.first_name ==='' || userData.last_name ===''){
@@ -229,5 +229,9 @@ export class MenuPage {
 
   openNewsArticle() {
     this.navCtrl.setRoot('NewsTabsPage');
+  }
+
+  openMenu() {
+    this.ionViewWillEnter();
   }
 }

@@ -4,13 +4,6 @@ import {UtilProvider} from "../../providers/util/util";
 import {User} from "../../providers";
 import {Storage} from "@ionic/storage";
 
-/**
- * Generated class for the UsersPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-users',
@@ -56,9 +49,9 @@ export class UsersPage {
     let data = {
       user_id:this.userId
     }
+    console.log('check request data >>>',data);
     this.util.presentLoading();
     this.user.getFollowFollowingMember(data,this.type).subscribe(res=>{
-      console.log(res)
       let response : any = res;
       if(response.status && response.data){
         this.usersList = response.data;

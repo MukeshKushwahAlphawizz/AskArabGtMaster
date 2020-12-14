@@ -9,7 +9,7 @@
     "MobileNumber_required": "*Mobile number is required.",
     "Minimumlength10.": "*Minimum length should be 10.",
     "Maximumlength12": "*Maximum length should be 12.",
-    "DOBrequired": "*Date of birth is required.",
+    "DOBrequired": "*Age is required.",
     "EmailRequired": "*Email is required.",
     "EnterValidEmail": "*Please enter a valid email address.",
     "PasswordRequired": "*Password is required.",

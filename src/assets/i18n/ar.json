@@ -9,7 +9,7 @@
     "MobileNumber_required": "* رقم الجوال مطلوب.",
     "Minimumlength10.": "* يجب أن يكون الحد الأدنى للطول 10.",
     "Maximumlength12": "* الحد الأقصى للطول هو 12.",
-    "DOBrequired": "*تاريخ الميلاد مطلوب.",
+    "DOBrequired": "* العمر مطلوب.",
     "EmailRequired": "*البريد الالكتروني مطلوب.",
     "EnterValidEmail": "*لو سمحت أدخل بريد إليكتروني مفعّل.",
     "PasswordRequired": "*كلمة المرور مطلوبة.",

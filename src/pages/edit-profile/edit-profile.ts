@@ -143,16 +143,17 @@ export class EditProfilePage {
       if(response.status){
         let user : any = response.all_activities;
 
-        this.userData.user_gender = user.sex;
-        this.userData.my_bio = user.description;
-        this.userData.mobile_no = user.phone;
+        this.userData.sex = user.sex;
+        this.userData.description = user.description;
+        this.userData.phone = user.phone;
         this.userData.user_address = user.user_address;
         this.userData.first_name = user.first_name;
         this.userData.last_name = user.last_name;
-        this.userData.select_country = user.country;
-        this.userData.select_state = user.state;
+        this.userData.country = user.country;
+        this.userData.state = user.state;
         this.userData.user_login = user.user_login;
-        this.userData.user_dob = user.age;
+        this.userData.age = user.age;
+        this.userData.user_profile = user.user_profile;
 
         this.storage.set('userData', JSON.stringify(this.userData))
         this.util.presentToast(this.ProfileEditedSuccessfully);
@@ -184,7 +185,7 @@ export class EditProfilePage {
   }
 
   populateData() {
-    if(this.userData.user_profile && this.userData.user_profile != ''){
+    if(this.userData.user_profile && this.userData.user_profile != '' && this.userData.user_profile != 'http://ask.arabgt.com/wp-content/uploads/'){
       this.userImage = this.userData.user_profile;
     }else {
       this.userImage = 'assets/img/profile-default.jpeg';
@@ -197,15 +198,15 @@ export class EditProfilePage {
       this.userData.user_dob = '2020-01-01'
     }
     this.profileForm.controls.datebirth.setValue(this.userData.user_dob);
-    if(this.userData.user_gender == ''){
-      this.userData.user_gender = 'male'
+    if(this.userData.sex == '' && this.userData.sex == '1'){
+      this.userData.sex = 'male'
     }
-    this.profileForm.controls.gender.setValue(this.userData.user_gender);
-    this.profileForm.controls.mobilenumber.setValue(this.userData.mobile_no);
-    this.profileForm.controls.myBio.setValue(this.userData.my_bio);
+    this.profileForm.controls.gender.setValue(this.userData.sex);
+    this.profileForm.controls.mobilenumber.setValue(this.userData.phone);
+    this.profileForm.controls.myBio.setValue(this.userData.description);
 
-    this.userData.select_country === '' ? this.profileForm.controls.country.setValue('default') : this.profileForm.controls.country.setValue(this.userData.select_country);
-    this.userData.select_state === '' ? this.profileForm.controls.state.setValue('default') : this.profileForm.controls.state.setValue(this.userData.select_state);
+    this.userData.country === '' ? this.profileForm.controls.country.setValue('default') : this.profileForm.controls.country.setValue(this.userData.country);
+    this.userData.state === '' ? this.profileForm.controls.state.setValue('default') : this.profileForm.controls.state.setValue(this.userData.state);
 
   }
 
