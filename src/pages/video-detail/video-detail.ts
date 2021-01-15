@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Content, Events, ViewController} from "ionic-angular/index";
+import {Content, Events, Platform, ViewController} from "ionic-angular/index";
 import {UtilProvider} from "../../providers/util/util";
 import {DomSanitizer} from "@angular/platform-browser";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
@@ -27,6 +27,7 @@ export class VideoDetailPage {
   postId: any = '';
   isPlayVideo: boolean = false;
   videoUrlArr: any = [];
+  videoUrlArrIos: any = [];
 
   pageSize:any=0;
   pageNumber:any=5;
@@ -37,6 +38,7 @@ export class VideoDetailPage {
               public event : Events,
               public socialSharing : SocialSharing,
               public sanitizer : DomSanitizer,
+              public platform : Platform,
               public viewController : ViewController,
               public api : NewsArticlesProvider,
               public navParams: NavParams) {
@@ -77,6 +79,37 @@ export class VideoDetailPage {
         this.videoUrl = resp.videourl[0];
         this.videoUrlArr = resp.videourl;
 
+        /*ios code*/
+        // this.videoUrlArrIos = resp.videourl;
+        this.videoUrlArrIos = [];
+        this.videoUrlArr.filter(item=>{
+          let twitterCheck = new RegExp('((https://)|(www\\.))twitter\\.com/(\\w+)');
+          let youTubeCheck = new RegExp(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+          let instaCheck = new RegExp('(https?:\\/\\/(?:www\\.)?instagram\\.com\\/p\\/([^/?#&]+)).*');
+          // let fbCheck = new RegExp(/^(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*)?$/);
+          let fbCheck = new RegExp(/^(https?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/);
+          if (twitterCheck.test(item)){
+            //twitter url
+            let embedUrl = 'https://twitframe.com/show?url='+item;
+            this.videoUrlArrIos.push({url:embedUrl,type:'twitter'});
+          }else if (youTubeCheck.test(item)){
+            //youtube url
+            let videoId = this.getYoutubeId(item);
+            let embedUrl = 'https://www.youtube.com/embed/'+videoId;
+            this.videoUrlArrIos.push({url:embedUrl,type:'youtube'});
+          }else if (instaCheck.test(item)){
+            //instagram url
+            this.videoUrlArrIos.push({url:item+'/embed',type:'youtube'});
+          }else if (fbCheck.test(item)){
+            //fb url
+            this.videoUrlArrIos.push({url:'https://www.facebook.com/plugins/post.php?href='+item,type:'facebook'});
+          }/*else {
+            this.videoUrlArrIos.push({url:item,type:'other'});
+          }*/
+        })
+        // console.log('video array >>',this.videoUrlArrIos);
+
+        /*ends here*/
         this.tagList = resp.TagName;
         this.gallaryImages = resp.Gallery;
         // this.releatedPost = resp.RelatedPost;
@@ -106,7 +139,13 @@ export class VideoDetailPage {
   }
 
   getDate() {
-    return this.util.timeSince(new Date(this.videoDetail.post_date).getTime());
+    if (this.videoDetail.post_date){
+      if (this.platform.is('ios')){
+        return this.videoDetail.post_date;
+      }else {
+        return this.util.timeSince(new Date(this.videoDetail.post_date).getTime());
+      }
+    }
   }
 
   openRelated(related: any) {
@@ -172,5 +211,14 @@ export class VideoDetailPage {
 
   back() {
     this.event.publish('backToHome','1');
+  }
+
+  getYoutubeId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11)
+        ? match[2]
+        : null;
   }
 }

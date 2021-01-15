@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {App, Content, Events, ModalController} from "ionic-angular/index";
+import {App, Content, Events, ModalController, Platform} from "ionic-angular/index";
 import {UtilProvider} from "../../providers/util/util";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
 
@@ -23,6 +23,7 @@ export class VideoListPage {
               public util:UtilProvider,
               public modal:ModalController,
               public api:NewsArticlesProvider,
+              public platform:Platform,
               public event:Events,
               public app:App,
               public navParams: NavParams) {
@@ -116,7 +117,11 @@ export class VideoListPage {
   }
 
   getDate(date: any) {
-    return this.util.timeSince(new Date(date).getTime());
+    if (this.platform.is('ios')){
+      return date;
+    }else {
+      return this.util.timeSince(new Date(date).getTime());
+    }
   }
   scrollToTop() {
     this.content.scrollToTop();

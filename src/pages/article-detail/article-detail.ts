@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Content, Events, ViewController} from "ionic-angular/index";
+import {Content, Events, Platform, ViewController} from "ionic-angular/index";
 import {UtilProvider} from "../../providers/util/util";
 import {DomSanitizer} from "@angular/platform-browser";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
@@ -25,6 +25,7 @@ export class ArticleDetailPage {
 
   constructor(public navCtrl: NavController,
               public util : UtilProvider,
+              public platform : Platform,
               public event : Events,
               public sanitizer : DomSanitizer,
               public socialSharing : SocialSharing,
@@ -77,7 +78,11 @@ export class ArticleDetailPage {
   }
 
   getDate() {
-    return this.util.timeSince(new Date(this.articleDetail.post_date).getTime());
+    if (this.platform.is('ios')){
+      return this.articleDetail.post_date;
+    }else {
+      return this.util.timeSince(new Date(this.articleDetail.post_date).getTime());
+    }
   }
 
   openRelated(related: any) {

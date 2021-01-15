@@ -4,7 +4,7 @@ import {Storage} from "@ionic/storage";
 import {UtilProvider} from "../../providers/util/util";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
 import {Content} from "ionic-angular";
-import {App, Events} from "ionic-angular/index";
+import {App, Events, Platform} from "ionic-angular/index";
 
 
 @IonicPage()
@@ -26,6 +26,7 @@ export class NewsHomePage {
               public storage:Storage,
               public api:NewsArticlesProvider,
               public util:UtilProvider,
+              public platform:Platform,
               public event:Events,
               public app: App,
               public navParams: NavParams) {
@@ -143,8 +144,14 @@ export class NewsHomePage {
   }
 
   getDate(date: any) {
-    return this.util.timeSince(new Date(date).getTime());
+    // return this.util.timeSince(new Date(date).getTime());
+    if (this.platform.is('ios')){
+      return date;
+    }else {
+      return this.util.timeSince(new Date(date).getTime());
+    }
   }
+
   scrollToTop() {
     if (this.content){
       this.content.scrollToTop();

@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UtilProvider} from "../../providers/util/util";
 import {NewsArticlesProvider} from "../../providers/news-articles/news-articles";
-import {App, Content, Events, ModalController} from "ionic-angular/index";
+import {App, Content, Events, ModalController, Platform} from "ionic-angular/index";
 @IonicPage()
 @Component({
   selector: 'page-news-article',
@@ -21,6 +21,7 @@ export class NewsArticlePage {
 
   constructor(public navCtrl: NavController,
               public util:UtilProvider,
+              public platform:Platform,
               public modal:ModalController,
               public api:NewsArticlesProvider,
               public event:Events,
@@ -127,7 +128,12 @@ export class NewsArticlePage {
   }
 
   getDate(date: any) {
-    return this.util.timeSince(new Date(date).getTime());
+    if (this.platform.is('ios')){
+      return date;
+    }else {
+      return this.util.timeSince(new Date(date).getTime());
+    }
+    // return this.util.timeSince(new Date(date).getTime());
   }
   scrollToTop() {
     this.content.scrollToTop();
